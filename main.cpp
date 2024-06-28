@@ -976,7 +976,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	//}
 
 	//----- obj -----
-	// モデルの読み込み
+	// モデルの読み込み 
 	ModelData modelData = LoadObjFile("Resources/models", "axis.obj");
 	// 頂点リソースを作る
 	Microsoft::WRL::ComPtr<ID3D12Resource> vertexResource = CreateBufferResource(device, sizeof(VertexData) * modelData.vertices.size());
