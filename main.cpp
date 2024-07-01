@@ -18,6 +18,8 @@
 
 #include "externals/DirectXTex/DirectXTex.h"
 
+#include "Input.h"
+
 #pragma comment(lib, "d3d12.lib")
 #pragma comment(lib, "dxgi.lib")
 #pragma comment(lib, "dxguid.lib")
@@ -429,6 +431,7 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam) {
 
 // Windowsアプリでのエントリーポイント
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
+	
 	D3DResourceLeakChecker leakCheck;
 
 	// COMの初期化
@@ -490,6 +493,38 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		debugController->SetEnableGPUBasedValidation(TRUE);
 	}
 #endif // DEBUG
+
+	//=========================================================
+	//ポインタ
+	Input* input = nullptr;
+	//入力の初期化
+	input = new Input();
+	input->Initialize(wc.hInstance, hwnd);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	//=========================================================
 
 	// ウィンドウを表示する
 	ShowWindow(hwnd, SW_SHOW);
@@ -1332,6 +1367,25 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	vertexShaderBlob->Release();
 
 	CloseHandle(fenceEvent);
+
+	//=================================================
+	delete input;
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//=================================================
 
 	//////////////////////////////////////////////
 
