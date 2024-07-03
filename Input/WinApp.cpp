@@ -59,6 +59,10 @@ void WinApp::Initialize()
 		nullptr,              // メニューハンドル
 		wc.hInstance,         // インスタンスハンドル
 		nullptr);             // オプション
+
+	// ウィンドウを表示する
+	ShowWindow(hwnd, SW_SHOW);
+
 }
 
 void WinApp::Update()
