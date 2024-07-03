@@ -423,8 +423,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	// 出力ウィンドウへの文字出力
 	OutputDebugStringA("Hello,DirectX!\n");
 
-	
-	
+
+
 
 #ifdef _DEBUG
 	// デバッグ
@@ -472,7 +472,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 
 	//=========================================================
-	
+
 	// ウィンドウを表示する
 	ShowWindow(hwnd, SW_SHOW);
 

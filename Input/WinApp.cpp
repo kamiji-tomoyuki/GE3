@@ -7,7 +7,7 @@ LRESULT CALLBACK WinApp::WindowProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM l
 	if (ImGui_ImplWin32_WndProcHandler(hWnd, msg, wParam, lParam)) {
 		return true;
 	}
-	
+
 	// メッセージに応じてゲーム固有の処理を行う
 	switch (msg) {
 		// ウィンドウが破壊された
