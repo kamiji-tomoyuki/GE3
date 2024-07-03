@@ -10,7 +10,6 @@
 #include <fstream>
 #include <sstream>
 #include <string>
-#include <wrl.h>
 
 #include "externals/imgui/imgui.h"
 #include "externals/imgui/imgui_impl_dx12.h"
@@ -524,6 +523,31 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 
 
+	//=========================================================
+	//入力の更新
+	input->Update();
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	//=========================================================
 
 	// ウィンドウを表示する
