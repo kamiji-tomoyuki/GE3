@@ -19,6 +19,9 @@ public://メンバ関数
 	//終了
 	void Finalize();
 
+	//メッセージの処理
+	bool ProcessMessage();
+
 	//getter
 	HINSTANCE GetHInstance()const { return wc_.hInstance; }
 	HWND GetHwnd()const { return hwnd_; }

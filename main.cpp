@@ -1097,13 +1097,12 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 	bool useMonsterBall = true;
 
-	MSG msg{};
 	// ウィンドウのxボタンが押されるまでループ
-	while (msg.message != WM_QUIT) { // メインループ！！！！！！！！！！
+	while (true) { // ゲームループ！！！！！！！！！！
 		// Windowにメッセージがきてたら最優先で処理させる
-		if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE)) {
-			TranslateMessage(&msg);
-			DispatchMessage(&msg);
+		if (winApp->ProcessMessage()) {
+			//ゲームループを抜ける
+			break;
 		}
 		else {
 
