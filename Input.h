@@ -17,9 +17,21 @@ public://メンバ関数
 	//更新
 	void Update();
 
+	//キーの押下をチェック
+	bool PushKey(BYTE keyNumber);
+	//キーのトリガーをチェック
+	bool TriggerKey(BYTE keynumber);
+
 private://メンバ変数
+	//DirectInputのインスタンス
+	ComPtr<IDirectInput8> directInput = nullptr;
+
 	//キーボードのデバイス
 	ComPtr <IDirectInputDevice8> keyboard;
 
+	//キー
+	BYTE key[256] = {};
+	//前回のキー
+	BYTE keyPre[256] = {};
 };
 

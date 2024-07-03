@@ -68,9 +68,9 @@ struct Material {
 	Matrix4x4 uvTransform;
 };
 Transform uvTransformSprite{
-    {1.0f, 1.0f, 1.0f},
-    {0.0f, 0.0f, 0.0f},
-    {0.0f, 0.0f, 0.0f},
+	{1.0f, 1.0f, 1.0f},
+	{0.0f, 0.0f, 0.0f},
+	{0.0f, 0.0f, 0.0f},
 };
 
 struct TransformationMatrix {
@@ -128,12 +128,12 @@ std::wstring ConvertString(const std::string& str);
 std::string ConvertString(const std::wstring& str);
 
 IDxcBlob* CompileShader(
-    // CompilerするShaderファイルへのパス
-    const std::wstring& filePath,
-    // Compilerに使用するProfile
-    const wchar_t* profile,
-    // 初期化で生成したもの3つ
-    IDxcUtils* dxcUtils, IDxcCompiler3* dxcCompiler, IDxcIncludeHandler* IDxcIncludeHandler);
+	// CompilerするShaderファイルへのパス
+	const std::wstring& filePath,
+	// Compilerに使用するProfile
+	const wchar_t* profile,
+	// 初期化で生成したもの3つ
+	IDxcUtils* dxcUtils, IDxcCompiler3* dxcCompiler, IDxcIncludeHandler* IDxcIncludeHandler);
 
 Microsoft::WRL::ComPtr<ID3D12Resource> CreateBufferResource(Microsoft::WRL::ComPtr<ID3D12Device> device, size_t sizeInBytes);
 Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> CreateDescriptorHeap(Microsoft::WRL::ComPtr<ID3D12Device> device, D3D12_DESCRIPTOR_HEAP_TYPE heapType, UINT numDescriptors, bool shaderVisible);
@@ -304,62 +304,62 @@ Matrix4x4 Inverse(const Matrix4x4& m) {
 
 	Matrix4x4 a{};
 	a.m[0][0] = m.m[1][1] * m.m[2][2] * m.m[3][3] + m.m[1][2] * m.m[2][3] * m.m[3][1] + m.m[1][3] * m.m[2][1] * m.m[3][2] - m.m[1][3] * m.m[2][2] * m.m[3][1] - m.m[1][2] * m.m[2][1] * m.m[3][3] -
-	            m.m[1][1] * m.m[2][3] * m.m[3][2];
+		m.m[1][1] * m.m[2][3] * m.m[3][2];
 
 	a.m[0][1] = -(m.m[0][1] * m.m[2][2] * m.m[3][3]) - (m.m[0][2] * m.m[2][3] * m.m[3][1]) - (m.m[0][3] * m.m[2][1] * m.m[3][2]) + m.m[0][3] * m.m[2][2] * m.m[3][1] +
-	            m.m[0][2] * m.m[2][1] * m.m[3][3] + m.m[0][1] * m.m[2][3] * m.m[3][2];
+		m.m[0][2] * m.m[2][1] * m.m[3][3] + m.m[0][1] * m.m[2][3] * m.m[3][2];
 
 	a.m[0][2] = m.m[0][1] * m.m[1][2] * m.m[3][3] + m.m[0][2] * m.m[1][3] * m.m[3][1] + m.m[0][3] * m.m[1][1] * m.m[3][2] - m.m[0][3] * m.m[1][2] * m.m[3][1] - m.m[0][2] * m.m[1][1] * m.m[3][3] -
-	            m.m[0][1] * m.m[1][3] * m.m[3][2];
+		m.m[0][1] * m.m[1][3] * m.m[3][2];
 
 	a.m[0][3] = -(m.m[0][1] * m.m[1][2] * m.m[2][3]) - (m.m[0][2] * m.m[1][3] * m.m[2][1]) - (m.m[0][3] * m.m[1][1] * m.m[2][2]) + m.m[0][3] * m.m[1][2] * m.m[2][1] +
-	            m.m[0][2] * m.m[1][1] * m.m[2][3] + m.m[0][1] * m.m[1][3] * m.m[2][2];
+		m.m[0][2] * m.m[1][1] * m.m[2][3] + m.m[0][1] * m.m[1][3] * m.m[2][2];
 
 	a.m[1][0] = -(m.m[1][0] * m.m[2][2] * m.m[3][3]) - (m.m[1][2] * m.m[2][3] * m.m[3][0]) - (m.m[1][3] * m.m[2][0] * m.m[3][2]) + m.m[1][3] * m.m[2][2] * m.m[3][0] +
-	            m.m[1][2] * m.m[2][0] * m.m[3][3] + m.m[1][0] * m.m[2][3] * m.m[3][2];
+		m.m[1][2] * m.m[2][0] * m.m[3][3] + m.m[1][0] * m.m[2][3] * m.m[3][2];
 
 	a.m[1][1] = m.m[0][0] * m.m[2][2] * m.m[3][3] + m.m[0][2] * m.m[2][3] * m.m[3][0] + m.m[0][3] * m.m[2][0] * m.m[3][2] - m.m[0][3] * m.m[2][2] * m.m[3][0] - m.m[0][2] * m.m[2][0] * m.m[3][3] -
-	            m.m[0][0] * m.m[2][3] * m.m[3][2];
+		m.m[0][0] * m.m[2][3] * m.m[3][2];
 
 	a.m[1][2] = -(m.m[0][0] * m.m[1][2] * m.m[3][3]) - (m.m[0][2] * m.m[1][3] * m.m[3][0]) - (m.m[0][3] * m.m[1][0] * m.m[3][2]) + m.m[0][3] * m.m[1][2] * m.m[3][0] +
-	            m.m[0][2] * m.m[1][0] * m.m[3][3] + m.m[0][0] * m.m[1][3] * m.m[3][2];
+		m.m[0][2] * m.m[1][0] * m.m[3][3] + m.m[0][0] * m.m[1][3] * m.m[3][2];
 
 	a.m[1][3] = m.m[0][0] * m.m[1][2] * m.m[2][3] + m.m[0][2] * m.m[1][3] * m.m[2][0] + m.m[0][3] * m.m[1][0] * m.m[2][2] - m.m[0][3] * m.m[1][2] * m.m[2][0] - m.m[0][2] * m.m[1][0] * m.m[2][3] -
-	            m.m[0][0] * m.m[1][3] * m.m[2][2];
+		m.m[0][0] * m.m[1][3] * m.m[2][2];
 
 	a.m[2][0] = m.m[1][0] * m.m[2][1] * m.m[3][3] + m.m[1][1] * m.m[2][3] * m.m[3][0] + m.m[1][3] * m.m[2][0] * m.m[3][1] - m.m[1][3] * m.m[2][1] * m.m[3][0] - m.m[1][1] * m.m[2][0] * m.m[3][3] -
-	            m.m[1][0] * m.m[2][3] * m.m[3][1];
+		m.m[1][0] * m.m[2][3] * m.m[3][1];
 
 	a.m[2][1] = -(m.m[0][0] * m.m[2][1] * m.m[3][3]) - (m.m[0][1] * m.m[2][3] * m.m[3][0]) - (m.m[0][3] * m.m[2][0] * m.m[3][1]) + m.m[0][3] * m.m[2][1] * m.m[3][0] +
-	            m.m[0][1] * m.m[2][0] * m.m[3][3] + m.m[0][0] * m.m[2][3] * m.m[3][1];
+		m.m[0][1] * m.m[2][0] * m.m[3][3] + m.m[0][0] * m.m[2][3] * m.m[3][1];
 
 	a.m[2][2] = m.m[0][0] * m.m[1][1] * m.m[3][3] + m.m[0][1] * m.m[1][3] * m.m[3][0] + m.m[0][3] * m.m[1][0] * m.m[3][1] - m.m[0][3] * m.m[1][1] * m.m[3][0] - m.m[0][1] * m.m[1][0] * m.m[3][3] -
-	            m.m[0][0] * m.m[1][3] * m.m[3][1];
+		m.m[0][0] * m.m[1][3] * m.m[3][1];
 
 	a.m[2][3] = -(m.m[0][0] * m.m[1][1] * m.m[2][3]) - (m.m[0][1] * m.m[1][3] * m.m[2][0]) - (m.m[0][3] * m.m[1][0] * m.m[2][1]) + m.m[0][3] * m.m[1][1] * m.m[2][0] +
-	            m.m[0][1] * m.m[1][0] * m.m[2][3] + m.m[0][0] * m.m[1][3] * m.m[2][1];
+		m.m[0][1] * m.m[1][0] * m.m[2][3] + m.m[0][0] * m.m[1][3] * m.m[2][1];
 
 	a.m[3][0] = -(m.m[1][0] * m.m[2][1] * m.m[3][2]) - (m.m[1][1] * m.m[2][2] * m.m[3][0]) - (m.m[1][2] * m.m[2][0] * m.m[3][1]) + m.m[1][2] * m.m[2][1] * m.m[3][0] +
-	            m.m[1][1] * m.m[2][0] * m.m[3][2] + m.m[1][0] * m.m[2][2] * m.m[3][1];
+		m.m[1][1] * m.m[2][0] * m.m[3][2] + m.m[1][0] * m.m[2][2] * m.m[3][1];
 
 	a.m[3][1] = m.m[0][0] * m.m[2][1] * m.m[3][2] + m.m[0][1] * m.m[2][2] * m.m[3][0] + m.m[0][2] * m.m[2][0] * m.m[3][1] - m.m[0][2] * m.m[2][1] * m.m[3][0] - m.m[0][1] * m.m[2][0] * m.m[3][2] -
-	            m.m[0][0] * m.m[2][2] * m.m[3][1];
+		m.m[0][0] * m.m[2][2] * m.m[3][1];
 
 	a.m[3][2] = -(m.m[0][0] * m.m[1][1] * m.m[3][2]) - (m.m[0][1] * m.m[1][2] * m.m[3][0]) - (m.m[0][2] * m.m[1][0] * m.m[3][1]) + m.m[0][2] * m.m[1][1] * m.m[3][0] +
-	            m.m[0][1] * m.m[1][0] * m.m[3][2] + m.m[0][0] * m.m[1][2] * m.m[3][1];
+		m.m[0][1] * m.m[1][0] * m.m[3][2] + m.m[0][0] * m.m[1][2] * m.m[3][1];
 
 	a.m[3][3] = m.m[0][0] * m.m[1][1] * m.m[2][2] + m.m[0][1] * m.m[1][2] * m.m[2][0] + m.m[0][2] * m.m[1][0] * m.m[2][1] - m.m[0][2] * m.m[1][1] * m.m[2][0] - m.m[0][1] * m.m[1][0] * m.m[2][2] -
-	            m.m[0][0] * m.m[1][2] * m.m[2][1];
+		m.m[0][0] * m.m[1][2] * m.m[2][1];
 
 	float number;
 	number = m.m[0][0] * m.m[1][1] * m.m[2][2] * m.m[3][3] + m.m[0][0] * m.m[1][2] * m.m[2][3] * m.m[3][1] + m.m[0][0] * m.m[1][3] * m.m[2][1] * m.m[3][2] -
-	         (m.m[0][0] * m.m[1][3] * m.m[2][2] * m.m[3][1]) - (m.m[0][0] * m.m[1][2] * m.m[2][1] * m.m[3][3]) - (m.m[0][0] * m.m[1][1] * m.m[2][3] * m.m[3][2]) -
-	         (m.m[0][1] * m.m[1][0] * m.m[2][2] * m.m[3][3]) - (m.m[0][2] * m.m[1][0] * m.m[2][3] * m.m[3][1]) - (m.m[0][3] * m.m[1][0] * m.m[2][1] * m.m[3][2]) +
-	         m.m[0][3] * m.m[1][0] * m.m[2][2] * m.m[3][1] + m.m[0][2] * m.m[1][0] * m.m[2][1] * m.m[3][3] + m.m[0][1] * m.m[1][0] * m.m[2][3] * m.m[3][2] +
-	         m.m[0][1] * m.m[1][2] * m.m[2][0] * m.m[3][3] + m.m[0][2] * m.m[1][3] * m.m[2][0] * m.m[3][1] + m.m[0][3] * m.m[1][1] * m.m[2][0] * m.m[3][2] -
-	         (m.m[0][3] * m.m[1][2] * m.m[2][0] * m.m[3][1]) - (m.m[0][2] * m.m[1][1] * m.m[2][0] * m.m[3][3]) - (m.m[0][1] * m.m[1][3] * m.m[2][0] * m.m[3][2]) -
-	         (m.m[0][1] * m.m[1][2] * m.m[2][3] * m.m[3][0]) - (m.m[0][2] * m.m[1][3] * m.m[2][1] * m.m[3][0]) - (m.m[0][3] * m.m[1][1] * m.m[2][2] * m.m[3][0]) +
-	         m.m[0][3] * m.m[1][2] * m.m[2][1] * m.m[3][0] + m.m[0][2] * m.m[1][1] * m.m[2][3] * m.m[3][0] + m.m[0][1] * m.m[1][3] * m.m[2][2] * m.m[3][0];
+		(m.m[0][0] * m.m[1][3] * m.m[2][2] * m.m[3][1]) - (m.m[0][0] * m.m[1][2] * m.m[2][1] * m.m[3][3]) - (m.m[0][0] * m.m[1][1] * m.m[2][3] * m.m[3][2]) -
+		(m.m[0][1] * m.m[1][0] * m.m[2][2] * m.m[3][3]) - (m.m[0][2] * m.m[1][0] * m.m[2][3] * m.m[3][1]) - (m.m[0][3] * m.m[1][0] * m.m[2][1] * m.m[3][2]) +
+		m.m[0][3] * m.m[1][0] * m.m[2][2] * m.m[3][1] + m.m[0][2] * m.m[1][0] * m.m[2][1] * m.m[3][3] + m.m[0][1] * m.m[1][0] * m.m[2][3] * m.m[3][2] +
+		m.m[0][1] * m.m[1][2] * m.m[2][0] * m.m[3][3] + m.m[0][2] * m.m[1][3] * m.m[2][0] * m.m[3][1] + m.m[0][3] * m.m[1][1] * m.m[2][0] * m.m[3][2] -
+		(m.m[0][3] * m.m[1][2] * m.m[2][0] * m.m[3][1]) - (m.m[0][2] * m.m[1][1] * m.m[2][0] * m.m[3][3]) - (m.m[0][1] * m.m[1][3] * m.m[2][0] * m.m[3][2]) -
+		(m.m[0][1] * m.m[1][2] * m.m[2][3] * m.m[3][0]) - (m.m[0][2] * m.m[1][3] * m.m[2][1] * m.m[3][0]) - (m.m[0][3] * m.m[1][1] * m.m[2][2] * m.m[3][0]) +
+		m.m[0][3] * m.m[1][2] * m.m[2][1] * m.m[3][0] + m.m[0][2] * m.m[1][1] * m.m[2][3] * m.m[3][0] + m.m[0][1] * m.m[1][3] * m.m[2][2] * m.m[3][0];
 
 	number = 1.0f / number;
 
@@ -392,7 +392,7 @@ Matrix4x4 MakePerspectiveFovMatrix(float fovY, float aspectRatio, float nearClip
 
 Vector3 Normalize(const Vector3& v) {
 	float length = std::sqrt(v.x * v.x + v.y * v.y + v.z * v.z);
-	return {v.x / length, v.y / length, v.z / length};
+	return { v.x / length, v.y / length, v.z / length };
 }
 
 DirectX::ScratchImage LoadTexture(const std::string& filePath);
@@ -430,17 +430,17 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam) {
 
 // Windowsアプリでのエントリーポイント
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
-	
+
 	D3DResourceLeakChecker leakCheck;
 
 	// COMの初期化
 	CoInitializeEx(0, COINIT_MULTITHREADED);
 
 	// 文字を格納する
-	std::string str0{"STRING!!!"};
+	std::string str0{ "STRING!!!" };
 
 	// 整数を文字列にする
-	std::string str1{std::to_string(10)};
+	std::string str1{ std::to_string(10) };
 
 	// 出力ウィンドウへの文字出力
 	OutputDebugStringA("Hello,DirectX!\n");
@@ -463,24 +463,24 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	const int32_t kClientHeight = 720;
 
 	// ウィンドウサイズを表す構造体にクライアント領域を入れる
-	RECT wrc = {0, 0, kClientWidth, kClientHeight};
+	RECT wrc = { 0, 0, kClientWidth, kClientHeight };
 
 	// クライアント領域をもとに実際のサイズにwrcを変更してもらう
 	AdjustWindowRect(&wrc, WS_OVERLAPPEDWINDOW, false);
 
 	// ウィンドウの生成
 	HWND hwnd = CreateWindow(
-	    wc.lpszClassName,     // 利用するクラス名
-	    L"CG2",               // タイトルバーの文字
-	    WS_OVERLAPPEDWINDOW,  // よく見るウィンドウスタイル
-	    CW_USEDEFAULT,        // 表示x座標
-	    CW_USEDEFAULT,        // 表示y座標
-	    wrc.right - wrc.left, // ウィンドウ横幅
-	    wrc.bottom - wrc.top, // ウィンドウ縦幅
-	    nullptr,              // 親ウィンドウハンドル
-	    nullptr,              // メニューハンドル
-	    wc.hInstance,         // インスタンスハンドル
-	    nullptr);             // オプション
+		wc.lpszClassName,     // 利用するクラス名
+		L"CG2",               // タイトルバーの文字
+		WS_OVERLAPPEDWINDOW,  // よく見るウィンドウスタイル
+		CW_USEDEFAULT,        // 表示x座標
+		CW_USEDEFAULT,        // 表示y座標
+		wrc.right - wrc.left, // ウィンドウ横幅
+		wrc.bottom - wrc.top, // ウィンドウ縦幅
+		nullptr,              // 親ウィンドウハンドル
+		nullptr,              // メニューハンドル
+		wc.hInstance,         // インスタンスハンドル
+		nullptr);             // オプション
 
 #ifdef _DEBUG
 	// デバッグ
@@ -524,32 +524,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 
 	//=========================================================
-	//入力の更新
-	input->Update();
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	//=========================================================
-
 	// ウィンドウを表示する
 	ShowWindow(hwnd, SW_SHOW);
 
@@ -580,8 +555,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 	Microsoft::WRL::ComPtr<ID3D12Device> device = nullptr;
 	// 機能レベルとログ出力用の文字列
-	D3D_FEATURE_LEVEL featureLevels[] = {D3D_FEATURE_LEVEL_12_1, D3D_FEATURE_LEVEL_12_0};
-	const char* featureLevelStrings[] = {"12.2", "12.1", "12.0"};
+	D3D_FEATURE_LEVEL featureLevels[] = { D3D_FEATURE_LEVEL_12_1, D3D_FEATURE_LEVEL_12_0 };
+	const char* featureLevelStrings[] = { "12.2", "12.1", "12.0" };
 	// 高い順に生成できるか調べていく
 	for (size_t i = 0; i < _countof(featureLevels); ++i) {
 		// 採用したアダプタでデバイスを生成
@@ -610,9 +585,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 		// 抑制するメッセージのID
 		D3D12_MESSAGE_ID denyIds[] = {// Windows11でDXGIデバッグレイヤーとDX12デバッグレイヤーの相互作用バグによるエラーメッセージ
-		                              D3D12_MESSAGE_ID_RESOURCE_BARRIER_MISMATCHING_COMMAND_LIST_TYPE};
+									  D3D12_MESSAGE_ID_RESOURCE_BARRIER_MISMATCHING_COMMAND_LIST_TYPE };
 		// 抑制するレベル
-		D3D12_MESSAGE_SEVERITY severities[] = {D3D12_MESSAGE_SEVERITY_INFO};
+		D3D12_MESSAGE_SEVERITY severities[] = { D3D12_MESSAGE_SEVERITY_INFO };
 		D3D12_INFO_QUEUE_FILTER filter{};
 		filter.DenyList.NumIDs = _countof(denyIds);
 		filter.DenyList.pIDList = denyIds;
@@ -680,7 +655,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	Log("Complete create ID3D12DescriptorHeap!!!\n"); // ディスクリプタ―ヒープ生成完了のログを出す
 
 	// SwapChainからResourceを引っ張ってくる
-	Microsoft::WRL::ComPtr<ID3D12Resource> swapChainResources[2] = {nullptr};
+	Microsoft::WRL::ComPtr<ID3D12Resource> swapChainResources[2] = { nullptr };
 	hr = swapChain->GetBuffer(0, IID_PPV_ARGS(&swapChainResources[0]));
 	// うまく取得できなければ起動できない
 	assert(SUCCEEDED(hr));
@@ -792,8 +767,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	// 書き込むためのアドレスを取得
 	directionalLightResource->Map(0, nullptr, reinterpret_cast<void**>(&directionalLightData));
 	// デフォルト値
-	directionalLightData->color = {1.0f, 1.0f, 1.0f, 1.0f};
-	directionalLightData->direction = {0.0f, -1.0f, 0.0f};
+	directionalLightData->color = { 1.0f, 1.0f, 1.0f, 1.0f };
+	directionalLightData->direction = { 0.0f, -1.0f, 0.0f };
 	directionalLightData->intensity = 1.0f;
 
 	// シリアライズしてバイナリにする
@@ -871,8 +846,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	D3D12_GRAPHICS_PIPELINE_STATE_DESC graphicsPipelineStateDesc{};
 	graphicsPipelineStateDesc.pRootSignature = rootSignature.Get();                                           // RootSignature
 	graphicsPipelineStateDesc.InputLayout = inputLayoutDesc;                                                  // inputLayout
-	graphicsPipelineStateDesc.VS = {vertexShaderBlob->GetBufferPointer(), vertexShaderBlob->GetBufferSize()}; // VertexShader
-	graphicsPipelineStateDesc.PS = {pixelShaderBlob->GetBufferPointer(), pixelShaderBlob->GetBufferSize()};   // PixelShader
+	graphicsPipelineStateDesc.VS = { vertexShaderBlob->GetBufferPointer(), vertexShaderBlob->GetBufferSize() }; // VertexShader
+	graphicsPipelineStateDesc.PS = { pixelShaderBlob->GetBufferPointer(), pixelShaderBlob->GetBufferSize() };   // PixelShader
 	graphicsPipelineStateDesc.BlendState = blendDesc;                                                         // BlendDesc
 	graphicsPipelineStateDesc.RasterizerState = rasterizerDesc;                                               // RasterizerDesc
 	// 書き込むRTV情報
@@ -900,7 +875,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	// 書き込むためのアドレスを取得
 	materialResource->Map(0, nullptr, reinterpret_cast<void**>(&materialData));
 	// 色を書き込む
-	materialData->color = {1.0f, 1.0f, 1.0f, 1.0f};
+	materialData->color = { 1.0f, 1.0f, 1.0f, 1.0f };
 	// 単位行列で初期化
 	materialData->uvTransform = MakeIdentity();
 
@@ -974,14 +949,14 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 	// Transform変数を作る
 	Transform transform{
-	    {1.0f, 1.0f, 1.0f},
-        {0.0f, 0.0f, 0.0f},
-        {0.0f, 0.0f, 0.0f}
-    };
+		{1.0f, 1.0f, 1.0f},
+		{0.0f, 0.0f, 0.0f},
+		{0.0f, 0.0f, 0.0f}
+	};
 	Transform cameraTransform{
-	    {1.0f, 1.0f, 1.0f  },
-	    {0.0f, 0.0f, 0.0f  },
-	    {0.0f, 0.0f, -10.0f},
+		{1.0f, 1.0f, 1.0f  },
+		{0.0f, 0.0f, 0.0f  },
+		{0.0f, 0.0f, -10.0f},
 	};
 
 	// float pi = float(M_PI);
@@ -1081,15 +1056,15 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	// 書き込むためのアドレスを取得
 	vertexResourceSprite->Map(0, nullptr, reinterpret_cast<void**>(&vertexDataSprite));
 	// 1枚目の三角形
-	vertexDataSprite[0].position = {0.0f, 360.0f, 0.0f, 1.0f}; // 左下
-	vertexDataSprite[0].texcoord = {0.0f, 1.0f};
-	vertexDataSprite[1].position = {0.0f, 0.0f, 0.0f, 1.0f}; // 左上
-	vertexDataSprite[1].texcoord = {0.0f, 0.0f};
-	vertexDataSprite[2].position = {640.0f, 360.0f, 0.0f, 1.0f}; // 右下
-	vertexDataSprite[2].texcoord = {1.0f, 1.0f};
+	vertexDataSprite[0].position = { 0.0f, 360.0f, 0.0f, 1.0f }; // 左下
+	vertexDataSprite[0].texcoord = { 0.0f, 1.0f };
+	vertexDataSprite[1].position = { 0.0f, 0.0f, 0.0f, 1.0f }; // 左上
+	vertexDataSprite[1].texcoord = { 0.0f, 0.0f };
+	vertexDataSprite[2].position = { 640.0f, 360.0f, 0.0f, 1.0f }; // 右下
+	vertexDataSprite[2].texcoord = { 1.0f, 1.0f };
 	// 2枚目の三角形
-	vertexDataSprite[3].position = {640.0f, 0.0f, 0.0f, 1.0f}; // 右上
-	vertexDataSprite[3].texcoord = {1.0f, 0.0f};
+	vertexDataSprite[3].position = { 640.0f, 0.0f, 0.0f, 1.0f }; // 右上
+	vertexDataSprite[3].texcoord = { 1.0f, 0.0f };
 
 	// インデックスリソースにデータを書き込む
 	uint32_t* indexDataSprite = nullptr;
@@ -1109,7 +1084,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	// Lightingを有効にする
 	materialDataSprite->enableLighting = false;
 	// 色を書き込む
-	materialDataSprite->color = {1.0f, 1.0f, 1.0f, 1.0f};
+	materialDataSprite->color = { 1.0f, 1.0f, 1.0f, 1.0f };
 	// 単位行列で初期化
 	materialDataSprite->uvTransform = MakeIdentity();
 
@@ -1125,10 +1100,10 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 	// Transform変数を作る
 	Transform transformSprite{
-	    {1.0f, 1.0f, 1.0f},
-        {0.0f, 0.0f, 0.0f},
-        {0.0f, 0.0f, 0.0f}
-    };
+		{1.0f, 1.0f, 1.0f},
+		{0.0f, 0.0f, 0.0f},
+		{0.0f, 0.0f, 0.0f}
+	};
 
 	//////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1138,8 +1113,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	ImGui::StyleColorsDark();
 	ImGui_ImplWin32_Init(hwnd);
 	ImGui_ImplDX12_Init(
-	    device.Get(), swapChainDesc.BufferCount, rtvDesc.Format, srvDescriptorHeap.Get(), srvDescriptorHeap->GetCPUDescriptorHandleForHeapStart(),
-	    srvDescriptorHeap->GetGPUDescriptorHandleForHeapStart());
+		device.Get(), swapChainDesc.BufferCount, rtvDesc.Format, srvDescriptorHeap.Get(), srvDescriptorHeap->GetCPUDescriptorHandleForHeapStart(),
+		srvDescriptorHeap->GetGPUDescriptorHandleForHeapStart());
 
 	//////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1190,9 +1165,36 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE)) {
 			TranslateMessage(&msg);
 			DispatchMessage(&msg);
-		} else {
+		}
+		else {
 
 			// ゲームの処理
+			//=========================================================
+			//入力の更新
+			input->Update();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			//========================================================= 
 			// これから書き込むバックバッファのインデックスを取得
 			UINT backBufferIndex = swapChain->GetCurrentBackBufferIndex();
 
@@ -1239,6 +1241,16 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 			ImGui::End();
 
+			//=============================
+			//キーボード
+			if (input->PushKey(DIK_0)) {
+				OutputDebugStringA("Push Hit 0\n");
+			}
+			if (input->TriggerKey(DIK_1)) {
+				OutputDebugStringA("Trigger Hit 0\n");
+			}
+			//=============================
+
 			// TransitionBarrierの設定
 			D3D12_RESOURCE_BARRIER barrier{};
 			// 今回のバリアはTransition
@@ -1261,11 +1273,11 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			// 指定した深度で画面全体をクリアする
 			commandList->ClearDepthStencilView(dsvHandle, D3D12_CLEAR_FLAG_DEPTH, 1.0f, 0, 0, nullptr);
 			// 指定した色で画面全体をクリアする
-			float clearColor[] = {0.1f, 0.25f, 0.5f, 1.0f}; // 青っぽい色。RGBAの順
+			float clearColor[] = { 0.1f, 0.25f, 0.5f, 1.0f }; // 青っぽい色。RGBAの順
 			commandList->ClearRenderTargetView(rtvHandles[backBufferIndex], clearColor, 0, nullptr);
 
 			// 描画用DescriptorHeap設定
-			Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> descriptorHeaps[] = {srvDescriptorHeap};
+			Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> descriptorHeaps[] = { srvDescriptorHeap };
 			commandList->SetDescriptorHeaps(1, descriptorHeaps->GetAddressOf());
 
 			// ImGuiの内部コマンドを生成する
@@ -1355,7 +1367,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			assert(SUCCEEDED(hr));
 
 			// GPUにコマンドリストの実行を行わせる
-			Microsoft::WRL::ComPtr<ID3D12CommandList> commandLists[] = {commandList};
+			Microsoft::WRL::ComPtr<ID3D12CommandList> commandLists[] = { commandList };
 			commandQueue->ExecuteCommandLists(1, commandLists->GetAddressOf());
 			// GPUとOSに画面の交換を行うように通知する
 			swapChain->Present(1, 0); // 面倒くさいやつ
@@ -1394,21 +1406,21 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 	//=================================================
 	delete input;
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	//=================================================
 
 	//////////////////////////////////////////////
@@ -1459,12 +1471,12 @@ std::string ConvertString(const std::wstring& str) {
 }
 
 IDxcBlob* CompileShader(
-    // CompilerするShaderファイルへのパス
-    const std::wstring& filePath,
-    // Compilerに使用するProfile
-    const wchar_t* profile,
-    // 初期化で生成したもの3つ
-    IDxcUtils* dxcUtils, IDxcCompiler3* dxcCompiler, IDxcIncludeHandler* includeHandler) {
+	// CompilerするShaderファイルへのパス
+	const std::wstring& filePath,
+	// Compilerに使用するProfile
+	const wchar_t* profile,
+	// 初期化で生成したもの3つ
+	IDxcUtils* dxcUtils, IDxcCompiler3* dxcCompiler, IDxcIncludeHandler* includeHandler) {
 
 	// これからシェーダーをコンパイルする旨をログにだす
 	Log(ConvertString(std::format(L"Begin CompileShader, path:{}, profile{}\n", filePath, profile)));
@@ -1480,24 +1492,24 @@ IDxcBlob* CompileShader(
 	shaderSourceBuffer.Encoding = DXC_CP_UTF8; // UTF8の文字コードであることを通知
 
 	LPCWSTR arguments[] = {
-	    filePath.c_str(), // コンパイル対象のhlslファイル名
-	    L"-E",
-	    L"main", // エントリーポイントの指定。基本的にmain以外にはしない
-	    L"-T",
-	    profile, // ShaderProfileの設定
-	    L"-Zi",
-	    L"-Qembed_debug", // デバッグ用の情報を埋め込む
-	    L"-Od",           // 最適化を外しておく
-	    L"-Zpr",          // メモリレイアウトは行優先
+		filePath.c_str(), // コンパイル対象のhlslファイル名
+		L"-E",
+		L"main", // エントリーポイントの指定。基本的にmain以外にはしない
+		L"-T",
+		profile, // ShaderProfileの設定
+		L"-Zi",
+		L"-Qembed_debug", // デバッグ用の情報を埋め込む
+		L"-Od",           // 最適化を外しておく
+		L"-Zpr",          // メモリレイアウトは行優先
 	};
 	// 実際にShaderをコンパイルする
 	IDxcResult* shaderResult = nullptr;
 	hr = dxcCompiler->Compile(
-	    &shaderSourceBuffer,        // 読み込んだファイル
-	    arguments,                  // コンパイルオプション
-	    _countof(arguments),        // コンパイルオプションの数
-	    includeHandler,             // includeが含まれた諸々
-	    IID_PPV_ARGS(&shaderResult) // コンパイル結果
+		&shaderSourceBuffer,        // 読み込んだファイル
+		arguments,                  // コンパイルオプション
+		_countof(arguments),        // コンパイルオプションの数
+		includeHandler,             // includeが含まれた諸々
+		IID_PPV_ARGS(&shaderResult) // コンパイル結果
 	);
 	// コンパイルエラーではなくdxcが起動できないなど致命的な状況
 	assert(SUCCEEDED(hr));
@@ -1577,21 +1589,29 @@ MaterialData LoadMaterialTemplateFile(const std::string& directoryPath, const st
 
 		if (identifier == "newmtl") {
 			s >> materialData.name;
-		} else if (identifier == "Ns") {
+		}
+		else if (identifier == "Ns") {
 			s >> materialData.Ns;
-		} else if (identifier == "Ka") {
+		}
+		else if (identifier == "Ka") {
 			s >> materialData.Ka.r >> materialData.Ka.g >> materialData.Ka.b;
-		} else if (identifier == "Kd") {
+		}
+		else if (identifier == "Kd") {
 			s >> materialData.Kd.r >> materialData.Kd.g >> materialData.Kd.b;
-		} else if (identifier == "Ks") {
+		}
+		else if (identifier == "Ks") {
 			s >> materialData.Ks.r >> materialData.Ks.g >> materialData.Ks.b;
-		} else if (identifier == "Ni") {
+		}
+		else if (identifier == "Ni") {
 			s >> materialData.Ni;
-		} else if (identifier == "d") {
+		}
+		else if (identifier == "d") {
 			s >> materialData.d;
-		} else if (identifier == "illum") {
+		}
+		else if (identifier == "illum") {
 			s >> materialData.illum;
-		} else if (identifier == "map_Kd") {
+		}
+		else if (identifier == "map_Kd") {
 			std::string textureFilename;
 			s >> textureFilename;
 			materialData.textureFilePath = directoryPath + "/" + textureFilename;
@@ -1621,17 +1641,20 @@ ModelData LoadObjFile(const std::string& directoryPath, const std::string& filen
 			position.x *= -1.0f;
 			position.w = 1.0f;
 			positions.push_back(position);
-		} else if (identifier == "vt") {
+		}
+		else if (identifier == "vt") {
 			Vector2 texcoord;
 			s >> texcoord.x >> texcoord.y;
 			texcoord.y = 1.0f - texcoord.y;
 			texcoords.push_back(texcoord);
-		} else if (identifier == "vn") {
+		}
+		else if (identifier == "vn") {
 			Vector3 normal;
 			s >> normal.x >> normal.y >> normal.z;
 			normal.x *= -1.0f;
 			normals.push_back(normal);
-		} else if (identifier == "f") {
+		}
+		else if (identifier == "f") {
 			VertexData triangle[3];
 			for (int32_t faceVertex = 0; faceVertex < 3; ++faceVertex) {
 				std::string vertexDefinition;
@@ -1646,13 +1669,14 @@ ModelData LoadObjFile(const std::string& directoryPath, const std::string& filen
 				Vector4 position = positions[elementIndices[0] - 1];
 				Vector2 texcoord = texcoords[elementIndices[1] - 1];
 				Vector3 normal = normals[elementIndices[2] - 1];
-				VertexData vertex = {position, texcoord, normal};
+				VertexData vertex = { position, texcoord, normal };
 				triangle[faceVertex] = vertex;
 			}
 			modelData.vertices.push_back(triangle[2]);
 			modelData.vertices.push_back(triangle[1]);
 			modelData.vertices.push_back(triangle[0]);
-		} else if (identifier == "mtllib") {
+		}
+		else if (identifier == "mtllib") {
 			std::string materialFilename;
 			s >> materialFilename;
 			modelData.material = LoadMaterialTemplateFile(directoryPath, materialFilename);
@@ -1698,12 +1722,12 @@ Microsoft::WRL::ComPtr<ID3D12Resource> CreateTextureResources(Microsoft::WRL::Co
 	// Resourcesの生成
 	Microsoft::WRL::ComPtr<ID3D12Resource> resource = nullptr;
 	HRESULT hr = device->CreateCommittedResource(
-	    &heapProperties,                   // Heapの設定
-	    D3D12_HEAP_FLAG_NONE,              // Heapの特殊な設定
-	    &resourceDesc,                     // Resource設定
-	    D3D12_RESOURCE_STATE_GENERIC_READ, // 初回のResourceState。Textureは読むだけ
-	    nullptr,                           // Clear最適値。使わないのでnullptr
-	    IID_PPV_ARGS(&resource)            // 作成するResourceポインタへのポインタ
+		&heapProperties,                   // Heapの設定
+		D3D12_HEAP_FLAG_NONE,              // Heapの特殊な設定
+		&resourceDesc,                     // Resource設定
+		D3D12_RESOURCE_STATE_GENERIC_READ, // 初回のResourceState。Textureは読むだけ
+		nullptr,                           // Clear最適値。使わないのでnullptr
+		IID_PPV_ARGS(&resource)            // 作成するResourceポインタへのポインタ
 	);
 	assert(SUCCEEDED(hr));
 
@@ -1719,11 +1743,11 @@ void UploadTextureData(Microsoft::WRL::ComPtr<ID3D12Resource> texture, const Dir
 		const DirectX::Image* img = mipImages.GetImage(mipLevel, 0, 0);
 		// Textureに転送
 		HRESULT hr = texture->WriteToSubresource(
-		    UINT(mipLevel),       //
-		    nullptr,              // 全領域へコピー
-		    img->pixels,          // 元データアドレス
-		    UINT(img->rowPitch),  // 1ラインサイズ
-		    UINT(img->slicePitch) // 1枚サイズ
+			UINT(mipLevel),       //
+			nullptr,              // 全領域へコピー
+			img->pixels,          // 元データアドレス
+			UINT(img->rowPitch),  // 1ラインサイズ
+			UINT(img->slicePitch) // 1枚サイズ
 		);
 		assert(SUCCEEDED(hr));
 	}
@@ -1753,12 +1777,12 @@ Microsoft::WRL::ComPtr<ID3D12Resource> CreateDepthStencilTextureResource(Microso
 	// Resourceの生成
 	Microsoft::WRL::ComPtr<ID3D12Resource> resource = nullptr;
 	HRESULT hr = device->CreateCommittedResource(
-	    &heapProperties,                  // Heapの設定
-	    D3D12_HEAP_FLAG_NONE,             // Heapの特殊な設定
-	    &resourceDesc,                    // Resource設定
-	    D3D12_RESOURCE_STATE_DEPTH_WRITE, // 初回のResourceState。Textureは読むだけ
-	    &depthClearValue,                 // Clear最適値
-	    IID_PPV_ARGS(&resource)           // 作成するResourceポインタへのポインタ
+		&heapProperties,                  // Heapの設定
+		D3D12_HEAP_FLAG_NONE,             // Heapの特殊な設定
+		&resourceDesc,                    // Resource設定
+		D3D12_RESOURCE_STATE_DEPTH_WRITE, // 初回のResourceState。Textureは読むだけ
+		&depthClearValue,                 // Clear最適値
+		IID_PPV_ARGS(&resource)           // 作成するResourceポインタへのポインタ
 	);
 	assert(SUCCEEDED(hr));
 
