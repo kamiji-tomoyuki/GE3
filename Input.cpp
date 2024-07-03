@@ -6,8 +6,6 @@
 
 void Input::Initialize(HINSTANCE hInstance, HWND hwnd)
 {
-	HRESULT result;
-
 	//DirectInputのインスタンスの生成
 	result = DirectInput8Create(hInstance, DIRECTINPUT_VERSION, IID_IDirectInput8, (void**)&directInput, nullptr);
 	assert(SUCCEEDED(result));
@@ -24,8 +22,6 @@ void Input::Initialize(HINSTANCE hInstance, HWND hwnd)
 
 void Input::Update()
 {
-	HRESULT result;
-
 	//前回のキー入力を保存
 	memcpy(keyPre, key, sizeof(key));
 

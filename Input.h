@@ -23,6 +23,8 @@ public://メンバ関数
 	bool TriggerKey(BYTE keynumber);
 
 private://メンバ変数
+	HRESULT result;
+
 	//DirectInputのインスタンス
 	ComPtr<IDirectInput8> directInput = nullptr;
 
