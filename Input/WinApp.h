@@ -3,6 +3,7 @@
 #include <wrl.h>
 
 #include "../externals/imgui/imgui.h"
+#include <cstdint>
 
 class WinApp
 {
@@ -15,9 +16,12 @@ public://メンバ関数
 	//更新
 	void Update();
 
+	//終了
+	void Finalize();
+
 	//getter
-	HINSTANCE GetHInstance()const { return wc.hInstance; }
-	HWND GetHwnd()const { return hwnd; }
+	HINSTANCE GetHInstance()const { return wc_.hInstance; }
+	HWND GetHwnd()const { return hwnd_; }
 
 public://定数
 	//クライアント領域のサイズ
@@ -26,8 +30,8 @@ public://定数
 
 private:
 	//ウインドウクラスの設定
-	WNDCLASS wc{};
+	WNDCLASS wc_{};
 	//ウインドウハンドル
-	HWND hwnd = nullptr;
+	HWND hwnd_ = nullptr;
 };
 
