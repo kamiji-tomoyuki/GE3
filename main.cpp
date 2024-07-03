@@ -448,7 +448,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	winApp->Initialize();
 	input->Initialize(winApp);
 
-	
+
 
 
 
@@ -1342,7 +1342,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 	CloseHandle(fenceEvent);
 
-	
+
 	//////////////////////////////////////////////
 
 	// ImGuiの終了処理
