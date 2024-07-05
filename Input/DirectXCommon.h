@@ -4,6 +4,8 @@
 #include <wrl.h>
 
 #include "WinApp.h"
+#include "Function/Logger.h"
+#include "Function/StringUtility.h"
 
 class DirectXCommon
 {
@@ -35,6 +37,18 @@ private:
 
 	//WindowsAPI
 	WinApp* winApp_ = nullptr;
+
+	//DXGIファクトリー
+	Microsoft::WRL::ComPtr<IDXGIFactory7> dxgiFactory = nullptr;
+
+	//コマンド関連の変数
+	Microsoft::WRL::ComPtr<ID3D12CommandAllocator> commandAllocator = nullptr;
+	Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> commandList = nullptr;
+	Microsoft::WRL::ComPtr<ID3D12CommandQueue> commandQueue = nullptr;
+
+	//スワップチェーン
+	Microsoft::WRL::ComPtr<IDXGISwapChain4> swapChain = nullptr;
+
 
 };
 

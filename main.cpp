@@ -119,11 +119,11 @@ struct D3DResourceLeakChecker {
 
 /////////////////////////////////////////////////////////////////////////////
 
-void Log(const std::string& message);
-// string->wstring
-std::wstring ConvertString(const std::string& str);
-// wstring->string
-std::string ConvertString(const std::wstring& str);
+//void Log(const std::string& message);
+//// string->wstring
+//std::wstring ConvertString(const std::string& str);
+//// wstring->string
+//std::string ConvertString(const std::wstring& str);
 
 IDxcBlob* CompileShader(
 	// CompilerするShaderファイルへのパス
@@ -492,90 +492,90 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	//// 適切なアダプタが見つからなかったので起動できない
 	//assert(useAdapter != nullptr);
 
-	Microsoft::WRL::ComPtr<ID3D12Device> device = nullptr;
-	// 機能レベルとログ出力用の文字列
-	D3D_FEATURE_LEVEL featureLevels[] = { D3D_FEATURE_LEVEL_12_1, D3D_FEATURE_LEVEL_12_0 };
-	const char* featureLevelStrings[] = { "12.2", "12.1", "12.0" };
-	// 高い順に生成できるか調べていく
-	for (size_t i = 0; i < _countof(featureLevels); ++i) {
-		// 採用したアダプタでデバイスを生成
-		hr = D3D12CreateDevice(useAdapter.Get(), featureLevels[i], IID_PPV_ARGS(&device));
-		// 指定した機能レベルでデバイスが生成出来たかを確認
-		if (SUCCEEDED(hr)) {
-			// 生成出来たのでログ出力を行ってループを抜ける
-			Log(std::format("FeatureLevel : {}\n", featureLevelStrings[i]));
-			break;
-		}
-	}
+	//Microsoft::WRL::ComPtr<ID3D12Device> device = nullptr;
+	//// 機能レベルとログ出力用の文字列
+	//D3D_FEATURE_LEVEL featureLevels[] = { D3D_FEATURE_LEVEL_12_1, D3D_FEATURE_LEVEL_12_0 };
+	//const char* featureLevelStrings[] = { "12.2", "12.1", "12.0" };
+	//// 高い順に生成できるか調べていく
+	//for (size_t i = 0; i < _countof(featureLevels); ++i) {
+	//	// 採用したアダプタでデバイスを生成
+	//	hr = D3D12CreateDevice(useAdapter.Get(), featureLevels[i], IID_PPV_ARGS(&device));
+	//	// 指定した機能レベルでデバイスが生成出来たかを確認
+	//	if (SUCCEEDED(hr)) {
+	//		// 生成出来たのでログ出力を行ってループを抜ける
+	//		Log(std::format("FeatureLevel : {}\n", featureLevelStrings[i]));
+	//		break;
+	//	}
+	//}
 
-	// デバイスの生成が上手くいかなかったので起動できない
-	assert(device != nullptr);
-	Log("Complete create D3D12Device!!!\n"); // 初期化完了のログをだす
+	//// デバイスの生成が上手くいかなかったので起動できない
+	//assert(device != nullptr);
+	//Log("Complete create D3D12Device!!!\n"); // 初期化完了のログをだす
 
-#ifdef _DEBUG
-	Microsoft::WRL::ComPtr<ID3D12InfoQueue> infoQueue = nullptr;
-	if (SUCCEEDED(device->QueryInterface(IID_PPV_ARGS(&infoQueue)))) {
-		// やばいエラー時にとまる
-		infoQueue->SetBreakOnSeverity(D3D12_MESSAGE_SEVERITY_CORRUPTION, true);
-		// エラー時にとまる
-		infoQueue->SetBreakOnSeverity(D3D12_MESSAGE_SEVERITY_ERROR, true);
-		// 警告時にとまる
-		infoQueue->SetBreakOnSeverity(D3D12_MESSAGE_SEVERITY_WARNING, true);
+//#ifdef _DEBUG
+//	Microsoft::WRL::ComPtr<ID3D12InfoQueue> infoQueue = nullptr;
+//	if (SUCCEEDED(device->QueryInterface(IID_PPV_ARGS(&infoQueue)))) {
+//		// やばいエラー時にとまる
+//		infoQueue->SetBreakOnSeverity(D3D12_MESSAGE_SEVERITY_CORRUPTION, true);
+//		// エラー時にとまる
+//		infoQueue->SetBreakOnSeverity(D3D12_MESSAGE_SEVERITY_ERROR, true);
+//		// 警告時にとまる
+//		infoQueue->SetBreakOnSeverity(D3D12_MESSAGE_SEVERITY_WARNING, true);
+//
+//		// 抑制するメッセージのID
+//		D3D12_MESSAGE_ID denyIds[] = {// Windows11でDXGIデバッグレイヤーとDX12デバッグレイヤーの相互作用バグによるエラーメッセージ
+//									  D3D12_MESSAGE_ID_RESOURCE_BARRIER_MISMATCHING_COMMAND_LIST_TYPE };
+//		// 抑制するレベル
+//		D3D12_MESSAGE_SEVERITY severities[] = { D3D12_MESSAGE_SEVERITY_INFO };
+//		D3D12_INFO_QUEUE_FILTER filter{};
+//		filter.DenyList.NumIDs = _countof(denyIds);
+//		filter.DenyList.pIDList = denyIds;
+//		filter.DenyList.NumSeverities = _countof(severities);
+//		filter.DenyList.pSeverityList = severities;
+//		// 指定したメッセージの表示を抑制する
+//		infoQueue->PushStorageFilter(&filter);
+//
+//		// 解放
+//		infoQueue->Release();
+//	}
+//#endif // _DEBUG
 
-		// 抑制するメッセージのID
-		D3D12_MESSAGE_ID denyIds[] = {// Windows11でDXGIデバッグレイヤーとDX12デバッグレイヤーの相互作用バグによるエラーメッセージ
-									  D3D12_MESSAGE_ID_RESOURCE_BARRIER_MISMATCHING_COMMAND_LIST_TYPE };
-		// 抑制するレベル
-		D3D12_MESSAGE_SEVERITY severities[] = { D3D12_MESSAGE_SEVERITY_INFO };
-		D3D12_INFO_QUEUE_FILTER filter{};
-		filter.DenyList.NumIDs = _countof(denyIds);
-		filter.DenyList.pIDList = denyIds;
-		filter.DenyList.NumSeverities = _countof(severities);
-		filter.DenyList.pSeverityList = severities;
-		// 指定したメッセージの表示を抑制する
-		infoQueue->PushStorageFilter(&filter);
+	//// コマンドキューを生成する
+	//Microsoft::WRL::ComPtr<ID3D12CommandQueue> commandQueue = nullptr;
+	//D3D12_COMMAND_QUEUE_DESC commandQueueDesc{};
+	//hr = device->CreateCommandQueue(&commandQueueDesc, IID_PPV_ARGS(&commandQueue));
+	//// コマンドキューの生成がうまくいかなかったので起動できない
+	//assert(SUCCEEDED(hr));
+	//Log("Complete create ID3D12CommandQueue!!!\n"); // コマンドキュー生成完了のログを出す
 
-		// 解放
-		infoQueue->Release();
-	}
-#endif // _DEBUG
+	//// コマンドアロケータを生成する
+	//Microsoft::WRL::ComPtr<ID3D12CommandAllocator> commandAllocator = nullptr;
+	//hr = device->CreateCommandAllocator(D3D12_COMMAND_LIST_TYPE_DIRECT, IID_PPV_ARGS(&commandAllocator));
+	//// コマンドアロケータの生成がうまくいかなかったので起動できない
+	//assert(SUCCEEDED(hr));
+	//Log("Complete create ID3D12CommandAllocator!!!\n"); // コマンドアロケータ生成完了のログを出す
 
-	// コマンドキューを生成する
-	Microsoft::WRL::ComPtr<ID3D12CommandQueue> commandQueue = nullptr;
-	D3D12_COMMAND_QUEUE_DESC commandQueueDesc{};
-	hr = device->CreateCommandQueue(&commandQueueDesc, IID_PPV_ARGS(&commandQueue));
-	// コマンドキューの生成がうまくいかなかったので起動できない
-	assert(SUCCEEDED(hr));
-	Log("Complete create ID3D12CommandQueue!!!\n"); // コマンドキュー生成完了のログを出す
+	//// コマンドリストを生成する
+	//Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> commandList = nullptr;
+	//hr = device->CreateCommandList(0, D3D12_COMMAND_LIST_TYPE_DIRECT, commandAllocator.Get(), nullptr, IID_PPV_ARGS(&commandList));
+	//// コマンドリストの生成がうまくいかなかったので起動できない
+	//assert(SUCCEEDED(hr));
+	//Log("Complete create ID3D12GraphicsCommandList!!!\n"); // コマンドリスト生成完了のログを出す　
 
-	// コマンドアロケータを生成する
-	Microsoft::WRL::ComPtr<ID3D12CommandAllocator> commandAllocator = nullptr;
-	hr = device->CreateCommandAllocator(D3D12_COMMAND_LIST_TYPE_DIRECT, IID_PPV_ARGS(&commandAllocator));
-	// コマンドアロケータの生成がうまくいかなかったので起動できない
-	assert(SUCCEEDED(hr));
-	Log("Complete create ID3D12CommandAllocator!!!\n"); // コマンドアロケータ生成完了のログを出す
-
-	// コマンドリストを生成する
-	Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> commandList = nullptr;
-	hr = device->CreateCommandList(0, D3D12_COMMAND_LIST_TYPE_DIRECT, commandAllocator.Get(), nullptr, IID_PPV_ARGS(&commandList));
-	// コマンドリストの生成がうまくいかなかったので起動できない
-	assert(SUCCEEDED(hr));
-	Log("Complete create ID3D12GraphicsCommandList!!!\n"); // コマンドリスト生成完了のログを出す　
-
-	// スワップチェーンを生成する
-	Microsoft::WRL::ComPtr<IDXGISwapChain4> swapChain = nullptr;
-	DXGI_SWAP_CHAIN_DESC1 swapChainDesc{};
-	swapChainDesc.Width = WinApp::kClientWidth;                  // 画面の幅。ウィンドウンおクライアント領域を同じものにしておく
-	swapChainDesc.Height = WinApp::kClientHeight;                // 画面の高さ。ウィンドウのクライアント領域を同じものにしておく
-	swapChainDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;           // 色の形式
-	swapChainDesc.SampleDesc.Count = 1;                          // マルチサンプルしない
-	swapChainDesc.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT; // 描画のターゲットとして利用する
-	swapChainDesc.BufferCount = 2;                               // ダブルバッファ
-	swapChainDesc.SwapEffect = DXGI_SWAP_EFFECT_FLIP_DISCARD;    // モニタに移したら、中身を破棄
-	// コマンドキュー、ウィンドウハンドル、設定を渡して生成する
-	hr = dxgiFactory->CreateSwapChainForHwnd(commandQueue.Get(), winApp->GetHwnd(), &swapChainDesc, nullptr, nullptr, reinterpret_cast<IDXGISwapChain1**>(swapChain.GetAddressOf()));
-	assert(SUCCEEDED(hr));
-	Log("Complete create IDXGISwapChain4!!!\n"); // スワップチェーン生成完了のログを出す
+	//// スワップチェーンを生成する
+	//Microsoft::WRL::ComPtr<IDXGISwapChain4> swapChain = nullptr;
+	//DXGI_SWAP_CHAIN_DESC1 swapChainDesc{};
+	//swapChainDesc.Width = WinApp::kClientWidth;                  // 画面の幅。ウィンドウンおクライアント領域を同じものにしておく
+	//swapChainDesc.Height = WinApp::kClientHeight;                // 画面の高さ。ウィンドウのクライアント領域を同じものにしておく
+	//swapChainDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;           // 色の形式
+	//swapChainDesc.SampleDesc.Count = 1;                          // マルチサンプルしない
+	//swapChainDesc.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT; // 描画のターゲットとして利用する
+	//swapChainDesc.BufferCount = 2;                               // ダブルバッファ
+	//swapChainDesc.SwapEffect = DXGI_SWAP_EFFECT_FLIP_DISCARD;    // モニタに移したら、中身を破棄
+	//// コマンドキュー、ウィンドウハンドル、設定を渡して生成する
+	//hr = dxgiFactory->CreateSwapChainForHwnd(commandQueue.Get(), winApp->GetHwnd(), &swapChainDesc, nullptr, nullptr, reinterpret_cast<IDXGISwapChain1**>(swapChain.GetAddressOf()));
+	//assert(SUCCEEDED(hr));
+	//Log("Complete create IDXGISwapChain4!!!\n"); // スワップチェーン生成完了のログを出す
 
 	// ディスクリプタヒープ
 	// RTV用のヒープでディスクリプタ数は2。RTVはShader内で触るものではないので、ShaderVisibleはfalse
@@ -1376,35 +1376,35 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 }
 
 // 関数の中身
-void Log(const std::string& message) { OutputDebugStringA(message.c_str()); }
+//void Log(const std::string& message) { OutputDebugStringA(message.c_str()); }
 
-std::wstring ConvertString(const std::string& str) {
-	if (str.empty()) {
-		return std::wstring();
-	}
-
-	auto sizeNeeded = MultiByteToWideChar(CP_UTF8, 0, reinterpret_cast<const char*>(&str[0]), static_cast<int>(str.size()), NULL, 0);
-	if (sizeNeeded == 0) {
-		return std::wstring();
-	}
-	std::wstring result(sizeNeeded, 0);
-	MultiByteToWideChar(CP_UTF8, 0, reinterpret_cast<const char*>(&str[0]), static_cast<int>(str.size()), &result[0], sizeNeeded);
-	return result;
-}
-
-std::string ConvertString(const std::wstring& str) {
-	if (str.empty()) {
-		return std::string();
-	}
-
-	auto sizeNeeded = WideCharToMultiByte(CP_UTF8, 0, str.data(), static_cast<int>(str.size()), NULL, 0, NULL, NULL);
-	if (sizeNeeded == 0) {
-		return std::string();
-	}
-	std::string result(sizeNeeded, 0);
-	WideCharToMultiByte(CP_UTF8, 0, str.data(), static_cast<int>(str.size()), result.data(), sizeNeeded, NULL, NULL);
-	return result;
-}
+//std::wstring ConvertString(const std::string& str) {
+//	if (str.empty()) {
+//		return std::wstring();
+//	}
+//
+//	auto sizeNeeded = MultiByteToWideChar(CP_UTF8, 0, reinterpret_cast<const char*>(&str[0]), static_cast<int>(str.size()), NULL, 0);
+//	if (sizeNeeded == 0) {
+//		return std::wstring();
+//	}
+//	std::wstring result(sizeNeeded, 0);
+//	MultiByteToWideChar(CP_UTF8, 0, reinterpret_cast<const char*>(&str[0]), static_cast<int>(str.size()), &result[0], sizeNeeded);
+//	return result;
+//}
+//
+//std::string ConvertString(const std::wstring& str) {
+//	if (str.empty()) {
+//		return std::string();
+//	}
+//
+//	auto sizeNeeded = WideCharToMultiByte(CP_UTF8, 0, str.data(), static_cast<int>(str.size()), NULL, 0, NULL, NULL);
+//	if (sizeNeeded == 0) {
+//		return std::string();
+//	}
+//	std::string result(sizeNeeded, 0);
+//	WideCharToMultiByte(CP_UTF8, 0, str.data(), static_cast<int>(str.size()), result.data(), sizeNeeded, NULL, NULL);
+//	return result;
+//}
 
 IDxcBlob* CompileShader(
 	// CompilerするShaderファイルへのパス
