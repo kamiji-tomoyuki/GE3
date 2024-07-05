@@ -29,6 +29,16 @@ public://メンバ関数
 	void DXCCompilerCreate();			//DXCコンパイラ
 	void ImGuiInitialize();				//ImGui
 
+	//DescriptorHeapの生成
+	Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> CreateDescriptorHeap(Microsoft::WRL::ComPtr<ID3D12Device> device, D3D12_DESCRIPTOR_HEAP_TYPE heapType, UINT numDescriptors, bool shaderVisible);
+
+	//DescriptorHandleの取得
+	D3D12_CPU_DESCRIPTOR_HANDLE GetCPUDescriptorHandle(Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> descriptorHeap, uint32_t descriptorSize, uint32_t index);
+	D3D12_GPU_DESCRIPTOR_HANDLE GetGPUDescriptorHandle(Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> descriptorHeap, uint32_t descriptorSize, uint32_t index);
+	//DescriptorHandleの取得(SRV)
+	D3D12_CPU_DESCRIPTOR_HANDLE GetSRVCPUDescriptorHandle(uint32_t index);
+	D3D12_GPU_DESCRIPTOR_HANDLE GetSRVGPUDescriptorHandle(uint32_t index);
+
 private:
 	//DirectX12デバイス
 	Microsoft::WRL::ComPtr<ID3D12Device> device_;
@@ -49,6 +59,19 @@ private:
 	//スワップチェーン
 	Microsoft::WRL::ComPtr<IDXGISwapChain4> swapChain = nullptr;
 
+	//DescriptorSize
+	uint32_t descriptorSizeRTV;
+	uint32_t descriptorSizeSRV;
+	uint32_t descriptorSizeDSV;
+	//DescriptorHeap
+	Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> rtvDescriptorHeap;
+	Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> srvDescriptorHeap;
+	Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> dsvDescriptorHeap;
+
+	//swapChainResources
+	std::array<Microsoft::WRL::ComPtr<ID3D12Resource>,2> swapChainResources;
+	// ディスクリプタ * 2
+	D3D12_CPU_DESCRIPTOR_HANDLE rtvHandles[2];
 
 };
 
