@@ -1,10 +1,10 @@
 #include <Windows.h>
-#include <cassert>
+
 #include <corecrt_math_defines.h>
 #include <cstdint>
-#include <d3d12.h>
+
 #include <dxcapi.h>
-#include <dxgi1_6.h>
+
 #include <dxgidebug.h>
 #include <format>
 #include <fstream>
@@ -18,10 +18,8 @@
 
 #include "Input/Input.h"
 #include "Input/WinApp.h"
+#include "Input/DirectXCommon.h"
 
-
-#pragma comment(lib, "d3d12.lib")
-#pragma comment(lib, "dxgi.lib")
 #pragma comment(lib, "dxguid.lib")
 #pragma comment(lib, "dxcompiler.lib")
 
@@ -426,16 +424,16 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 
 
-#ifdef _DEBUG
-	// デバッグ
-	Microsoft::WRL::ComPtr<ID3D12Debug1> debugController = nullptr;
-	if (SUCCEEDED(D3D12GetDebugInterface(IID_PPV_ARGS(&debugController)))) {
-		// デバッグレイヤーを有効化する
-		debugController->EnableDebugLayer();
-		// さらにGPU側でもチェックを行うようにする
-		debugController->SetEnableGPUBasedValidation(TRUE);
-	}
-#endif // DEBUG
+//#ifdef _DEBUG
+//	// デバッグ
+//	Microsoft::WRL::ComPtr<ID3D12Debug1> debugController = nullptr;
+//	if (SUCCEEDED(D3D12GetDebugInterface(IID_PPV_ARGS(&debugController)))) {
+//		// デバッグレイヤーを有効化する
+//		debugController->EnableDebugLayer();
+//		// さらにGPU側でもチェックを行うようにする
+//		debugController->SetEnableGPUBasedValidation(TRUE);
+//	}
+//#endif // DEBUG
 
 	//=========================================================
 	//取得
@@ -443,11 +441,13 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	winApp = new WinApp();
 	Input* input = nullptr;//input
 	input = new Input();
+	DirectXCommon* dxCommon = nullptr;//dxCommon
+	dxCommon = new DirectXCommon();
 
 	//初期化
 	winApp->Initialize();
 	input->Initialize(winApp);
-
+	dxCommon->Initialize(winApp);
 
 
 
@@ -467,30 +467,30 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	//=========================================================
 	HRESULT hr;
 
-	// DXGIファクトリーの生成
-	Microsoft::WRL::ComPtr<IDXGIFactory7> dxgiFactory = nullptr;
-	hr = CreateDXGIFactory(IID_PPV_ARGS(&dxgiFactory));
+	//// DXGIファクトリーの生成
+	//Microsoft::WRL::ComPtr<IDXGIFactory7> dxgiFactory = nullptr;
+	//hr = CreateDXGIFactory(IID_PPV_ARGS(&dxgiFactory));
 
-	assert(SUCCEEDED(hr));
+	//assert(SUCCEEDED(hr));
 
-	// 使用するアダプタ用の変数。最初にnullptrを入れておく
-	Microsoft::WRL::ComPtr<IDXGIAdapter4> useAdapter = nullptr;
-	// いい順にアダプタを頼む
-	for (UINT i = 0; dxgiFactory->EnumAdapterByGpuPreference(i, DXGI_GPU_PREFERENCE_HIGH_PERFORMANCE, IID_PPV_ARGS(&useAdapter)) != DXGI_ERROR_NOT_FOUND; ++i) {
-		// アダプタの情報を取得する
-		DXGI_ADAPTER_DESC3 adapterDesc{};
-		hr = useAdapter->GetDesc3(&adapterDesc);
-		assert(SUCCEEDED(hr));
-		// ソフトウェアアダプタでなければ採用
-		if (!(adapterDesc.Flags & DXGI_ADAPTER_FLAG3_SOFTWARE)) {
-			// 採用したアダプタの情報をログに出力。wstringの方なので注意
-			Log(ConvertString(std::format(L"Use Adapter : {}\n", adapterDesc.Description)));
-			break;
-		}
-		useAdapter = nullptr;
-	}
-	// 適切なアダプタが見つからなかったので起動できない
-	assert(useAdapter != nullptr);
+	//// 使用するアダプタ用の変数。最初にnullptrを入れておく
+	//Microsoft::WRL::ComPtr<IDXGIAdapter4> useAdapter = nullptr;
+	//// いい順にアダプタを頼む
+	//for (UINT i = 0; dxgiFactory->EnumAdapterByGpuPreference(i, DXGI_GPU_PREFERENCE_HIGH_PERFORMANCE, IID_PPV_ARGS(&useAdapter)) != DXGI_ERROR_NOT_FOUND; ++i) {
+	//	// アダプタの情報を取得する
+	//	DXGI_ADAPTER_DESC3 adapterDesc{};
+	//	hr = useAdapter->GetDesc3(&adapterDesc);
+	//	assert(SUCCEEDED(hr));
+	//	// ソフトウェアアダプタでなければ採用
+	//	if (!(adapterDesc.Flags & DXGI_ADAPTER_FLAG3_SOFTWARE)) {
+	//		// 採用したアダプタの情報をログに出力。wstringの方なので注意
+	//		Log(ConvertString(std::format(L"Use Adapter : {}\n", adapterDesc.Description)));
+	//		break;
+	//	}
+	//	useAdapter = nullptr;
+	//}
+	//// 適切なアダプタが見つからなかったので起動できない
+	//assert(useAdapter != nullptr);
 
 	Microsoft::WRL::ComPtr<ID3D12Device> device = nullptr;
 	// 機能レベルとログ出力用の文字列
@@ -1356,7 +1356,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	//=================================================
 	delete input;
 	delete winApp;
-
+	delete dxCommon;
 
 
 
