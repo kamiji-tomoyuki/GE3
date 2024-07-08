@@ -1,4 +1,5 @@
 #pragma once
+#include <array>
 #include <d3d12.h>
 #include <dxgi1_6.h>
 #include <wrl.h>
@@ -6,6 +7,7 @@
 #include "WinApp.h"
 #include "Function/Logger.h"
 #include "Function/StringUtility.h"
+#include <dxcapi.h>
 
 class DirectXCommon
 {
@@ -39,6 +41,9 @@ public://メンバ関数
 	D3D12_CPU_DESCRIPTOR_HANDLE GetSRVCPUDescriptorHandle(uint32_t index);
 	D3D12_GPU_DESCRIPTOR_HANDLE GetSRVGPUDescriptorHandle(uint32_t index);
 
+	//
+	Microsoft::WRL::ComPtr<ID3D12Resource> CreateDepthStencilTextureResource(Microsoft::WRL::ComPtr<ID3D12Device> device, int32_t width, int32_t height);
+
 private:
 	//DirectX12デバイス
 	Microsoft::WRL::ComPtr<ID3D12Device> device_;
@@ -59,6 +64,11 @@ private:
 	//スワップチェーン
 	Microsoft::WRL::ComPtr<IDXGISwapChain4> swapChain = nullptr;
 
+	DXGI_SWAP_CHAIN_DESC1 swapChainDesc{};
+
+	//depthStencilResource
+	Microsoft::WRL::ComPtr<ID3D12Resource> depthStencilResource;
+
 	//DescriptorSize
 	uint32_t descriptorSizeRTV;
 	uint32_t descriptorSizeSRV;
@@ -68,10 +78,27 @@ private:
 	Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> srvDescriptorHeap;
 	Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> dsvDescriptorHeap;
 
+	D3D12_RENDER_TARGET_VIEW_DESC rtvDesc{};
+
 	//swapChainResources
 	std::array<Microsoft::WRL::ComPtr<ID3D12Resource>,2> swapChainResources;
 	// ディスクリプタ * 2
 	D3D12_CPU_DESCRIPTOR_HANDLE rtvHandles[2];
+
+	//Fence
+	Microsoft::WRL::ComPtr<ID3D12Fence> fence = nullptr;
+
+	// ビューポート
+	D3D12_VIEWPORT viewport{};
+
+	// シザー矩形
+	D3D12_RECT scissorRect{};
+
+	// dxcCompiler
+	IDxcUtils* dxcUtils = nullptr;
+	IDxcCompiler3* dxcCompiler = nullptr;
+	IDxcIncludeHandler* includeHandler = nullptr;
+
 
 };
 
