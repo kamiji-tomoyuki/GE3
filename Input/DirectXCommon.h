@@ -3,12 +3,12 @@
 #include <d3d12.h>
 #include <dxgi1_6.h>
 #include <wrl.h>
-
-#include "WinApp.h"
-#include "Function/Logger.h"
-#include "Function/StringUtility.h"
 #include <dxcapi.h>
 
+#include "WinApp.h"
+
+#include "Function/Logger.h"
+#include "Function/StringUtility.h"
 class DirectXCommon
 {
 public://メンバ関数

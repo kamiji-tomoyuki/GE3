@@ -1,9 +1,8 @@
 #pragma once
-#include <Windows.h>
-#include <wrl.h>
+#include "Windows.h"
+#include <cstdint>
 
 #include "../externals/imgui/imgui.h"
-#include <cstdint>
 
 class WinApp
 {

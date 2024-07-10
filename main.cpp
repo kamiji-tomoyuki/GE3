@@ -1,23 +1,7 @@
-#include <Windows.h>
-
-#include <corecrt_math_defines.h>
-#include <cstdint>
-
-#include <dxcapi.h>
-
 #include <dxgidebug.h>
-#include <format>
-#include <fstream>
-#include <sstream>
-#include <string>
 
-#include "externals/imgui/imgui_impl_dx12.h"
-#include "externals/imgui/imgui_impl_win32.h"
-
-#include "externals/DirectXTex/DirectXTex.h"
-
-#include "Input/Input.h"
 #include "Input/WinApp.h"
+#include "Input/Input.h"
 #include "Input/DirectXCommon.h"
 
 #pragma comment(lib, "dxguid.lib")

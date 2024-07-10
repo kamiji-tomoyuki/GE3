@@ -1,8 +1,4 @@
 #include "Input.h"
-#include <cassert>
-
-#pragma comment(lib,"dinput8.lib")
-#pragma comment(lib,"dxguid.lib")
 
 void Input::Initialize(WinApp* winApp)
 {

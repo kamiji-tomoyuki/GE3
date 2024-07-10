@@ -1,4 +1,5 @@
 #include <string>
+#include <WinNls.h>
 namespace StringUtility
 {
 	// string->wstring
