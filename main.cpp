@@ -1,3 +1,5 @@
+#include "Windows.h"
+
 #include <dxgidebug.h>
 
 #include "Input/WinApp.h"

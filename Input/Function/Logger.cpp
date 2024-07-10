@@ -1,3 +1,4 @@
+#include "Windows.h"
 #include "Logger.h"
 namespace Logger 
 {

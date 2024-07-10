@@ -1,3 +1,5 @@
+#include "Windows.h"
+
 #include "DirectXCommon.h"
 #include <cassert>
 #include <format>
