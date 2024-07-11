@@ -79,14 +79,13 @@ void DirectXCommon::DviceInitialize()
 	assert(useAdapter != nullptr);
 
 	// --- デバイス生成 ---
-	Microsoft::WRL::ComPtr<ID3D12Device> device = nullptr;
 	// 機能レベルとログ出力用の文字列
 	D3D_FEATURE_LEVEL featureLevels[] = { D3D_FEATURE_LEVEL_12_1, D3D_FEATURE_LEVEL_12_0 };
 	const char* featureLevelStrings[] = { "12.2", "12.1", "12.0" };
 	// 高い順に生成できるか調べていく
 	for (size_t i = 0; i < _countof(featureLevels); ++i) {
 		// 採用したアダプタでデバイスを生成
-		hr = D3D12CreateDevice(useAdapter.Get(), featureLevels[i], IID_PPV_ARGS(&device));
+		hr = D3D12CreateDevice(useAdapter.Get(), featureLevels[i], IID_PPV_ARGS(&device_));
 		// 指定した機能レベルでデバイスが生成出来たかを確認
 		if (SUCCEEDED(hr)) {
 			// 生成出来たのでログ出力を行ってループを抜ける
@@ -94,14 +93,14 @@ void DirectXCommon::DviceInitialize()
 			break;
 		}
 	}
-	assert(device != nullptr);
+	assert(device_ != nullptr);
 
 	Logger::Log("Complete create D3D12Device!!!\n"); // 初期化完了のログをだす
 
 	// --- エラー時にブレークを発生 ---
 #ifdef _DEBUG
 	Microsoft::WRL::ComPtr<ID3D12InfoQueue> infoQueue = nullptr;
-	if (SUCCEEDED(device->QueryInterface(IID_PPV_ARGS(&infoQueue)))) {
+	if (SUCCEEDED(device_->QueryInterface(IID_PPV_ARGS(&infoQueue)))) {
 		// やばいエラー時にとまる
 		infoQueue->SetBreakOnSeverity(D3D12_MESSAGE_SEVERITY_CORRUPTION, true);
 		// エラー時にとまる
