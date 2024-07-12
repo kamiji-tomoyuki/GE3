@@ -53,7 +53,7 @@ void DirectXCommon::DviceInitialize()
 		// デバッグレイヤーを有効化する
 		debugController->EnableDebugLayer();
 		// さらにGPU側でもチェックを行うようにする
-		debugController->SetEnableGPUBasedValidation(TRUE);
+		debugController->SetEnableGPUBasedValidation(true);
 	}
 #endif // DEBUG
 
@@ -62,7 +62,7 @@ void DirectXCommon::DviceInitialize()
 	assert(SUCCEEDED(hr));
 
 	// --- アダプターの列挙 ---
-	Microsoft::WRL::ComPtr<IDXGIAdapter4> useAdapter = nullptr;
+	Microsoft::WRL::ComPtr<IDXGIAdapter4> useAdapter;
 	for (UINT i = 0; dxgiFactory->EnumAdapterByGpuPreference(i, DXGI_GPU_PREFERENCE_HIGH_PERFORMANCE, IID_PPV_ARGS(&useAdapter)) != DXGI_ERROR_NOT_FOUND; ++i) {
 		// アダプタの情報を取得する
 		DXGI_ADAPTER_DESC3 adapterDesc{};
@@ -80,7 +80,7 @@ void DirectXCommon::DviceInitialize()
 
 	// --- デバイス生成 ---
 	// 機能レベルとログ出力用の文字列
-	D3D_FEATURE_LEVEL featureLevels[] = { D3D_FEATURE_LEVEL_12_1, D3D_FEATURE_LEVEL_12_0 };
+	D3D_FEATURE_LEVEL featureLevels[] = { D3D_FEATURE_LEVEL_12_2,D3D_FEATURE_LEVEL_12_1, D3D_FEATURE_LEVEL_12_0 };
 	const char* featureLevelStrings[] = { "12.2", "12.1", "12.0" };
 	// 高い順に生成できるか調べていく
 	for (size_t i = 0; i < _countof(featureLevels); ++i) {
@@ -99,7 +99,7 @@ void DirectXCommon::DviceInitialize()
 
 	// --- エラー時にブレークを発生 ---
 #ifdef _DEBUG
-	Microsoft::WRL::ComPtr<ID3D12InfoQueue> infoQueue = nullptr;
+	ID3D12InfoQueue* infoQueue;
 	if (SUCCEEDED(device_->QueryInterface(IID_PPV_ARGS(&infoQueue)))) {
 		// やばいエラー時にとまる
 		infoQueue->SetBreakOnSeverity(D3D12_MESSAGE_SEVERITY_CORRUPTION, true);
@@ -131,24 +131,25 @@ void DirectXCommon::CommandInitialize()
 {
 	HRESULT hr;
 
+	// --- コマンドキュー生成 ---
+	D3D12_COMMAND_QUEUE_DESC commandQueueDesc{};
+	hr = device_->CreateCommandQueue(&commandQueueDesc, IID_PPV_ARGS(&commandQueue));
+	assert(SUCCEEDED(hr));
+
+	Logger::Log("Complete create ID3D12CommandQueue!!!\n"); // コマンドキュー生成完了のログ
+
 	// --- コマンドアロケータ生成 ---
 	hr = device_->CreateCommandAllocator(D3D12_COMMAND_LIST_TYPE_DIRECT, IID_PPV_ARGS(&commandAllocator));
 	assert(SUCCEEDED(hr));
 
 	Logger::Log("Complete create ID3D12CommandAllocator!!!\n"); // コマンドアロケータ生成完了のログ
 
-	// --- コマンドアリスト生成 ---
+	// --- コマンドリスト生成 ---
 	hr = device_->CreateCommandList(0, D3D12_COMMAND_LIST_TYPE_DIRECT, commandAllocator.Get(), nullptr, IID_PPV_ARGS(&commandList));
 	assert(SUCCEEDED(hr));
 
 	Logger::Log("Complete create ID3D12GraphicsCommandList!!!\n"); // コマンドリスト生成完了のログ　
 
-	// --- コマンドアキュー生成 ---
-	D3D12_COMMAND_QUEUE_DESC commandQueueDesc{};
-	hr = device_->CreateCommandQueue(&commandQueueDesc, IID_PPV_ARGS(&commandQueue));
-	assert(SUCCEEDED(hr));
-
-	Logger::Log("Complete create ID3D12CommandQueue!!!\n"); // コマンドキュー生成完了のログ
 }
 
 void DirectXCommon::SwapChainCreate()

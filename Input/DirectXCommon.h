@@ -46,23 +46,21 @@ public://メンバ関数
 
 private:
 	//DirectX12デバイス
-	Microsoft::WRL::ComPtr<ID3D12Device> device_;
-	//DXGIファクトリ
-	Microsoft::WRL::ComPtr<IDXGIFactory7> dxgiFactory_;
-
+	Microsoft::WRL::ComPtr<ID3D12Device> device_ = nullptr;
+	
 	//WindowsAPI
 	WinApp* winApp_ = nullptr;
 
 	//DXGIファクトリー
-	Microsoft::WRL::ComPtr<IDXGIFactory7> dxgiFactory = nullptr;
+	Microsoft::WRL::ComPtr<IDXGIFactory7> dxgiFactory;
 
 	//コマンド関連の変数
-	Microsoft::WRL::ComPtr<ID3D12CommandAllocator> commandAllocator = nullptr;
-	Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> commandList = nullptr;
-	Microsoft::WRL::ComPtr<ID3D12CommandQueue> commandQueue = nullptr;
+	Microsoft::WRL::ComPtr<ID3D12CommandAllocator> commandAllocator;
+	Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> commandList;
+	Microsoft::WRL::ComPtr<ID3D12CommandQueue> commandQueue;
 
 	//スワップチェーン
-	Microsoft::WRL::ComPtr<IDXGISwapChain4> swapChain = nullptr;
+	Microsoft::WRL::ComPtr<IDXGISwapChain4> swapChain;
 
 	DXGI_SWAP_CHAIN_DESC1 swapChainDesc{};
 
@@ -86,7 +84,7 @@ private:
 	D3D12_CPU_DESCRIPTOR_HANDLE rtvHandles[2];
 
 	//Fence
-	Microsoft::WRL::ComPtr<ID3D12Fence> fence = nullptr;
+	Microsoft::WRL::ComPtr<ID3D12Fence> fence;
 
 	// ビューポート
 	D3D12_VIEWPORT viewport{};
