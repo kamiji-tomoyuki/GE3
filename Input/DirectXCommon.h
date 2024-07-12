@@ -53,7 +53,7 @@ public:
 
 private:
 	//DirectX12デバイス
-	Microsoft::WRL::ComPtr<ID3D12Device> device_ = nullptr;
+	Microsoft::WRL::ComPtr<ID3D12Device> device_;
 	
 	//WindowsAPI
 	WinApp* winApp_ = nullptr;
@@ -62,14 +62,14 @@ private:
 	Microsoft::WRL::ComPtr<IDXGIFactory7> dxgiFactory;
 
 	//コマンド関連の変数
-	Microsoft::WRL::ComPtr<ID3D12CommandAllocator> commandAllocator;
-	Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> commandList;
-	Microsoft::WRL::ComPtr<ID3D12CommandQueue> commandQueue;
+	Microsoft::WRL::ComPtr<ID3D12CommandAllocator> commandAllocator = nullptr;
+	Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> commandList = nullptr;
+	Microsoft::WRL::ComPtr<ID3D12CommandQueue> commandQueue = nullptr;
 
 	//スワップチェーン
 	Microsoft::WRL::ComPtr<IDXGISwapChain4> swapChain;
-
 	DXGI_SWAP_CHAIN_DESC1 swapChainDesc{};
+	Microsoft::WRL::ComPtr<ID3D12Resource> swapChainResources[2];
 
 	//depthStencilResource
 	Microsoft::WRL::ComPtr<ID3D12Resource> depthStencilResource;
@@ -85,13 +85,13 @@ private:
 
 	D3D12_RENDER_TARGET_VIEW_DESC rtvDesc{};
 
-	//swapChainResources
-	std::array<Microsoft::WRL::ComPtr<ID3D12Resource>,2> swapChainResources;
 	// ディスクリプタ * 2
 	D3D12_CPU_DESCRIPTOR_HANDLE rtvHandles[2];
 
 	//Fence
 	Microsoft::WRL::ComPtr<ID3D12Fence> fence;
+	UINT fenceValue = 0;
+	HANDLE fenceEvent;
 
 	// ビューポート
 	D3D12_VIEWPORT viewport{};
@@ -100,10 +100,13 @@ private:
 	D3D12_RECT scissorRect{};
 
 	// dxcCompiler
-	IDxcUtils* dxcUtils = nullptr;
-	IDxcCompiler3* dxcCompiler = nullptr;
-	IDxcIncludeHandler* includeHandler = nullptr;
+	IDxcUtils* dxcUtils;
+	IDxcCompiler3* dxcCompiler;
 
+	IDxcIncludeHandler* includeHandler;
+
+	// リソースバリア
+	D3D12_RESOURCE_BARRIER barrier{};
 
 };
 

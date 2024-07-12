@@ -213,6 +213,8 @@ void DirectXCommon::RenderTargetViewInitialize()
 	for (uint32_t i = 0; i < 2; ++i) {
 		rtvHandles[i] = rtvStartHandle;
 		device_->CreateRenderTargetView(swapChainResources[i].Get(), &rtvDesc, rtvHandles[i]);
+		// 次のRTVのハンドルに移動
+		rtvStartHandle.ptr += device_->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_RTV);
 	}
 }
 
@@ -232,7 +234,6 @@ void DirectXCommon::FenceInitialize()
 	HRESULT hr;
 
 	// --- Fenceの生成 ---
-	uint64_t fenceValue = 0;
 	hr = device_->CreateFence(fenceValue, D3D12_FENCE_FLAG_NONE, IID_PPV_ARGS(&fence));
 	assert(SUCCEEDED(hr));
 	// FenceのSignalを持つためのイベントを作成する
@@ -293,7 +294,6 @@ void DirectXCommon::PreDraw()
 	UINT backBufferIndex = swapChain->GetCurrentBackBufferIndex();
 
 	// --- リソースバリアで書き込み可能に変更 ---
-	D3D12_RESOURCE_BARRIER barrier{};
 	barrier.Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
 	// None
 	barrier.Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
@@ -321,32 +321,57 @@ void DirectXCommon::PreDraw()
 	commandList->SetDescriptorHeaps(1, descriptorHeaps->GetAddressOf());
 
 	// --- ビューポート領域の設定 ---
+	commandList->RSSetViewports(1, &viewport);
 
 	// --- シザー矩形の設定 ---
+	commandList->RSSetScissorRects(1, &scissorRect);
 
 }
 
 void DirectXCommon::PostDraw()
 {
+	HRESULT hr;
+
 	// --- バックバッファの番号取得 ---
-	
+	UINT backBufferIndex = swapChain->GetCurrentBackBufferIndex();
+
 	// --- リソースバリアで表示状態に変更 ---
+	// RenderTarget -> Present
+	barrier.Transition.StateBefore = D3D12_RESOURCE_STATE_RENDER_TARGET;
+	barrier.Transition.StateAfter = D3D12_RESOURCE_STATE_PRESENT;
+	// TransitionBarrierを振る
+	commandList->ResourceBarrier(1, &barrier);
 
 	// --- グラフィックスコマンドをクローズ ---
+	hr = commandList->Close();
+	assert(SUCCEEDED(hr));
 
 	// --- GPUコマンドの実行 ---
-	
+	Microsoft::WRL::ComPtr<ID3D12CommandList> commandLists[] = { commandList };
+	commandQueue->ExecuteCommandLists(1, commandLists->GetAddressOf());
+
 	// --- GPU画面の交換を通知 ---
-	
+	swapChain->Present(1, 0);
+
 	// --- Fenceの値を更新 ---
-	
+	fenceValue++;
+
 	// --- コマンドキューにシグナルを送る ---
-	
+	commandQueue->Signal(fence.Get(), fenceValue);
+
 	// --- コマンド完了待ち ---
-	
+	if (fence->GetCompletedValue() < fenceValue) {
+		fence->SetEventOnCompletion(fenceValue, fenceEvent);
+		WaitForSingleObject(fenceEvent, INFINITE);
+	}
+
 	// --- コマンドアロケータのリセット ---
+	hr = commandAllocator->Reset();
+	assert(SUCCEEDED(hr));
 
 	// --- コマンドリストのリセット ---
+	hr = commandList->Reset(commandAllocator.Get(), nullptr);
+	assert(SUCCEEDED(hr));
 
 }
 
