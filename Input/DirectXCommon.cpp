@@ -287,6 +287,69 @@ void DirectXCommon::ImGuiInitialize()
 		srvDescriptorHeap->GetGPUDescriptorHandleForHeapStart());
 }
 
+void DirectXCommon::PreDraw()
+{
+	// --- バックバッファの番号取得 ---
+	UINT backBufferIndex = swapChain->GetCurrentBackBufferIndex();
+
+	// --- リソースバリアで書き込み可能に変更 ---
+	D3D12_RESOURCE_BARRIER barrier{};
+	barrier.Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
+	// None
+	barrier.Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
+	// バリアを張る対象のリソース
+	barrier.Transition.pResource = swapChainResources[backBufferIndex].Get();
+	// ResourceState
+	barrier.Transition.StateBefore = D3D12_RESOURCE_STATE_PRESENT;		//遷移前
+	barrier.Transition.StateAfter = D3D12_RESOURCE_STATE_RENDER_TARGET;	//遷移後
+	// TransitionBarrierを張る
+	commandList->ResourceBarrier(1, &barrier);
+
+	// --- 描画先のRTVとDSVを指定 ---
+	D3D12_CPU_DESCRIPTOR_HANDLE dsvHandle = dsvDescriptorHeap->GetCPUDescriptorHandleForHeapStart();
+	commandList->OMSetRenderTargets(1, &rtvHandles[backBufferIndex], false, &dsvHandle);
+
+	// --- 画面全体の色をクリア ---
+	float clearColor[] = { 0.1f, 0.25f, 0.5f, 1.0f }; // 青っぽい色。RGBAの順
+	commandList->ClearRenderTargetView(rtvHandles[backBufferIndex], clearColor, 0, nullptr);
+
+	// --- 画面全体の深度をクリア ---
+	commandList->ClearDepthStencilView(dsvHandle, D3D12_CLEAR_FLAG_DEPTH, 1.0f, 0, 0, nullptr);
+
+	// --- SRV用のデスクリプタヒープを指定する ---
+	Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> descriptorHeaps[] = { srvDescriptorHeap };
+	commandList->SetDescriptorHeaps(1, descriptorHeaps->GetAddressOf());
+
+	// --- ビューポート領域の設定 ---
+
+	// --- シザー矩形の設定 ---
+
+}
+
+void DirectXCommon::PostDraw()
+{
+	// --- バックバッファの番号取得 ---
+	
+	// --- リソースバリアで表示状態に変更 ---
+
+	// --- グラフィックスコマンドをクローズ ---
+
+	// --- GPUコマンドの実行 ---
+	
+	// --- GPU画面の交換を通知 ---
+	
+	// --- Fenceの値を更新 ---
+	
+	// --- コマンドキューにシグナルを送る ---
+	
+	// --- コマンド完了待ち ---
+	
+	// --- コマンドアロケータのリセット ---
+
+	// --- コマンドリストのリセット ---
+
+}
+
 Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> DirectXCommon::CreateDescriptorHeap(Microsoft::WRL::ComPtr<ID3D12Device> device, D3D12_DESCRIPTOR_HEAP_TYPE heapType, UINT numDescriptors, bool shaderVisible)
 {
 	Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> descriptorHeap = nullptr;

@@ -31,6 +31,13 @@ public://メンバ関数
 	void DXCCompilerCreate();			//DXCコンパイラ
 	void ImGuiInitialize();				//ImGui
 
+	//描画処理
+	void PreDraw();	//前
+	void PostDraw();//後
+
+
+
+public:
 	//DescriptorHeapの生成
 	Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> CreateDescriptorHeap(Microsoft::WRL::ComPtr<ID3D12Device> device, D3D12_DESCRIPTOR_HEAP_TYPE heapType, UINT numDescriptors, bool shaderVisible);
 
