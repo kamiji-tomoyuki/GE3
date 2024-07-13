@@ -98,6 +98,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="externals\imgui\imgui_impl_win32.cpp" />
     <ClCompile Include="externals\imgui\imgui_tables.cpp" />
     <ClCompile Include="externals\imgui\imgui_widgets.cpp" />
+    <ClCompile Include="Input\D3DResourceLeakChecker.cpp" />
     <ClCompile Include="Input\DirectXCommon.cpp" />
     <ClCompile Include="Input\Function\Logger.cpp" />
     <ClCompile Include="Input\Function\StringUtility.cpp" />
@@ -114,6 +115,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="externals\imgui\imstb_rectpack.h" />
     <ClInclude Include="externals\imgui\imstb_textedit.h" />
     <ClInclude Include="externals\imgui\imstb_truetype.h" />
+    <ClInclude Include="Input\D3DResourceLeakChecker.h" />
     <ClInclude Include="Input\DirectXCommon.h" />
     <ClInclude Include="Input\Function\Logger.h" />
     <ClInclude Include="Input\Function\StringUtility.h" />
