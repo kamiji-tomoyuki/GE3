@@ -69,6 +69,7 @@ public:
 	//テクスチャファイルの読み込み
 	static DirectX::ScratchImage LoadTexture(const std::string& filePath);
 
+
 private:
 	//DirectX12デバイス
 	Microsoft::WRL::ComPtr<ID3D12Device> device_;
