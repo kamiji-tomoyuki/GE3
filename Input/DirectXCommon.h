@@ -1,5 +1,6 @@
 #pragma once
 #include <array>
+#include <chrono>
 #include <d3d12.h>
 #include <dxgi1_6.h>
 #include <wrl.h>
@@ -69,6 +70,14 @@ public:
 	//テクスチャファイルの読み込み
 	static DirectX::ScratchImage LoadTexture(const std::string& filePath);
 
+private:
+	//FPS固定初期化
+	void InitializeFixFPS();
+	//FPS固定更新
+	void UpdateFixFPS();
+
+	//記録時間
+	std::chrono::steady_clock::time_point reference_;
 
 private:
 	//DirectX12デバイス
