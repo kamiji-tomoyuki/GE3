@@ -458,7 +458,7 @@ Microsoft::WRL::ComPtr<ID3D12Resource> DirectXCommon::CreateDepthStencilTextureR
 
 }
 
-Microsoft::WRL::ComPtr<IDxcBlob> DirectXCommon::CompileShader(const std::wstring& filePath, const wchar_t* profile)
+IDxcBlob* DirectXCommon::CompileShader(const std::wstring& filePath, const wchar_t* profile)
 {
 	// これからシェーダーをコンパイルする旨をログにだす
 	Logger::Log(StringUtility::ConvertString(std::format(L"Begin CompileShader, path:{}, profile{}\n", filePath, profile)));

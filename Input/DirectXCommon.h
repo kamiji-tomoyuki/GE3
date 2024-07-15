@@ -56,7 +56,7 @@ public:
 	Microsoft::WRL::ComPtr<ID3D12Resource> CreateDepthStencilTextureResource(Microsoft::WRL::ComPtr<ID3D12Device> device, int32_t width, int32_t height);
 
 	//シェーダーのコンパイル
-	Microsoft::WRL::ComPtr<IDxcBlob> CompileShader(const std::wstring& filePath, const wchar_t* profile);
+	IDxcBlob* CompileShader(const std::wstring& filePath, const wchar_t* profile);
 
 	//リソース生成関数
 	//バッファリソースの生成
@@ -135,7 +135,6 @@ private:
 	// dxcCompiler
 	IDxcUtils* dxcUtils;
 	IDxcCompiler3* dxcCompiler;
-
 	IDxcIncludeHandler* includeHandler;
 
 	// リソースバリア
