@@ -16,11 +16,11 @@
     <Filter Include="imgui">
       <UniqueIdentifier>{606fb1cf-2e0b-4cd2-b7d5-27f8be018fc9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="input">
+    <Filter Include="ヘッダー ファイル\input">
       <UniqueIdentifier>{12fbd120-5845-4da9-8a46-6a9b41c03607}</UniqueIdentifier>
     </Filter>
-    <Filter Include="NewFilter1">
-      <UniqueIdentifier>{2969d354-fa81-44c2-a6d7-6dac8f943294}</UniqueIdentifier>
+    <Filter Include="ソース ファイル\input">
+      <UniqueIdentifier>{a498844a-4efb-4094-a856-fa42afec7f2c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -49,28 +49,28 @@
       <Filter>imgui</Filter>
     </ClCompile>
     <ClCompile Include="Input\D3DResourceLeakChecker.cpp">
-      <Filter>input</Filter>
+      <Filter>ソース ファイル\input</Filter>
     </ClCompile>
     <ClCompile Include="Input\DirectXCommon.cpp">
-      <Filter>input</Filter>
+      <Filter>ソース ファイル\input</Filter>
     </ClCompile>
     <ClCompile Include="Input\Input.cpp">
-      <Filter>input</Filter>
+      <Filter>ソース ファイル\input</Filter>
     </ClCompile>
     <ClCompile Include="Input\Function\Logger.cpp">
-      <Filter>input</Filter>
+      <Filter>ソース ファイル\input</Filter>
     </ClCompile>
     <ClCompile Include="Input\Sprite.cpp">
-      <Filter>input</Filter>
+      <Filter>ソース ファイル\input</Filter>
     </ClCompile>
     <ClCompile Include="Input\SpriteCommon.cpp">
-      <Filter>input</Filter>
+      <Filter>ソース ファイル\input</Filter>
     </ClCompile>
     <ClCompile Include="Input\Function\StringUtility.cpp">
-      <Filter>input</Filter>
+      <Filter>ソース ファイル\input</Filter>
     </ClCompile>
     <ClCompile Include="Input\WinApp.cpp">
-      <Filter>input</Filter>
+      <Filter>ソース ファイル\input</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -99,28 +99,28 @@
       <Filter>imgui</Filter>
     </ClInclude>
     <ClInclude Include="Input\D3DResourceLeakChecker.h">
-      <Filter>input</Filter>
+      <Filter>ヘッダー ファイル\input</Filter>
     </ClInclude>
     <ClInclude Include="Input\DirectXCommon.h">
-      <Filter>input</Filter>
+      <Filter>ヘッダー ファイル\input</Filter>
     </ClInclude>
     <ClInclude Include="Input\Input.h">
-      <Filter>input</Filter>
+      <Filter>ヘッダー ファイル\input</Filter>
     </ClInclude>
     <ClInclude Include="Input\Function\Logger.h">
-      <Filter>input</Filter>
+      <Filter>ヘッダー ファイル\input</Filter>
     </ClInclude>
     <ClInclude Include="Input\Sprite.h">
-      <Filter>input</Filter>
+      <Filter>ヘッダー ファイル\input</Filter>
     </ClInclude>
     <ClInclude Include="Input\SpriteCommon.h">
-      <Filter>input</Filter>
+      <Filter>ヘッダー ファイル\input</Filter>
     </ClInclude>
     <ClInclude Include="Input\Function\StringUtility.h">
-      <Filter>input</Filter>
+      <Filter>ヘッダー ファイル\input</Filter>
     </ClInclude>
     <ClInclude Include="Input\WinApp.h">
-      <Filter>input</Filter>
+      <Filter>ヘッダー ファイル\input</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
