@@ -70,6 +70,11 @@ public:
 	//テクスチャファイルの読み込み
 	static DirectX::ScratchImage LoadTexture(const std::string& filePath);
 
+	//deviceを取得
+	Microsoft::WRL::ComPtr<ID3D12Device> GetDevice()const { return device_; }
+	//commandListを取得
+	Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList>GetCommandList()const { return commandList; }
+
 private:
 	//FPS固定初期化
 	void InitializeFixFPS();

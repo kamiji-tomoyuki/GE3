@@ -17,6 +17,7 @@ public://メンバ関数
 public://ゲッター
 	DirectXCommon* GetDxCommon() const { return dxCommon_; }
 
+
 private:
 	DirectXCommon* dxCommon_;
 
@@ -24,11 +25,28 @@ private:
 	Microsoft::WRL::ComPtr<ID3D12RootSignature> rootSignature = nullptr;
 	//グラフィックスパイプラインステート
 	D3D12_GRAPHICS_PIPELINE_STATE_DESC graphicsPipelineStateDesc{};
+	
+	//グラフィックスパイプライン
+	Microsoft::WRL::ComPtr<ID3D12PipelineState> graphicsPipelineState = nullptr;
+
 
 private:
 	//ルートシグネチャの作成
 	void CreateRootSignature();
 	//グラフィックスパイプラインの生成
 	void CreateGraphicsPipelineState();
+
+private://PSO生成のための関数
+	//シェーダーのコンパイル
+	IDxcBlob* CompileShader(
+		// CompilerするShaderファイルへのパス
+		const std::wstring& filePath,
+		// Compilerに使用するProfile
+		const wchar_t* profile,
+		// 初期化で生成したもの3つ
+		IDxcUtils* dxcUtils,
+		IDxcCompiler3* dxcCompiler,
+		IDxcIncludeHandler* includeHandler);
+
 };
 

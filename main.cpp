@@ -35,7 +35,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 	SpriteCommon* spriteCommon = nullptr;//スプライト共通部
 	spriteCommon = new SpriteCommon();
-	spriteCommon->Initialize();
+	spriteCommon->Initialize(dxCommon);
 
 	Sprite* sprite = new Sprite();
 	sprite->Initialize();
