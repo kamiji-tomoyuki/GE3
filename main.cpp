@@ -55,11 +55,11 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		//入力の更新
 		input->Update();
 
-		//描画前処理
+		//描画前処理(DirectX)
 		dxCommon->PreDraw();
 		
-		//
-
+		//描画前処理(Sprite)
+		spriteCommon->PreDraw();
 
 		//描画後処理
 		dxCommon->PostDraw();
