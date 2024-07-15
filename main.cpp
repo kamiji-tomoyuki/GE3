@@ -6,6 +6,8 @@
 #include "Input/Input.h"
 #include "Input/DirectXCommon.h"
 #include "Input/D3DResourceLeakChecker.h"
+#include "Input/Sprite.h"
+#include "Input/SpriteCommon.h"
 
 #pragma comment(lib, "dxguid.lib")
 #pragma comment(lib, "dxcompiler.lib")
@@ -18,7 +20,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	D3DResourceLeakChecker leakCheck;
 
 	//=========================================================
-	//取得
+#pragma region 初期化
 	WinApp* winApp = nullptr;//WinApp
 	winApp = new WinApp();
 	winApp->Initialize();
@@ -31,6 +33,14 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	dxCommon = new DirectXCommon();
 	dxCommon->Initialize(winApp);
 
+	SpriteCommon* spriteCommon = nullptr;//スプライト共通部
+	spriteCommon = new SpriteCommon();
+	spriteCommon->Initialize();
+
+	Sprite* sprite = new Sprite();
+	sprite->Initialize();
+
+#pragma endregion 初期化
 	//=========================================================
 
 	// ウィンドウのxボタンが押されるまでループ
@@ -59,6 +69,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	}
 
 	//=================================================
+#pragma region 解放処理
 	delete input;
 
 	winApp->Finalize();
@@ -66,6 +77,10 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	winApp = nullptr;
 
 	delete dxCommon;
+
+	delete spriteCommon;
+	delete sprite;
+#pragma endregion 解放処理
 	//=================================================
 
 	return 0;

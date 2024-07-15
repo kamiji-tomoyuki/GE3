@@ -103,6 +103,8 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Input\Function\Logger.cpp" />
     <ClCompile Include="Input\Function\StringUtility.cpp" />
     <ClCompile Include="Input\Input.cpp" />
+    <ClCompile Include="Input\Sprite.cpp" />
+    <ClCompile Include="Input\SpriteCommon.cpp" />
     <ClCompile Include="Input\WinApp.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
@@ -120,6 +122,8 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Input\Function\Logger.h" />
     <ClInclude Include="Input\Function\StringUtility.h" />
     <ClInclude Include="Input\Input.h" />
+    <ClInclude Include="Input\Sprite.h" />
+    <ClInclude Include="Input\SpriteCommon.h" />
     <ClInclude Include="Input\WinApp.h" />
   </ItemGroup>
   <ItemGroup>
