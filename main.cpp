@@ -38,7 +38,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	spriteCommon->Initialize(dxCommon);
 
 	Sprite* sprite = new Sprite();
-	sprite->Initialize();
+	sprite->Initialize(spriteCommon);
 
 #pragma endregion 初期化
 	//=========================================================
@@ -60,6 +60,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		
 		//描画前処理(Sprite)
 		spriteCommon->PreDraw();
+
+		sprite->Update();
+		sprite->Draw();
 
 		//描画後処理
 		dxCommon->PostDraw();
