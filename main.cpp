@@ -55,9 +55,30 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		//入力の更新
 		input->Update();
 
+#pragma region スプライト
+		// Textureを読んで転送する
+		DirectX::ScratchImage mipImages = dxCommon->LoadTexture("./resources/images/uvChecker.png");
+		const DirectX::TexMetadata& metadata = mipImages.GetMetadata();
+		Microsoft::WRL::ComPtr<ID3D12Resource> textureResource = dxCommon->CreateTextureResources(metadata);
+		/*エラー原因 ->*/Microsoft::WRL::ComPtr<ID3D12Resource> interminalResource = dxCommon->UploadTextureData(textureResource, mipImages);
+
+		// metaDataを基にSRVの設定
+		D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc{};
+		srvDesc.Format = metadata.format;
+		srvDesc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
+		srvDesc.ViewDimension = D3D12_SRV_DIMENSION_TEXTURE2D;
+		srvDesc.Texture2D.MipLevels = UINT(metadata.mipLevels);
+
+		// SRVを作成するDescriptorHeapの場所を決める
+		D3D12_CPU_DESCRIPTOR_HANDLE textureSrvHandleCPU = dxCommon->GetSRVCPUDescriptorHandle(2);
+		D3D12_GPU_DESCRIPTOR_HANDLE textureSrvHandleGPU = dxCommon->GetSRVGPUDescriptorHandle(2);
+
+		dxCommon->GetDevice()->CreateShaderResourceView(textureResource.Get(), &srvDesc, textureSrvHandleCPU);
+#pragma endregion スプライト
+
 		//描画前処理(DirectX)
 		dxCommon->PreDraw();
-		
+
 		//描画前処理(Sprite)
 		spriteCommon->PreDraw();
 

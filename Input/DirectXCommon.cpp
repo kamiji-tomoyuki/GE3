@@ -548,15 +548,15 @@ Microsoft::WRL::ComPtr<ID3D12Resource> DirectXCommon::CreateTextureResources(con
 	resourceDesc.Height = UINT(metadata.height);                           // Textureの高さ
 	resourceDesc.MipLevels = UINT16(metadata.mipLevels);                   // mipmapの数
 	resourceDesc.DepthOrArraySize = UINT16(metadata.arraySize);            // 奥行き or 配列Textureの配列数
-	resourceDesc.Format = metadata.format;                                 ////TextureのFormat
+	resourceDesc.Format = metadata.format;                                 // TextureのFormat
 	resourceDesc.SampleDesc.Count = 1;                                     // サンプリングカウント(1固定)
 	resourceDesc.Dimension = D3D12_RESOURCE_DIMENSION(metadata.dimension); // Textureの次元数
 
 	// 利用するHeapの設定
 	D3D12_HEAP_PROPERTIES heapProperties{};
-	heapProperties.Type = D3D12_HEAP_TYPE_CUSTOM;                        // 細かい設定を行う
-	heapProperties.CPUPageProperty = D3D12_CPU_PAGE_PROPERTY_WRITE_BACK; // WriteBackポリシーでCPUアクセス可能
-	heapProperties.MemoryPoolPreference = D3D12_MEMORY_POOL_L0;          // プロセッサの近くに配置
+	heapProperties.Type = D3D12_HEAP_TYPE_DEFAULT;                        // 細かい設定を行う
+	heapProperties.CPUPageProperty = D3D12_CPU_PAGE_PROPERTY_UNKNOWN;     // WriteBackポリシーでCPUアクセス可能
+	heapProperties.MemoryPoolPreference = D3D12_MEMORY_POOL_UNKNOWN;      // プロセッサの近くに配置
 
 	// Resourcesの生成
 	Microsoft::WRL::ComPtr<ID3D12Resource> resource = nullptr;
@@ -564,7 +564,7 @@ Microsoft::WRL::ComPtr<ID3D12Resource> DirectXCommon::CreateTextureResources(con
 		&heapProperties,                   // Heapの設定
 		D3D12_HEAP_FLAG_NONE,              // Heapの特殊な設定
 		&resourceDesc,                     // Resource設定
-		D3D12_RESOURCE_STATE_GENERIC_READ, // 初回のResourceState
+		D3D12_RESOURCE_STATE_COPY_DEST, // 初回のResourceState
 		nullptr,                           // Clear最適値
 		IID_PPV_ARGS(&resource)            // 作成するResourceポインタへのポインタ
 	);
