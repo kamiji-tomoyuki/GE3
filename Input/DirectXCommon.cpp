@@ -564,7 +564,7 @@ Microsoft::WRL::ComPtr<ID3D12Resource> DirectXCommon::CreateTextureResources(con
 		&heapProperties,                   // Heapの設定
 		D3D12_HEAP_FLAG_NONE,              // Heapの特殊な設定
 		&resourceDesc,                     // Resource設定
-		D3D12_RESOURCE_STATE_COPY_DEST, // 初回のResourceState
+		D3D12_RESOURCE_STATE_COPY_DEST,    // 初回のResourceState
 		nullptr,                           // Clear最適値
 		IID_PPV_ARGS(&resource)            // 作成するResourceポインタへのポインタ
 	);
