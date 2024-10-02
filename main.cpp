@@ -8,6 +8,8 @@
 #include "Input/D3DResourceLeakChecker.h"
 #include "Input/Sprite.h"
 #include "Input/SpriteCommon.h"
+#include "externals/imgui/imgui_impl_win32.h"
+#include "externals/imgui/imgui_impl_dx12.h"
 
 #pragma comment(lib, "dxguid.lib")
 #pragma comment(lib, "dxcompiler.lib")
@@ -37,8 +39,12 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	spriteCommon = new SpriteCommon();
 	spriteCommon->Initialize(dxCommon);
 
-	Sprite* sprite = new Sprite();
-	sprite->Initialize(spriteCommon);
+	std::vector<Sprite*> sprites;
+	for (uint32_t i = 0; i < 5; ++i) {
+		Sprite* sprite = new Sprite();
+		sprite->Initialize(spriteCommon);
+		sprites.push_back(sprite);
+	}
 
 #pragma endregion 初期化
 	//=========================================================
@@ -74,6 +80,22 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		D3D12_GPU_DESCRIPTOR_HANDLE textureSrvHandleGPU = dxCommon->GetSRVGPUDescriptorHandle(2);
 
 		dxCommon->GetDevice()->CreateShaderResourceView(textureResource.Get(), &srvDesc, textureSrvHandleCPU);
+
+		// 動かす
+		for (uint32_t i = 0; i < 5; ++i) {
+			Vector2 position = { 200.0f * i, 0.0f };
+			sprites[i]->SetPosition(position);
+
+			float rotation = sprites[i]->GetRotate();
+			sprites[i]->SetRotate(rotation);
+
+			Vector2 size = {100.0f,100.0f};
+			sprites[i]->SetSize(size);
+
+			Vector4 color = sprites[i]->GetColor();
+			sprites[i]->SetColor(color);
+		}
+
 #pragma endregion スプライト
 
 		//描画前処理(DirectX)
@@ -82,13 +104,20 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		//描画前処理(Sprite)
 		spriteCommon->PreDraw();
 
-		sprite->Update();
-		sprite->Draw();
+		for (uint32_t i = 0; i < 5; ++i) {
+			sprites[i]->Update();
+			sprites[i]->Draw();
+		}
 
 		//描画後処理
 		dxCommon->PostDraw();
 
 		//========================================================= 
+
+#ifdef _DEBUG
+
+
+#endif
 
 	}
 
@@ -103,7 +132,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	delete dxCommon;
 
 	delete spriteCommon;
-	delete sprite;
+	for (uint32_t i = 0; i < 5; ++i) {
+		delete sprites[i];
+	}
 #pragma endregion 解放処理
 	//=================================================
 

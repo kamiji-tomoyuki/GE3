@@ -26,6 +26,23 @@ public://メンバ関数
 	//描画処理
 	void Draw();
 
+public:
+	// position
+	const Vector2& GetPosition() const { return position; }
+	void SetPosition(const Vector2& position) { this->position = position; }
+
+	// rotate
+	float GetRotate() const { return rotation; }
+	void SetRotate(float rotation) { this->rotation = rotation; }
+
+	// scale
+	const Vector2& GetSize() const { return size; }
+	void SetSize(const Vector2& size) { this->size = size; }
+
+	// color
+	const Vector4& GetColor() const { return materialData->color; }
+	void SetColor(const Vector4& color) { materialData->color = color; }
+
 private:
 	//Data書き込み
 	void VertexDataWriting();
@@ -94,6 +111,11 @@ private:
 	Matrix4x4 projectionMatrix;
 	Matrix4x4 worldMatrix;
 
+	Transform transform{ {1.0f,1.0f,1.0f},{0.0f,0.0f,0.0f},{0.0f,0.0f,0.0f} };
+	Vector2 position = { 0.0f,0.0f };
+	float rotation = 0.0f;
+	Vector2 size = { 640.0f,360.0f };
+	
 	// --- texture ---
 	Microsoft::WRL::ComPtr<ID3D12Resource> textureResource;
 	D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc{};

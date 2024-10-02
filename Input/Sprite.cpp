@@ -52,18 +52,16 @@ void Sprite::Initialize(SpriteCommon* spriteCommon)
 
 void Sprite::Update()
 {
-	// --- 頂点データ書き込み ---
-	//spriteCommon->GetDxCommon()->GetCommandList()->DrawInstanced(4, 1, 0, 0);
-
-	// --- インデックスリソース書き込み ---
-	//spriteCommon->GetDxCommon()->GetCommandList()->DrawIndexedInstanced(vertexCount, 1, 0, 0, 0);
-
 	// --- world座標変換 ---
 	MakeWorldMatrix();
 
 	// --- transformationMatrixDataの更新 ---
 	transformationMatrixData->WVP = Multiply(worldMatrix, Multiply(viewMatrix, projectionMatrix));
 	transformationMatrixData->World = worldMatrix;
+
+	transform.translate = { position.x, position.y, 0.0f };
+	transform.rotate = { 0.0f, 0.0f, rotation };
+	transform.scale = { size.x, size.y, 1.0f };
 
 }
 
@@ -90,16 +88,16 @@ void Sprite::Draw()
 
 void Sprite::VertexDataWriting()
 {
-	vertexData[0].position = { 0.0f, 360.0f, 0.0f, 1.0f }; // 左下
+	vertexData[0].position = { 0.0f, 1.0f, 0.0f, 1.0f }; // 左下
 	vertexData[0].texcoord = { 0.0f, 1.0f };
 
 	vertexData[1].position = { 0.0f, 0.0f, 0.0f, 1.0f }; // 左上
 	vertexData[1].texcoord = { 0.0f, 0.0f };
 
-	vertexData[2].position = { 640.0f, 360.0f, 0.0f, 1.0f }; // 右下
+	vertexData[2].position = { 1.0f, 1.0f, 0.0f, 1.0f }; // 右下
 	vertexData[2].texcoord = { 1.0f, 1.0f };
 
-	vertexData[3].position = { 640.0f, 0.0f, 0.0f, 1.0f }; // 右上
+	vertexData[3].position = { 1.0f, 0.0f, 0.0f, 1.0f }; // 右上
 	vertexData[3].texcoord = { 1.0f, 0.0f };
 }
 void Sprite::IndexDataWriting()
@@ -128,8 +126,6 @@ void Sprite::TransformationMatrixDataWriting()
 
 void Sprite::MakeWorldMatrix()
 {
-	Transform transform{ {1.0f,1.0f,1.0f},{0.0f,0.0f,0.0f},{0.0f,0.0f,0.0f} };
-
 	worldMatrix = MakeAffineMatrix(transform.scale, transform.rotate, transform.translate);
 	viewMatrix = MakeIdentity4x4();
 	projectionMatrix = MakeOrthographicMatrix(0.0f, 0.0f, float(WinApp::kClientWidth), float(WinApp::kClientHeight), 0.0f, 100.0f);
