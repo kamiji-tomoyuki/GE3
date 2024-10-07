@@ -2,13 +2,13 @@
 
 #include <dxgidebug.h>
 
-#include "Input/WinApp.h"
-#include "Input/Input.h"
-#include "Input/DirectXCommon.h"
-#include "Input/D3DResourceLeakChecker.h"
-#include "Input/Sprite.h"
-#include "Input/SpriteCommon.h"
-#include "Input/TextureManager.h"
+#include "gameEngine/WinApp.h"
+#include "gameEngine/Input.h"
+#include "gameEngine/DirectXCommon.h"
+#include "gameEngine/D3DResourceLeakChecker.h"
+#include "gameEngine/Sprite.h"
+#include "gameEngine/SpriteCommon.h"
+#include "gameEngine/TextureManager.h"
 #include "externals/imgui/imgui_impl_win32.h"
 #include "externals/imgui/imgui_impl_dx12.h"
 
