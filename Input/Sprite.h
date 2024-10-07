@@ -43,6 +43,22 @@ public:
 	const Vector4& GetColor() const { return materialData->color; }
 	void SetColor(const Vector4& color) { materialData->color = color; }
 
+	// anchorPoint
+	const Vector2& GetAnchorPoint() const { return anchorPoint; }
+	void SetAnchorPoint(const Vector2& anchorPoint) { this->anchorPoint = anchorPoint; }
+
+	// flip
+	bool GetIsFlipX() const { return isFlipX_; }
+	bool GetIsFlipY() const { return isFlipY_; }
+	void SetFlipX(bool isFlipX) { this->isFlipX_ = isFlipX; }
+	void SetFlipY(bool isFlipY) { this->isFlipY_ = isFlipY; }
+
+	// テクスチャ範囲指定
+	const Vector2& GetTextureLeftTop() const { return textureLeftTop; }
+	void SetTextureLeftTop(const Vector2& textureLeftTop) { this->textureLeftTop = textureLeftTop; }
+	const Vector2& GetTextureSize() const { return textureSize; }
+	void SetTextureSize(const Vector2& textureSize) { this->textureSize = textureSize; }
+
 private:
 	//Data書き込み
 	void VertexDataWriting();
@@ -50,8 +66,8 @@ private:
 	void MaterialDataWriting();
 	void TransformationMatrixDataWriting();
 
-	//worldMatrixの作成
-	void MakeWorldMatrix();
+	// テクスチャサイズをイメージに合わせる
+	void AdjustTextureSize();
 
 private:
 	SpriteCommon* spriteCommon = nullptr;
@@ -123,5 +139,29 @@ private:
 	D3D12_GPU_DESCRIPTOR_HANDLE textureSrvHandleGPU;
 	// テクスチャ番号
 	uint32_t textureIndex = 0;
+
+	// --- アンカーポイント ---
+	Vector2 anchorPoint = { 0.0f,0.0f };
+	float left = 0.0f - anchorPoint.x;
+	float right = 1.0f - anchorPoint.x;
+	float top = 0.0f - anchorPoint.y;
+	float bottom = 1.0f - anchorPoint.y;
+
+	// --- フリップ ---
+	// 左右
+	bool isFlipX_ = false;
+	// 上下
+	bool isFlipY_ = false;
+
+	// --- テクスチャ範囲指定 ---
+	// 左上座標
+	Vector2 textureLeftTop = { 0.0f,0.0f };
+	// 切り出しサイズ
+	Vector2 textureSize = { 400.0f,400.0f };
+	float tex_left;
+	float tex_right;
+	float tex_top;
+	float tex_bottom;
+
 };
 

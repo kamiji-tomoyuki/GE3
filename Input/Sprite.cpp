@@ -49,17 +49,23 @@ void Sprite::Initialize(SpriteCommon* spriteCommon, std::string textureFilePath)
 	TransformationMatrixDataWriting();
 #pragma endregion 座標変換
 
+	// --- テクスチャ読み込み
 	TextureManager::GetInstance()->LoadTexture(textureFilePath);
 
 	// --- 単位行列 ---
 	textureIndex = TextureManager::GetInstance()->GetTextureIndexByFilePath(textureFilePath);
+
+	// --- 切り取り ---
+	AdjustTextureSize();
 
 }
 
 void Sprite::Update()
 {
 	// --- world座標変換 ---
-	MakeWorldMatrix();
+	worldMatrix = MakeAffineMatrix(transform.scale, transform.rotate, transform.translate);
+	viewMatrix = MakeIdentity4x4();
+	projectionMatrix = MakeOrthographicMatrix(0.0f, 0.0f, float(WinApp::kClientWidth), float(WinApp::kClientHeight), 0.0f, 100.0f);
 
 	// --- transformationMatrixDataの更新 ---
 	transformationMatrixData->WVP = Multiply(worldMatrix, Multiply(viewMatrix, projectionMatrix));
@@ -68,6 +74,26 @@ void Sprite::Update()
 	transform.translate = { position.x, position.y, 0.0f };
 	transform.rotate = { 0.0f, 0.0f, rotation };
 	transform.scale = { size.x, size.y, 1.0f };
+
+	// --- フリップの更新処理 ---
+	if (isFlipX_) {
+		left = -left;
+		right = -right;
+	}
+	if (isFlipY_) {
+		top = -top;
+		bottom = -bottom;
+	}
+
+	// --- テクスチャ範囲指定の更新処理 ---
+	const DirectX::TexMetadata& metadata =
+		TextureManager::GetInstance()->GetMetaData(textureIndex);
+	tex_left = textureLeftTop.x / metadata.width;
+	tex_right = (textureLeftTop.x + textureSize.x) / metadata.width;
+	tex_top = textureLeftTop.y / metadata.height;
+	tex_bottom = (textureLeftTop.y + textureSize.y) / metadata.height;
+	// 適用
+	VertexDataWriting();
 
 }
 
@@ -94,17 +120,17 @@ void Sprite::Draw()
 
 void Sprite::VertexDataWriting()
 {
-	vertexData[0].position = { 0.0f, 1.0f, 0.0f, 1.0f }; // 左下
-	vertexData[0].texcoord = { 0.0f, 1.0f };
+	vertexData[0].position = { left, bottom, 0.0f, 1.0f }; // 左下
+	vertexData[0].texcoord = { tex_left, tex_bottom };
 
-	vertexData[1].position = { 0.0f, 0.0f, 0.0f, 1.0f }; // 左上
-	vertexData[1].texcoord = { 0.0f, 0.0f };
+	vertexData[1].position = { left, top, 0.0f, 1.0f }; // 左上
+	vertexData[1].texcoord = { tex_left, tex_top };
 
-	vertexData[2].position = { 1.0f, 1.0f, 0.0f, 1.0f }; // 右下
-	vertexData[2].texcoord = { 1.0f, 1.0f };
+	vertexData[2].position = { right, bottom, 0.0f, 1.0f }; // 右下
+	vertexData[2].texcoord = { tex_right, tex_bottom };
 
-	vertexData[3].position = { 1.0f, 0.0f, 0.0f, 1.0f }; // 右上
-	vertexData[3].texcoord = { 1.0f, 0.0f };
+	vertexData[3].position = { right, top, 0.0f, 1.0f }; // 右上
+	vertexData[3].texcoord = { tex_right, tex_top };
 }
 void Sprite::IndexDataWriting()
 {
@@ -130,10 +156,13 @@ void Sprite::TransformationMatrixDataWriting()
 	transformationMatrixData->World = MakeIdentity4x4();
 }
 
-void Sprite::MakeWorldMatrix()
+void Sprite::AdjustTextureSize()
 {
-	worldMatrix = MakeAffineMatrix(transform.scale, transform.rotate, transform.translate);
-	viewMatrix = MakeIdentity4x4();
-	projectionMatrix = MakeOrthographicMatrix(0.0f, 0.0f, float(WinApp::kClientWidth), float(WinApp::kClientHeight), 0.0f, 100.0f);
+	// テクスチャメタデータを取得
+	const DirectX::TexMetadata& metadata = TextureManager::GetInstance()->GetMetaData(textureIndex);
 
+	textureSize.x = static_cast<float>(metadata.width);
+	textureSize.y = static_cast<float>(metadata.height);
+	// 画像サイズをテクスチャサイズに合わせる
+	size = textureSize;
 }

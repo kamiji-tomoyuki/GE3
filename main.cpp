@@ -44,8 +44,10 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	spriteCommon->Initialize(dxCommon);
 
 	std::vector<Sprite*> sprites;
+	uint32_t spriteNum = 1;
+
 	std::string textureFiles[] = { "resources/images/monsterBall.png" ,"resources/images/uvChecker.png" };
-	for (uint32_t i = 0; i < 5; ++i) {
+	for (uint32_t i = 0; i < spriteNum; ++i) {
 		Sprite* sprite = new Sprite();
 		std::string textureFile = { "resources/images/uvChecker.png" };
 		if (i % 2 == 1) {
@@ -72,7 +74,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 #pragma region スプライト
 
-		for (uint32_t i = 0; i < 5; ++i) {
+		for (uint32_t i = 0; i < spriteNum; ++i) {
 			Vector2 position = { 200.0f * i, 0.0f };
 			sprites[i]->SetPosition(position);
 
@@ -80,7 +82,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			sprites[i]->SetRotate(rotation);
 
 			Vector2 size = {100.0f,100.0f};
-			sprites[i]->SetSize(size);
+			//sprites[i]->SetSize(size);
 
 			Vector4 color = sprites[i]->GetColor();
 			sprites[i]->SetColor(color);
@@ -94,7 +96,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		//描画前処理(Sprite)
 		spriteCommon->PreDraw();
 
-		for (uint32_t i = 0; i < 5; ++i) {
+		for (uint32_t i = 0; i < spriteNum; ++i) {
 			sprites[i]->Update();
 			sprites[i]->Draw();
 		}
@@ -124,7 +126,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	delete dxCommon;
 
 	delete spriteCommon;
-	for (uint32_t i = 0; i < 5; ++i) {
+	for (uint32_t i = 0; i < spriteNum; ++i) {
 		delete sprites[i];
 	}
 #pragma endregion 解放処理
