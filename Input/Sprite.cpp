@@ -1,8 +1,9 @@
 #include "Sprite.h"
 #include "SpriteCommon.h"
+#include "TextureManager.h"
 #include "WinApp.h"
 
-void Sprite::Initialize(SpriteCommon* spriteCommon)
+void Sprite::Initialize(SpriteCommon* spriteCommon, std::string textureFilePath)
 {
 	// --- 引数で受け取りメンバ変数に記録 ---
 	this->spriteCommon = spriteCommon;
@@ -48,6 +49,11 @@ void Sprite::Initialize(SpriteCommon* spriteCommon)
 	TransformationMatrixDataWriting();
 #pragma endregion 座標変換
 
+	TextureManager::GetInstance()->LoadTexture(textureFilePath);
+
+	// --- 単位行列 ---
+	textureIndex = TextureManager::GetInstance()->GetTextureIndexByFilePath(textureFilePath);
+
 }
 
 void Sprite::Update()
@@ -79,7 +85,7 @@ void Sprite::Draw()
 	spriteCommon->GetDxCommon()->GetCommandList()->SetGraphicsRootConstantBufferView(1, transformationMatrixResource->GetGPUVirtualAddress());
 
 	// --- SRVのDescriptorTableを設定 ---
-	spriteCommon->GetDxCommon()->GetCommandList()->SetGraphicsRootDescriptorTable(2, spriteCommon->GetDxCommon()->GetSRVGPUDescriptorHandle(2));
+	spriteCommon->GetDxCommon()->GetCommandList()->SetGraphicsRootDescriptorTable(2, TextureManager::GetInstance()->GetSrvHandleGPU(textureIndex));
 
 	// --- 描画(DrawCall/ドローコール) ---
 	spriteCommon->GetDxCommon()->GetCommandList()->DrawIndexedInstanced(vertexCount, 1, 0, 0, 0);

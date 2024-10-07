@@ -18,7 +18,7 @@ class Sprite
 {
 public://メンバ関数
 	//初期化
-	void Initialize(SpriteCommon* spriteCommon);
+	void Initialize(SpriteCommon* spriteCommon, std::string textureFilePath);
 
 	//更新処理
 	void Update();
@@ -121,5 +121,7 @@ private:
 	D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc{};
 	D3D12_CPU_DESCRIPTOR_HANDLE textureSrvHandleCPU;
 	D3D12_GPU_DESCRIPTOR_HANDLE textureSrvHandleGPU;
+	// テクスチャ番号
+	uint32_t textureIndex = 0;
 };
 

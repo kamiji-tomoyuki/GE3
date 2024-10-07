@@ -59,6 +59,8 @@ public:
 	IDxcBlob* CompileShader(const std::wstring& filePath, const wchar_t* profile);
 
 	//リソース生成関数
+	// 最大SRV数(最大テクスチャ枚数)
+	static const uint32_t kMaxSRVCount;
 	//バッファリソースの生成
 	Microsoft::WRL::ComPtr<ID3D12Resource> CreateBufferResource(size_t sizeInBytes);
 	//テクスチャリソースの生成
