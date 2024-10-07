@@ -6,6 +6,8 @@
 #include "gameEngine/Input.h"
 #include "gameEngine/DirectXCommon.h"
 #include "gameEngine/D3DResourceLeakChecker.h"
+#include "gameEngine/Object3d.h"
+#include "gameEngine/Object3dCommon.h"
 #include "gameEngine/Sprite.h"
 #include "gameEngine/SpriteCommon.h"
 #include "gameEngine/TextureManager.h"
@@ -38,7 +40,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 	TextureManager::GetInstance()->Initialize(dxCommon);
 
-
 	SpriteCommon* spriteCommon = nullptr;//スプライト共通部
 	spriteCommon = new SpriteCommon();
 	spriteCommon->Initialize(dxCommon);
@@ -56,6 +57,14 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		sprite->Initialize(spriteCommon, textureFile);
 		sprites.push_back(sprite);
 	}
+
+	Object3dCommon* object3dCommon = nullptr;
+	object3dCommon = new Object3dCommon();
+	object3dCommon->Initialize();
+	
+	Object3d* object3d = nullptr;
+	object3d = new Object3d;
+	object3d->Initialize();
 
 #pragma endregion 初期化
 	//=========================================================
@@ -129,6 +138,10 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	for (uint32_t i = 0; i < spriteNum; ++i) {
 		delete sprites[i];
 	}
+
+	delete object3dCommon;
+	delete object3d;
+
 #pragma endregion 解放処理
 	//=================================================
 

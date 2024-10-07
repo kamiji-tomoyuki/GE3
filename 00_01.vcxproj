@@ -103,6 +103,8 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="gameEngine\Function\Logger.cpp" />
     <ClCompile Include="gameEngine\Function\StringUtility.cpp" />
     <ClCompile Include="gameEngine\Input.cpp" />
+    <ClCompile Include="gameEngine\Object3d.cpp" />
+    <ClCompile Include="gameEngine\Object3dCommon.cpp" />
     <ClCompile Include="gameEngine\Sprite.cpp" />
     <ClCompile Include="gameEngine\SpriteCommon.cpp" />
     <ClCompile Include="gameEngine\TextureManager.cpp" />
@@ -126,6 +128,8 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="gameEngine\Function\Logger.h" />
     <ClInclude Include="gameEngine\Function\StringUtility.h" />
     <ClInclude Include="gameEngine\Input.h" />
+    <ClInclude Include="gameEngine\Object3d.h" />
+    <ClInclude Include="gameEngine\Object3dCommon.h" />
     <ClInclude Include="gameEngine\Sprite.h" />
     <ClInclude Include="gameEngine\SpriteCommon.h" />
     <ClInclude Include="gameEngine\TextureManager.h" />

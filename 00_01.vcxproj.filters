@@ -96,6 +96,12 @@
     <ClCompile Include="gameEngine\WinApp.cpp">
       <Filter>ソース ファイル\gameEngine</Filter>
     </ClCompile>
+    <ClCompile Include="gameEngine\Object3dCommon.cpp">
+      <Filter>ソース ファイル\gameEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="gameEngine\Object3d.cpp">
+      <Filter>ソース ファイル\gameEngine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imconfig.h">
@@ -162,6 +168,12 @@
       <Filter>ヘッダー ファイル\gameEngine</Filter>
     </ClInclude>
     <ClInclude Include="gameEngine\WinApp.h">
+      <Filter>ヘッダー ファイル\gameEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="gameEngine\Object3d.h">
+      <Filter>ヘッダー ファイル\gameEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="gameEngine\Object3dCommon.h">
       <Filter>ヘッダー ファイル\gameEngine</Filter>
     </ClInclude>
   </ItemGroup>
