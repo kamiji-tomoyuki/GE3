@@ -8,6 +8,7 @@
 
 #include "Model.h"
 #include "../math/CalculateMath.h"
+#include "ModelManager.h"
 
 void Object3d::Initialize(Object3dCommon* object3dCommon)
 {
@@ -51,6 +52,12 @@ void Object3d::Draw()
 		// 3Dモデルが割り当てられていれば描画
 		model->Draw();
 	}
+}
+
+void Object3d::SetModel(const std::string& filePath)
+{
+	// モデルを検索してセット
+	model = ModelManager::GetInstance()->FindModel(filePath);
 }
 
 void Object3d::TransformationMatrixResource()

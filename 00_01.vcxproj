@@ -105,6 +105,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="gameEngine\Input.cpp" />
     <ClCompile Include="gameEngine\Model.cpp" />
     <ClCompile Include="gameEngine\ModelCommon.cpp" />
+    <ClCompile Include="gameEngine\ModelManager.cpp" />
     <ClCompile Include="gameEngine\Object3d.cpp" />
     <ClCompile Include="gameEngine\Object3dCommon.cpp" />
     <ClCompile Include="gameEngine\Sprite.cpp" />
@@ -132,6 +133,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="gameEngine\Input.h" />
     <ClInclude Include="gameEngine\Model.h" />
     <ClInclude Include="gameEngine\ModelCommon.h" />
+    <ClInclude Include="gameEngine\ModelManager.h" />
     <ClInclude Include="gameEngine\Object3d.h" />
     <ClInclude Include="gameEngine\Object3dCommon.h" />
     <ClInclude Include="gameEngine\Sprite.h" />

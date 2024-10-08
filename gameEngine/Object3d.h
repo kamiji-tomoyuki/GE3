@@ -40,7 +40,7 @@ public:
 	void SetSize(const Vector3& scale) { this->transform.scale = scale; }
 	
 	// model
-	void SetModel(Model* model) { this->model = model; }
+	void SetModel(const std::string& filePath);
 
 private:
 	//Data書き込み

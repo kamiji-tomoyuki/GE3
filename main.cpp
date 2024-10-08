@@ -8,6 +8,7 @@
 #include "gameEngine/D3DResourceLeakChecker.h"
 #include "gameEngine/Model.h"
 #include "gameEngine/ModelCommon.h"
+#include "gameEngine/ModelManager.h"
 #include "gameEngine/Object3d.h"
 #include "gameEngine/Object3dCommon.h"
 #include "gameEngine/Sprite.h"
@@ -51,9 +52,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	object3dCommon = new Object3dCommon();
 	object3dCommon->Initialize(dxCommon);
 
-	ModelCommon* modelCommon = nullptr;
-	modelCommon = new ModelCommon();
-	modelCommon->Initialize(dxCommon);
+	ModelManager::GetInstance()->Initialize(dxCommon);
+	ModelManager::GetInstance()->LoadModel("plane.obj");
+	ModelManager::GetInstance()->LoadModel("axis.obj");
 	
 #pragma endregion 基礎システムの初期化
 
@@ -74,9 +75,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	}
 
 	// --- Model ---
-	Model* model_ = new Model();
-	model_->Initialize(modelCommon);
-
 	std::vector<Object3d*> object3ds;
 	uint32_t objectNum = 2;
 
@@ -88,7 +86,13 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		position.x = i * 2.0f;
 
 		object->SetPosition(position);
-		object->SetModel(model_);
+
+		if (i == 0) {
+			object->SetModel("plane.obj");
+		}
+		if (i == 1) {
+			object->SetModel("axis.obj");
+		}
 
 		object3ds.push_back(object);
 	}
@@ -120,8 +124,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			float rotation = sprites[i]->GetRotate();
 			sprites[i]->SetRotate(rotation);
 
-			Vector2 size = {100.0f,100.0f};
-			//sprites[i]->SetSize(size);
+			Vector2 size = {200.0f,200.0f};
+			sprites[i]->SetSize(size);
 
 			Vector4 color = sprites[i]->GetColor();
 			sprites[i]->SetColor(color);
@@ -185,19 +189,17 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	delete winApp;
 	winApp = nullptr;
 
-	TextureManager::GetInstance()->Finalize();
-
 	delete dxCommon;
 
 	delete spriteCommon;
 	delete object3dCommon;
-	delete modelCommon;
 
+	TextureManager::GetInstance()->Finalize();
 	for (uint32_t i = 0; i < spriteNum; ++i) {
 		delete sprites[i];
 	}
 
-	delete model_;
+	ModelManager::GetInstance()->Finalize();
 	for (auto& obj : object3ds) {
 		delete obj;
 	}
