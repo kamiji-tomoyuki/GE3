@@ -109,7 +109,6 @@ void SpriteCommon::CreateGraphicsPipelineState()
 	inputLayoutDesc.NumElements = _countof(inputElementDescs);
 
 	// --- Shaderをコンパイル ---
-	
 	IDxcBlob* vertexShaderBlob = dxCommon_->CompileShader(L"./Resources/shaders/Object3d.VS.hlsl", L"vs_6_0");
 	assert(vertexShaderBlob != nullptr);
 	IDxcBlob* pixelShaderBlob = dxCommon_->CompileShader(L"./Resources/shaders/Object3d.PS.hlsl", L"ps_6_0");

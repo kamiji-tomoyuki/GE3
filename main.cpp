@@ -25,7 +25,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	D3DResourceLeakChecker leakCheck;
 
 	//=========================================================
-#pragma region 初期化
 	WinApp* winApp = nullptr;//WinApp
 	winApp = new WinApp();
 	winApp->Initialize();
@@ -38,16 +37,26 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	dxCommon = new DirectXCommon();
 	dxCommon->Initialize(winApp);
 
+#pragma region 基礎システムの初期化
+
 	TextureManager::GetInstance()->Initialize(dxCommon);
 
-	SpriteCommon* spriteCommon = nullptr;//スプライト共通部
+	SpriteCommon* spriteCommon = nullptr;
 	spriteCommon = new SpriteCommon();
 	spriteCommon->Initialize(dxCommon);
 
+	Object3dCommon* object3dCommon = nullptr;
+	object3dCommon = new Object3dCommon();
+	object3dCommon->Initialize(dxCommon);
+	
+#pragma endregion 基礎システムの初期化
+
+#pragma region 初期化
+
+	// --- Sprite ---
 	std::vector<Sprite*> sprites;
 	uint32_t spriteNum = 1;
 
-	std::string textureFiles[] = { "resources/images/monsterBall.png" ,"resources/images/uvChecker.png" };
 	for (uint32_t i = 0; i < spriteNum; ++i) {
 		Sprite* sprite = new Sprite();
 		std::string textureFile = { "resources/images/uvChecker.png" };
@@ -58,15 +67,13 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		sprites.push_back(sprite);
 	}
 
-	Object3dCommon* object3dCommon = nullptr;
-	object3dCommon = new Object3dCommon();
-	object3dCommon->Initialize();
-	
+	// --- Object3D ---
 	Object3d* object3d = nullptr;
 	object3d = new Object3d;
 	object3d->Initialize();
 
 #pragma endregion 初期化
+
 	//=========================================================
 
 	// ウィンドウのxボタンが押されるまでループ
@@ -101,6 +108,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 		//描画前処理(DirectX)
 		dxCommon->PreDraw();
+
+		// 描画前処理(Object)
+		object3dCommon->PreDraw();
 
 		//描画前処理(Sprite)
 		spriteCommon->PreDraw();
