@@ -70,7 +70,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	// --- Object3D ---
 	Object3d* object3d = nullptr;
 	object3d = new Object3d;
-	object3d->Initialize();
+	object3d->Initialize(object3dCommon);
 
 #pragma endregion 初期化
 
@@ -91,6 +91,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 #pragma region スプライト
 
 		for (uint32_t i = 0; i < spriteNum; ++i) {
+			sprites[i]->Update();
+			
 			Vector2 position = { 200.0f * i, 0.0f };
 			sprites[i]->SetPosition(position);
 
@@ -106,6 +108,16 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 #pragma endregion スプライト
 
+#pragma region 3Dオブジェクト
+
+		object3d->Update();
+
+		Vector3 rotate = object3d->GetRotate();
+		rotate.y += 0.01f;
+		object3d->SetRotate(rotate);
+
+#pragma region 3Dオブジェクト
+
 		//描画前処理(DirectX)
 		dxCommon->PreDraw();
 
@@ -116,9 +128,11 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		spriteCommon->PreDraw();
 
 		for (uint32_t i = 0; i < spriteNum; ++i) {
-			sprites[i]->Update();
 			sprites[i]->Draw();
 		}
+
+		object3d->Update();
+		object3d->Draw();
 
 		//描画後処理
 		dxCommon->PostDraw();

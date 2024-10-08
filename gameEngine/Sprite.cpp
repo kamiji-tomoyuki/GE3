@@ -49,7 +49,7 @@ void Sprite::Initialize(SpriteCommon* spriteCommon, std::string textureFilePath)
 	TransformationMatrixDataWriting();
 #pragma endregion 座標変換
 
-	// --- テクスチャ読み込み
+	// --- テクスチャ読み込み ---
 	TextureManager::GetInstance()->LoadTexture(textureFilePath);
 
 	// --- 単位行列 ---
@@ -68,7 +68,7 @@ void Sprite::Update()
 	projectionMatrix = MakeOrthographicMatrix(0.0f, 0.0f, float(WinApp::kClientWidth), float(WinApp::kClientHeight), 0.0f, 100.0f);
 
 	// --- transformationMatrixDataの更新 ---
-	transformationMatrixData->WVP = Multiply(worldMatrix, Multiply(viewMatrix, projectionMatrix));
+	transformationMatrixData->WVP = worldMatrix * viewMatrix * projectionMatrix;
 	transformationMatrixData->World = worldMatrix;
 
 	transform.translate = { position.x, position.y, 0.0f };
