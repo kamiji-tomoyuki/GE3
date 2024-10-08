@@ -6,6 +6,8 @@
 #include "gameEngine/Input.h"
 #include "gameEngine/DirectXCommon.h"
 #include "gameEngine/D3DResourceLeakChecker.h"
+#include "gameEngine/Model.h"
+#include "gameEngine/ModelCommon.h"
 #include "gameEngine/Object3d.h"
 #include "gameEngine/Object3dCommon.h"
 #include "gameEngine/Sprite.h"
@@ -48,6 +50,10 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	Object3dCommon* object3dCommon = nullptr;
 	object3dCommon = new Object3dCommon();
 	object3dCommon->Initialize(dxCommon);
+
+	ModelCommon* modelCommon = nullptr;
+	modelCommon = new ModelCommon();
+	modelCommon->Initialize(dxCommon);
 	
 #pragma endregion 基礎システムの初期化
 
@@ -67,10 +73,25 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		sprites.push_back(sprite);
 	}
 
-	// --- Object3D ---
-	Object3d* object3d = nullptr;
-	object3d = new Object3d;
-	object3d->Initialize(object3dCommon);
+	// --- Model ---
+	Model* model_ = new Model();
+	model_->Initialize(modelCommon);
+
+	std::vector<Object3d*> object3ds;
+	uint32_t objectNum = 2;
+
+	for (uint32_t i = 0; i < objectNum; ++i) {
+		Object3d* object = new Object3d();
+		object->Initialize(object3dCommon);
+
+		Vector3 position;
+		position.x = i * 2.0f;
+
+		object->SetPosition(position);
+		object->SetModel(model_);
+
+		object3ds.push_back(object);
+	}
 
 #pragma endregion 初期化
 
@@ -110,13 +131,22 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 #pragma region 3Dオブジェクト
 
-		object3d->Update();
+		for (uint32_t i = 0; i < objectNum; ++i) {
+			Object3d* obj = object3ds[i];
+			obj->Update();
 
-		Vector3 rotate = object3d->GetRotate();
-		rotate.y += 0.01f;
-		object3d->SetRotate(rotate);
+			Vector3 rotate = obj->GetRotate();
+			if (i == 0) {
+				rotate.x += 0.01f;
+			}
+			else if (i == 1) {
+				rotate.y += 0.01f;
+			}
+			
+			obj->SetRotate(rotate);
+		}
 
-#pragma region 3Dオブジェクト
+#pragma endregion 3Dオブジェクト
 
 		//描画前処理(DirectX)
 		dxCommon->PreDraw();
@@ -131,8 +161,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			sprites[i]->Draw();
 		}
 
-		object3d->Update();
-		object3d->Draw();
+		for (auto& obj : object3ds) {
+			obj->Draw();
+		}
 
 		//描画後処理
 		dxCommon->PostDraw();
@@ -159,12 +190,17 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	delete dxCommon;
 
 	delete spriteCommon;
+	delete object3dCommon;
+	delete modelCommon;
+
 	for (uint32_t i = 0; i < spriteNum; ++i) {
 		delete sprites[i];
 	}
 
-	delete object3dCommon;
-	delete object3d;
+	delete model_;
+	for (auto& obj : object3ds) {
+		delete obj;
+	}
 
 #pragma endregion 解放処理
 	//=================================================

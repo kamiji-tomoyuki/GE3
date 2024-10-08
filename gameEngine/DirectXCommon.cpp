@@ -562,7 +562,7 @@ Microsoft::WRL::ComPtr<ID3D12Resource> DirectXCommon::CreateTextureResources(con
 
 	// Resourcesの生成
 	Microsoft::WRL::ComPtr<ID3D12Resource> resource = nullptr;
-	HRESULT hr = device_->CreateCommittedResource(
+	HRESULT hr = this->device_->CreateCommittedResource(
 		&heapProperties,                   // Heapの設定
 		D3D12_HEAP_FLAG_NONE,              // Heapの特殊な設定
 		&resourceDesc,                     // Resource設定

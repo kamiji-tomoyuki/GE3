@@ -102,6 +102,12 @@
     <ClCompile Include="gameEngine\Object3d.cpp">
       <Filter>ソース ファイル\gameEngine</Filter>
     </ClCompile>
+    <ClCompile Include="gameEngine\Model.cpp">
+      <Filter>ソース ファイル\gameEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="gameEngine\ModelCommon.cpp">
+      <Filter>ソース ファイル\gameEngine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imconfig.h">
@@ -174,6 +180,12 @@
       <Filter>ヘッダー ファイル\gameEngine</Filter>
     </ClInclude>
     <ClInclude Include="gameEngine\Object3dCommon.h">
+      <Filter>ヘッダー ファイル\gameEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="gameEngine\Model.h">
+      <Filter>ヘッダー ファイル\gameEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="gameEngine\ModelCommon.h">
       <Filter>ヘッダー ファイル\gameEngine</Filter>
     </ClInclude>
   </ItemGroup>
