@@ -204,6 +204,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	delete spriteCommon;
 	delete object3dCommon;
 
+	delete camera;
+
 	TextureManager::GetInstance()->Finalize();
 	for (uint32_t i = 0; i < spriteNum; ++i) {
 		delete sprites[i];
