@@ -22,7 +22,9 @@ void Object3d::Initialize(Object3dCommon* object3dCommon)
 
 	// --- Transform変数の作成 ---
 	transform = { {1.0f,1.0f,1.0f},{0.0f,0.0f,0.0f},{0.0f,0.0f,0.0f} };
-	cameraTransform = { {1.0f,1.0f,1.0f},{0.3f,0.0f,0.0f},{0.0f,4.0f,-10.0f} };
+	
+	// --- cameraの設置 ---
+	this->camera = object3dCommon->GetDefaultCamera();
 
 }
 
@@ -30,12 +32,17 @@ void Object3d::Update()
 {
 	// --- world座標変換 ---
 	Matrix4x4 worldMatrix = MakeAffineMatrix(transform.scale, transform.rotate, transform.translate);
-	Matrix4x4 cameraMatrix = MakeAffineMatrix(cameraTransform.scale, cameraTransform.rotate, cameraTransform.translate);
-	Matrix4x4 viewMatrix = Inverse(cameraMatrix);
-	Matrix4x4 projectionMatrix = MakePerspectiveFovMatrix(0.45f, float(WinApp::kClientWidth) / float(WinApp::kClientHeight), 0.1f, 100.0f);
+	Matrix4x4 worldViewProjectionMatrix;
+	if (camera) {
+		const Matrix4x4& viewProjectionMatrix = camera->GetViewProjectionMatrix();
+		worldViewProjectionMatrix = worldMatrix * viewProjectionMatrix;
+	}
+	else {
+		worldViewProjectionMatrix = worldMatrix;
+	}
 
 	// --- transformationMatrixDataの更新 ---
-	transformationMatrixData->WVP = worldMatrix * viewMatrix * projectionMatrix;
+	transformationMatrixData->WVP = worldViewProjectionMatrix;
 	transformationMatrixData->World = worldMatrix;
 }
 

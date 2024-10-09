@@ -5,10 +5,12 @@
 #include <vector>
 #include <wrl.h>
 
-#include "../math/Vector2.h"
-#include "../math/Vector3.h"
-#include "../math/Vector4.h"
-#include "../math/Matrix4x4.h"
+#include "Camera.h"
+
+#include "Vector2.h"
+#include "Vector3.h"
+#include "Vector4.h"
+#include "Matrix4x4.h"
 
 class Object3dCommon;
 class Model;
@@ -41,6 +43,9 @@ public:
 	
 	// model
 	void SetModel(const std::string& filePath);
+
+	// camera
+	void SetCamera(Camera* camera) { this->camera = camera; }
 
 private:
 	//Data書き込み
@@ -79,7 +84,7 @@ private:
 		Vector3 translate;
 	};
 	Transform transform;
-	Transform cameraTransform;
+	Camera* camera = nullptr;
 
 };
 

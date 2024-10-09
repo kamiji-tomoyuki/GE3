@@ -2,10 +2,10 @@
 
 #include <dxgidebug.h>
 
-#include "WinApp.h"
-#include "Input.h"
+#include "Camera.h"
 #include "DirectXCommon.h"
 #include "D3DResourceLeakChecker.h"
+#include "Input.h"
 #include "Model.h"
 #include "ModelCommon.h"
 #include "ModelManager.h"
@@ -14,6 +14,7 @@
 #include "Sprite.h"
 #include "SpriteCommon.h"
 #include "TextureManager.h"
+#include "WinApp.h"
 #include "imgui_impl_win32.h"
 #include "imgui_impl_dx12.h"
 
@@ -55,6 +56,11 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	ModelManager::GetInstance()->Initialize(dxCommon);
 	ModelManager::GetInstance()->LoadModel("plane.obj");
 	ModelManager::GetInstance()->LoadModel("axis.obj");
+
+	Camera* camera = new Camera();
+	camera->SetRotate({ 0.3f,0.0f,0.0f });
+	camera->SetTranslate({ 0.0f,4.0f,-10.0f });
+	object3dCommon->SetDefaultCamera(camera);
 	
 #pragma endregion 基礎システムの初期化
 
@@ -112,6 +118,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		//=========================================================
 		//入力の更新
 		input->Update();
+
+		//カメラの更新
+		camera->Update();
 
 #pragma region スプライト
 
