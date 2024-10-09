@@ -3,6 +3,7 @@
 #include <dxgidebug.h>
 
 #include "Camera.h"
+#include "CameraManager.h"
 #include "DirectXCommon.h"
 #include "D3DResourceLeakChecker.h"
 #include "Input.h"

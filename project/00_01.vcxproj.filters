@@ -150,6 +150,9 @@
     <ClCompile Include="gameEngine\3d\Camera.cpp">
       <Filter>ソース ファイル\gameEngine\3d</Filter>
     </ClCompile>
+    <ClCompile Include="gameEngine\3d\CameraManager.cpp">
+      <Filter>ソース ファイル\gameEngine\3d</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imconfig.h">
@@ -234,6 +237,9 @@
       <Filter>ヘッダー ファイル\gameEngine\utility</Filter>
     </ClInclude>
     <ClInclude Include="gameEngine\3d\Camera.h">
+      <Filter>ヘッダー ファイル\gameEngine\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="gameEngine\3d\CameraManager.h">
       <Filter>ヘッダー ファイル\gameEngine\3d</Filter>
     </ClInclude>
   </ItemGroup>
