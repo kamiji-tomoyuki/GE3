@@ -5,7 +5,7 @@
 
 #include "DirectXCommon.h"
 
-#include "../externals/DirectXTex/DirectXTex.h"
+#include "DirectXTex.h"
 
 using namespace Microsoft::WRL;
 

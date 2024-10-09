@@ -8,10 +8,10 @@
 
 #include "WinApp.h"
 
-#include "Function/Logger.h"
-#include "Function/StringUtility.h"
+#include "Logger.h"
+#include "StringUtility.h"
 
-#include "../externals/DirectXTex/DirectXTex.h"
+#include "DirectXTex.h"
 
 class DirectXCommon
 {

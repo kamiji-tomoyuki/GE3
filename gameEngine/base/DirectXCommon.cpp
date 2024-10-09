@@ -5,9 +5,9 @@
 #include <format>
 #include <thread>
 
-#include "../externals/imgui/imgui_impl_dx12.h"
-#include "../externals/imgui/imgui_impl_win32.h"
-#include "../externals/DirectXTex/d3dx12.h"
+#include "imgui_impl_dx12.h"
+#include "imgui_impl_win32.h"
+#include "d3dx12.h"
 
 #pragma comment(lib, "d3d12.lib")
 #pragma comment(lib, "dxgi.lib")

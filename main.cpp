@@ -2,20 +2,20 @@
 
 #include <dxgidebug.h>
 
-#include "gameEngine/WinApp.h"
-#include "gameEngine/Input.h"
-#include "gameEngine/DirectXCommon.h"
-#include "gameEngine/D3DResourceLeakChecker.h"
-#include "gameEngine/Model.h"
-#include "gameEngine/ModelCommon.h"
-#include "gameEngine/ModelManager.h"
-#include "gameEngine/Object3d.h"
-#include "gameEngine/Object3dCommon.h"
-#include "gameEngine/Sprite.h"
-#include "gameEngine/SpriteCommon.h"
-#include "gameEngine/TextureManager.h"
-#include "externals/imgui/imgui_impl_win32.h"
-#include "externals/imgui/imgui_impl_dx12.h"
+#include "WinApp.h"
+#include "Input.h"
+#include "DirectXCommon.h"
+#include "D3DResourceLeakChecker.h"
+#include "Model.h"
+#include "ModelCommon.h"
+#include "ModelManager.h"
+#include "Object3d.h"
+#include "Object3dCommon.h"
+#include "Sprite.h"
+#include "SpriteCommon.h"
+#include "TextureManager.h"
+#include "imgui_impl_win32.h"
+#include "imgui_impl_dx12.h"
 
 #pragma comment(lib, "dxguid.lib")
 #pragma comment(lib, "dxcompiler.lib")

@@ -2,7 +2,7 @@
 #include "Windows.h"
 #include <cstdint>
 
-#include "../externals/imgui/imgui.h"
+#include "imgui.h"
 
 class WinApp
 {

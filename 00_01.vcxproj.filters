@@ -96,55 +96,55 @@
     <ClCompile Include="externals\imgui\imgui_widgets.cpp">
       <Filter>imgui</Filter>
     </ClCompile>
-    <ClCompile Include="gameEngine\Sprite.cpp">
+    <ClCompile Include="gameEngine\2d\Sprite.cpp">
       <Filter>ソース ファイル\gameEngine\2d</Filter>
     </ClCompile>
-    <ClCompile Include="gameEngine\SpriteCommon.cpp">
+    <ClCompile Include="gameEngine\2d\SpriteCommon.cpp">
       <Filter>ソース ファイル\gameEngine\2d</Filter>
     </ClCompile>
-    <ClCompile Include="gameEngine\Model.cpp">
+    <ClCompile Include="gameEngine\3d\Model.cpp">
       <Filter>ソース ファイル\gameEngine\3d</Filter>
     </ClCompile>
-    <ClCompile Include="gameEngine\ModelCommon.cpp">
+    <ClCompile Include="gameEngine\3d\ModelCommon.cpp">
       <Filter>ソース ファイル\gameEngine\3d</Filter>
     </ClCompile>
-    <ClCompile Include="gameEngine\ModelManager.cpp">
+    <ClCompile Include="gameEngine\3d\ModelManager.cpp">
       <Filter>ソース ファイル\gameEngine\3d</Filter>
     </ClCompile>
-    <ClCompile Include="gameEngine\Object3d.cpp">
+    <ClCompile Include="gameEngine\3d\Object3d.cpp">
       <Filter>ソース ファイル\gameEngine\3d</Filter>
     </ClCompile>
-    <ClCompile Include="gameEngine\Object3dCommon.cpp">
+    <ClCompile Include="gameEngine\3d\Object3dCommon.cpp">
       <Filter>ソース ファイル\gameEngine\3d</Filter>
     </ClCompile>
-    <ClCompile Include="gameEngine\DirectXCommon.cpp">
+    <ClCompile Include="gameEngine\base\DirectXCommon.cpp">
       <Filter>ソース ファイル\gameEngine\base</Filter>
     </ClCompile>
-    <ClCompile Include="gameEngine\WinApp.cpp">
+    <ClCompile Include="gameEngine\base\WinApp.cpp">
       <Filter>ソース ファイル\gameEngine\base</Filter>
     </ClCompile>
-    <ClCompile Include="gameEngine\D3DResourceLeakChecker.cpp">
+    <ClCompile Include="gameEngine\base\D3DResourceLeakChecker.cpp">
       <Filter>ソース ファイル\gameEngine\base</Filter>
     </ClCompile>
-    <ClCompile Include="gameEngine\Input.cpp">
+    <ClCompile Include="gameEngine\io\Input.cpp">
       <Filter>ソース ファイル\gameEngine\io</Filter>
     </ClCompile>
-    <ClCompile Include="gameEngine\Function\Logger.cpp">
+    <ClCompile Include="gameEngine\utility\Logger.cpp">
       <Filter>ソース ファイル\gameEngine\utility</Filter>
     </ClCompile>
-    <ClCompile Include="gameEngine\Function\StringUtility.cpp">
+    <ClCompile Include="gameEngine\utility\StringUtility.cpp">
       <Filter>ソース ファイル\gameEngine\utility</Filter>
     </ClCompile>
-    <ClCompile Include="gameEngine\TextureManager.cpp">
+    <ClCompile Include="gameEngine\2d\TextureManager.cpp">
       <Filter>ソース ファイル\gameEngine\2d</Filter>
     </ClCompile>
-    <ClCompile Include="math\CalculateMath.cpp">
+    <ClCompile Include="gameEngine\math\CalculateMath.cpp">
       <Filter>ソース ファイル\gameEngine\math</Filter>
     </ClCompile>
-    <ClCompile Include="math\Matrix4x4.cpp">
+    <ClCompile Include="gameEngine\math\Matrix4x4.cpp">
       <Filter>ソース ファイル\gameEngine\math</Filter>
     </ClCompile>
-    <ClCompile Include="math\Vector3.cpp">
+    <ClCompile Include="gameEngine\math\Vector3.cpp">
       <Filter>ソース ファイル\gameEngine\math</Filter>
     </ClCompile>
   </ItemGroup>
@@ -173,61 +173,61 @@
     <ClInclude Include="externals\imgui\imstb_truetype.h">
       <Filter>imgui</Filter>
     </ClInclude>
-    <ClInclude Include="gameEngine\Sprite.h">
+    <ClInclude Include="gameEngine\2d\Sprite.h">
       <Filter>ヘッダー ファイル\gameEngine\2d</Filter>
     </ClInclude>
-    <ClInclude Include="gameEngine\SpriteCommon.h">
+    <ClInclude Include="gameEngine\2d\SpriteCommon.h">
       <Filter>ヘッダー ファイル\gameEngine\2d</Filter>
     </ClInclude>
-    <ClInclude Include="gameEngine\TextureManager.h">
+    <ClInclude Include="gameEngine\2d\TextureManager.h">
       <Filter>ヘッダー ファイル\gameEngine\2d</Filter>
     </ClInclude>
-    <ClInclude Include="gameEngine\Model.h">
+    <ClInclude Include="gameEngine\3d\Model.h">
       <Filter>ヘッダー ファイル\gameEngine\3d</Filter>
     </ClInclude>
-    <ClInclude Include="gameEngine\ModelCommon.h">
+    <ClInclude Include="gameEngine\3d\ModelCommon.h">
       <Filter>ヘッダー ファイル\gameEngine\3d</Filter>
     </ClInclude>
-    <ClInclude Include="gameEngine\ModelManager.h">
+    <ClInclude Include="gameEngine\3d\ModelManager.h">
       <Filter>ヘッダー ファイル\gameEngine\3d</Filter>
     </ClInclude>
-    <ClInclude Include="gameEngine\Object3d.h">
+    <ClInclude Include="gameEngine\3d\Object3d.h">
       <Filter>ヘッダー ファイル\gameEngine\3d</Filter>
     </ClInclude>
-    <ClInclude Include="gameEngine\Object3dCommon.h">
+    <ClInclude Include="gameEngine\3d\Object3dCommon.h">
       <Filter>ヘッダー ファイル\gameEngine\3d</Filter>
     </ClInclude>
-    <ClInclude Include="gameEngine\D3DResourceLeakChecker.h">
+    <ClInclude Include="gameEngine\base\D3DResourceLeakChecker.h">
       <Filter>ヘッダー ファイル\gameEngine\base</Filter>
     </ClInclude>
-    <ClInclude Include="gameEngine\DirectXCommon.h">
+    <ClInclude Include="gameEngine\base\DirectXCommon.h">
       <Filter>ヘッダー ファイル\gameEngine\base</Filter>
     </ClInclude>
-    <ClInclude Include="gameEngine\WinApp.h">
+    <ClInclude Include="gameEngine\base\WinApp.h">
       <Filter>ヘッダー ファイル\gameEngine\base</Filter>
     </ClInclude>
-    <ClInclude Include="gameEngine\Input.h">
+    <ClInclude Include="gameEngine\io\Input.h">
       <Filter>ヘッダー ファイル\gameEngine\io</Filter>
     </ClInclude>
-    <ClInclude Include="math\CalculateMath.h">
+    <ClInclude Include="gameEngine\math\CalculateMath.h">
       <Filter>ヘッダー ファイル\gameEngine\math</Filter>
     </ClInclude>
-    <ClInclude Include="math\Matrix4x4.h">
+    <ClInclude Include="gameEngine\math\Matrix4x4.h">
       <Filter>ヘッダー ファイル\gameEngine\math</Filter>
     </ClInclude>
-    <ClInclude Include="math\Vector2.h">
+    <ClInclude Include="gameEngine\math\Vector2.h">
       <Filter>ヘッダー ファイル\gameEngine\math</Filter>
     </ClInclude>
-    <ClInclude Include="math\Vector3.h">
+    <ClInclude Include="gameEngine\math\Vector3.h">
       <Filter>ヘッダー ファイル\gameEngine\math</Filter>
     </ClInclude>
-    <ClInclude Include="math\Vector4.h">
+    <ClInclude Include="gameEngine\math\Vector4.h">
       <Filter>ヘッダー ファイル\gameEngine\math</Filter>
     </ClInclude>
-    <ClInclude Include="gameEngine\Function\Logger.h">
+    <ClInclude Include="gameEngine\utility\Logger.h">
       <Filter>ヘッダー ファイル\gameEngine\utility</Filter>
     </ClInclude>
-    <ClInclude Include="gameEngine\Function\StringUtility.h">
+    <ClInclude Include="gameEngine\utility\StringUtility.h">
       <Filter>ヘッダー ファイル\gameEngine\utility</Filter>
     </ClInclude>
   </ItemGroup>

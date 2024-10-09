@@ -54,6 +54,7 @@
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <TreatWarningAsError>true</TreatWarningAsError>
+      <AdditionalIncludeDirectories>$(ProjectDir)gameEngine\2d;$(ProjectDir)gameEngine\3d;$(ProjectDir)gameEngine\audio;$(ProjectDir)gameEngine\base;$(ProjectDir)gameEngine\io;$(ProjectDir)gameEngine\scene;$(ProjectDir)gameEngine\utility;$(ProjectDir)gameEngine\math;$(ProjectDir)externals\imgui;$(ProjectDir)externals\DirectXTex;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -78,6 +79,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <AdditionalIncludeDirectories>$(ProjectDir)gameEngine\2d;$(ProjectDir)gameEngine\3d;$(ProjectDir)gameEngine\audio;$(ProjectDir)gameEngine\base;$(ProjectDir)gameEngine\io;$(ProjectDir)gameEngine\scene;$(ProjectDir)gameEngine\utility;$(ProjectDir)gameEngine\math;$(ProjectDir)externals\imgui;$(ProjectDir)externals\DirectXTex;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -98,24 +100,24 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="externals\imgui\imgui_impl_win32.cpp" />
     <ClCompile Include="externals\imgui\imgui_tables.cpp" />
     <ClCompile Include="externals\imgui\imgui_widgets.cpp" />
-    <ClCompile Include="gameEngine\D3DResourceLeakChecker.cpp" />
-    <ClCompile Include="gameEngine\DirectXCommon.cpp" />
-    <ClCompile Include="gameEngine\Function\Logger.cpp" />
-    <ClCompile Include="gameEngine\Function\StringUtility.cpp" />
-    <ClCompile Include="gameEngine\Input.cpp" />
-    <ClCompile Include="gameEngine\Model.cpp" />
-    <ClCompile Include="gameEngine\ModelCommon.cpp" />
-    <ClCompile Include="gameEngine\ModelManager.cpp" />
-    <ClCompile Include="gameEngine\Object3d.cpp" />
-    <ClCompile Include="gameEngine\Object3dCommon.cpp" />
-    <ClCompile Include="gameEngine\Sprite.cpp" />
-    <ClCompile Include="gameEngine\SpriteCommon.cpp" />
-    <ClCompile Include="gameEngine\TextureManager.cpp" />
-    <ClCompile Include="gameEngine\WinApp.cpp" />
+    <ClCompile Include="gameEngine\base\D3DResourceLeakChecker.cpp" />
+    <ClCompile Include="gameEngine\base\DirectXCommon.cpp" />
+    <ClCompile Include="gameEngine\utility\Logger.cpp" />
+    <ClCompile Include="gameEngine\utility\StringUtility.cpp" />
+    <ClCompile Include="gameEngine\io\Input.cpp" />
+    <ClCompile Include="gameEngine\3d\Model.cpp" />
+    <ClCompile Include="gameEngine\3d\ModelCommon.cpp" />
+    <ClCompile Include="gameEngine\3d\ModelManager.cpp" />
+    <ClCompile Include="gameEngine\3d\Object3d.cpp" />
+    <ClCompile Include="gameEngine\3d\Object3dCommon.cpp" />
+    <ClCompile Include="gameEngine\2d\Sprite.cpp" />
+    <ClCompile Include="gameEngine\2d\SpriteCommon.cpp" />
+    <ClCompile Include="gameEngine\2d\TextureManager.cpp" />
+    <ClCompile Include="gameEngine\base\WinApp.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="math\CalculateMath.cpp" />
-    <ClCompile Include="math\Matrix4x4.cpp" />
-    <ClCompile Include="math\Vector3.cpp" />
+    <ClCompile Include="gameEngine\math\CalculateMath.cpp" />
+    <ClCompile Include="gameEngine\math\Matrix4x4.cpp" />
+    <ClCompile Include="gameEngine\math\Vector3.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imconfig.h" />
@@ -126,25 +128,25 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="externals\imgui\imstb_rectpack.h" />
     <ClInclude Include="externals\imgui\imstb_textedit.h" />
     <ClInclude Include="externals\imgui\imstb_truetype.h" />
-    <ClInclude Include="gameEngine\D3DResourceLeakChecker.h" />
-    <ClInclude Include="gameEngine\DirectXCommon.h" />
-    <ClInclude Include="gameEngine\Function\Logger.h" />
-    <ClInclude Include="gameEngine\Function\StringUtility.h" />
-    <ClInclude Include="gameEngine\Input.h" />
-    <ClInclude Include="gameEngine\Model.h" />
-    <ClInclude Include="gameEngine\ModelCommon.h" />
-    <ClInclude Include="gameEngine\ModelManager.h" />
-    <ClInclude Include="gameEngine\Object3d.h" />
-    <ClInclude Include="gameEngine\Object3dCommon.h" />
-    <ClInclude Include="gameEngine\Sprite.h" />
-    <ClInclude Include="gameEngine\SpriteCommon.h" />
-    <ClInclude Include="gameEngine\TextureManager.h" />
-    <ClInclude Include="gameEngine\WinApp.h" />
-    <ClInclude Include="math\CalculateMath.h" />
-    <ClInclude Include="math\Matrix4x4.h" />
-    <ClInclude Include="math\Vector2.h" />
-    <ClInclude Include="math\Vector3.h" />
-    <ClInclude Include="math\Vector4.h" />
+    <ClInclude Include="gameEngine\base\D3DResourceLeakChecker.h" />
+    <ClInclude Include="gameEngine\base\DirectXCommon.h" />
+    <ClInclude Include="gameEngine\utility\Logger.h" />
+    <ClInclude Include="gameEngine\utility\StringUtility.h" />
+    <ClInclude Include="gameEngine\io\Input.h" />
+    <ClInclude Include="gameEngine\3d\Model.h" />
+    <ClInclude Include="gameEngine\3d\ModelCommon.h" />
+    <ClInclude Include="gameEngine\3d\ModelManager.h" />
+    <ClInclude Include="gameEngine\3d\Object3d.h" />
+    <ClInclude Include="gameEngine\3d\Object3dCommon.h" />
+    <ClInclude Include="gameEngine\2d\Sprite.h" />
+    <ClInclude Include="gameEngine\2d\SpriteCommon.h" />
+    <ClInclude Include="gameEngine\2d\TextureManager.h" />
+    <ClInclude Include="gameEngine\base\WinApp.h" />
+    <ClInclude Include="gameEngine\math\CalculateMath.h" />
+    <ClInclude Include="gameEngine\math\Matrix4x4.h" />
+    <ClInclude Include="gameEngine\math\Vector2.h" />
+    <ClInclude Include="gameEngine\math\Vector3.h" />
+    <ClInclude Include="gameEngine\math\Vector4.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="externals\imgui\LICENSE.txt" />
