@@ -2,9 +2,6 @@
 
 void MyGame::Initialize()
 {
-	// --- リークチェック ---
-	//D3DResourceLeakChecker leakCheck;
-
 #pragma region 基礎システムの初期化
 
 	// WindowsAPI
@@ -82,6 +79,10 @@ void MyGame::Initialize()
 
 void MyGame::Finalize()
 {
+	// --- リークチェック ---
+	D3DResourceLeakChecker leakCheck;
+
+	// --- 解放処理 ---
 	winApp->Finalize();
 	delete winApp;
 	winApp = nullptr;
