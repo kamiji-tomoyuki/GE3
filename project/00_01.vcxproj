@@ -114,6 +114,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="gameEngine\base\D3DResourceLeakChecker.cpp" />
     <ClCompile Include="gameEngine\base\DirectXCommon.cpp" />
     <ClCompile Include="gameEngine\base\Framework.cpp" />
+    <ClCompile Include="gameEngine\scene\GamePlayScene.cpp" />
     <ClCompile Include="gameEngine\utility\Logger.cpp" />
     <ClCompile Include="gameEngine\utility\StringUtility.cpp" />
     <ClCompile Include="gameEngine\io\Input.cpp" />
@@ -130,7 +131,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="gameEngine\math\CalculateMath.cpp" />
     <ClCompile Include="gameEngine\math\Matrix4x4.cpp" />
     <ClCompile Include="gameEngine\math\Vector3.cpp" />
-    <ClCompile Include="gameEngine\scene\MyGame.cpp" />
+    <ClCompile Include="gameEngine\base\MyGame.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imconfig.h" />
@@ -147,6 +148,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="gameEngine\base\D3DResourceLeakChecker.h" />
     <ClInclude Include="gameEngine\base\DirectXCommon.h" />
     <ClInclude Include="gameEngine\base\Framework.h" />
+    <ClInclude Include="gameEngine\scene\GamePlayScene.h" />
     <ClInclude Include="gameEngine\utility\Logger.h" />
     <ClInclude Include="gameEngine\utility\StringUtility.h" />
     <ClInclude Include="gameEngine\io\Input.h" />
@@ -164,7 +166,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="gameEngine\math\Vector2.h" />
     <ClInclude Include="gameEngine\math\Vector3.h" />
     <ClInclude Include="gameEngine\math\Vector4.h" />
-    <ClInclude Include="gameEngine\scene\MyGame.h" />
+    <ClInclude Include="gameEngine\base\MyGame.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="externals\imgui\LICENSE.txt" />
