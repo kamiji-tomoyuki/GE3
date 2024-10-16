@@ -156,7 +156,10 @@
     <ClCompile Include="gameEngine\audio\Audio.cpp">
       <Filter>ソース ファイル\gameEngine\audio</Filter>
     </ClCompile>
-    <ClCompile Include="MyGame.cpp">
+    <ClCompile Include="gameEngine\scene\MyGame.cpp">
+      <Filter>ソース ファイル\gameEngine\scene</Filter>
+    </ClCompile>
+    <ClCompile Include="gameEngine\base\Framework.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
@@ -251,7 +254,10 @@
     <ClInclude Include="gameEngine\audio\Audio.h">
       <Filter>ヘッダー ファイル\gameEngine\audio</Filter>
     </ClInclude>
-    <ClInclude Include="MyGame.h">
+    <ClInclude Include="gameEngine\scene\MyGame.h">
+      <Filter>ヘッダー ファイル\gameEngine\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="gameEngine\base\Framework.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>

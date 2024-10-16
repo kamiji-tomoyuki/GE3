@@ -10,30 +10,11 @@
 
 // Windowsアプリでのエントリーポイント
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
-	MyGame game;
-	game.Initialize();
-	
-	// ウィンドウのxボタンが押されるまでループ
-	while (true) { 
-		// 終了リクエストが来たら抜ける
-		if (game.IsEndRequest()) {
-			break;
-		}
-		// ===== 更新処理 =====
-		
-		// 毎フレーム更新
-		game.Update();
+	Framework* game = new MyGame();
 
+	game->Run();
 
-		// ===== 描画処理 =====
-
-		// 描画
-		game.Draw();
-
-	}
-
-	// ゲーム終了
-	game.Finalize();
+	delete game;
 	
 	return 0;
 

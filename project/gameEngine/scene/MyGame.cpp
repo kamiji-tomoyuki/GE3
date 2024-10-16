@@ -2,35 +2,8 @@
 
 void MyGame::Initialize()
 {
-#pragma region 基礎システムの初期化
-
-	// WindowsAPI
-	winApp = new WinApp();
-	winApp->Initialize();
-
-	// DirectX
-	dxCommon = new DirectXCommon();
-	dxCommon->Initialize(winApp);
-
-	// キーボード入力
-	input = new Input();
-	input->Initialize(winApp);
-
-	// オーディオ
-	audio = new Audio();
-	audio->Initialize();
-
-	// スプライト
-	TextureManager::GetInstance()->Initialize(dxCommon);
-	spriteCommon = new SpriteCommon();
-	spriteCommon->Initialize(dxCommon);
-
-	// 3Dオブジェクト
-	ModelManager::GetInstance()->Initialize(dxCommon);
-	object3dCommon = new Object3dCommon();
-	object3dCommon->Initialize(dxCommon);
-
-#pragma endregion 基礎システムの初期化
+	// --- 基底クラスの初期化 ---
+	Framework::Initialize();
 
 	// --- カメラ ---
 	camera = new Camera();
@@ -83,18 +56,8 @@ void MyGame::Finalize()
 	D3DResourceLeakChecker leakCheck;
 
 	// --- 解放処理 ---
-	winApp->Finalize();
-	delete winApp;
-	winApp = nullptr;
-
-	delete dxCommon;
-	delete input;
-	delete audio;
-
-	delete spriteCommon;
-	delete object3dCommon;
-
-
+	Framework::Finalize();	// 基底クラスの解放処理
+	
 	delete camera;
 
 	TextureManager::GetInstance()->Finalize();
@@ -111,13 +74,8 @@ void MyGame::Finalize()
 
 void MyGame::Update()
 {
-	// ゲームループを抜ける
-	if (winApp->ProcessMessage()) {
-		endRequest = true;
-	}
-
-	//入力の更新
-	input->Update();
+	// --- 基底クラスの更新処理 ---
+	Framework::Update();
 
 	//カメラの更新
 	camera->Update();
