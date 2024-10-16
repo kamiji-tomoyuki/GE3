@@ -156,6 +156,9 @@
     <ClCompile Include="gameEngine\audio\Audio.cpp">
       <Filter>ソース ファイル\gameEngine\audio</Filter>
     </ClCompile>
+    <ClCompile Include="MyGame.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imconfig.h">
@@ -247,6 +250,9 @@
     </ClInclude>
     <ClInclude Include="gameEngine\audio\Audio.h">
       <Filter>ヘッダー ファイル\gameEngine\audio</Filter>
+    </ClInclude>
+    <ClInclude Include="MyGame.h">
+      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
