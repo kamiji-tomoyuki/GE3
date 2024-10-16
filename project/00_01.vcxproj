@@ -110,6 +110,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="externals\imgui\imgui_widgets.cpp" />
     <ClCompile Include="gameEngine\3d\Camera.cpp" />
     <ClCompile Include="gameEngine\3d\CameraManager.cpp" />
+    <ClCompile Include="gameEngine\audio\Audio.cpp" />
     <ClCompile Include="gameEngine\base\D3DResourceLeakChecker.cpp" />
     <ClCompile Include="gameEngine\base\DirectXCommon.cpp" />
     <ClCompile Include="gameEngine\utility\Logger.cpp" />
@@ -140,6 +141,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="externals\imgui\imstb_truetype.h" />
     <ClInclude Include="gameEngine\3d\Camera.h" />
     <ClInclude Include="gameEngine\3d\CameraManager.h" />
+    <ClInclude Include="gameEngine\audio\Audio.h" />
     <ClInclude Include="gameEngine\base\D3DResourceLeakChecker.h" />
     <ClInclude Include="gameEngine\base\DirectXCommon.h" />
     <ClInclude Include="gameEngine\utility\Logger.h" />

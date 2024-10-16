@@ -2,6 +2,7 @@
 
 #include <dxgidebug.h>
 
+#include "Audio.h"
 #include "Camera.h"
 #include "CameraManager.h"
 #include "DirectXCommon.h"
@@ -30,17 +31,21 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	D3DResourceLeakChecker leakCheck;
 
 	//=========================================================
-	WinApp* winApp = nullptr;//WinApp
+	WinApp* winApp = nullptr;			//WinApp
 	winApp = new WinApp();
 	winApp->Initialize();
 
-	Input* input = nullptr;//input
+	Input* input = nullptr;				//input
 	input = new Input();
 	input->Initialize(winApp);
 
-	DirectXCommon* dxCommon = nullptr;//dxCommon
+	DirectXCommon* dxCommon = nullptr;	//dxCommon
 	dxCommon = new DirectXCommon();
 	dxCommon->Initialize(winApp);
+
+	Audio* audio = nullptr;				//audio
+	audio = new Audio();
+	audio->Initialize();
 
 #pragma region 基礎システムの初期化
 
@@ -62,6 +67,10 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	camera->SetRotate({ 0.3f,0.0f,0.0f });
 	camera->SetTranslate({ 0.0f,4.0f,-10.0f });
 	object3dCommon->SetDefaultCamera(camera);
+
+	SoundData soundData = audio->LoadWav("fanfare.wav");
+	audio->SoundPlayWave(audio->GetXAudio2().Get(), soundData);
+	audio->SetVolume(0.1f);
 	
 #pragma endregion 基礎システムの初期化
 
@@ -162,6 +171,13 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 #pragma endregion 3Dオブジェクト
 
+#pragma region 音声データ
+
+
+
+
+#pragma endregion 音声データ
+
 		//描画前処理(DirectX)
 		dxCommon->PreDraw();
 
@@ -215,6 +231,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	for (auto& obj : object3ds) {
 		delete obj;
 	}
+
+	delete audio;
 
 #pragma endregion 解放処理
 	//=================================================
