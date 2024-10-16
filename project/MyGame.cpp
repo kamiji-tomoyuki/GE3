@@ -3,7 +3,7 @@
 void MyGame::Initialize()
 {
 	// --- リークチェック ---
-	D3DResourceLeakChecker leakCheck;
+	//D3DResourceLeakChecker leakCheck;
 
 #pragma region 基礎システムの初期化
 
@@ -36,6 +36,7 @@ void MyGame::Initialize()
 #pragma endregion 基礎システムの初期化
 
 	// --- カメラ ---
+	camera = new Camera();
 	camera->SetRotate({ 0.3f,0.0f,0.0f });
 	camera->SetTranslate({ 0.0f,4.0f,-10.0f });
 	object3dCommon->SetDefaultCamera(camera);
