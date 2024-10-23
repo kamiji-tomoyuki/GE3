@@ -37,7 +37,7 @@ void Model::Draw()
 	modelCommon_->GetDxCommon()->GetCommandList()->SetGraphicsRootConstantBufferView(0, materialResource->GetGPUVirtualAddress());
 	
 	// --- SRVのDescriptorTableを設定 ---
-	modelCommon_->GetDxCommon()->GetCommandList()->SetGraphicsRootDescriptorTable(2, TextureManager::GetInstance()->GetSrvHandleGPU(modelData_.material.textureIndex));
+	modelCommon_->GetDxCommon()->GetCommandList()->SetGraphicsRootDescriptorTable(2, TextureManager::GetInstance()->GetSrvHandleGPU(modelData_.material.textureFilePath));
 
 	// --- 描画(DrawCall/ドローコール) ---
 	modelCommon_->GetDxCommon()->GetCommandList()->DrawInstanced(UINT(modelData_.vertices.size()), 1, 0, 0);
@@ -84,31 +84,7 @@ Model::MaterialData Model::LoadMaterialTemplateFile(const std::string& directory
 		std::istringstream s(line);
 		s >> identifier;
 
-		if (identifier == "newmtl") {
-			s >> materialData.name;
-		}
-		else if (identifier == "Ns") {
-			s >> materialData.Ns;
-		}
-		else if (identifier == "Ka") {
-			s >> materialData.Ka.r >> materialData.Ka.g >> materialData.Ka.b;
-		}
-		else if (identifier == "Kd") {
-			s >> materialData.Kd.r >> materialData.Kd.g >> materialData.Kd.b;
-		}
-		else if (identifier == "Ks") {
-			s >> materialData.Ks.r >> materialData.Ks.g >> materialData.Ks.b;
-		}
-		else if (identifier == "Ni") {
-			s >> materialData.Ni;
-		}
-		else if (identifier == "d") {
-			s >> materialData.d;
-		}
-		else if (identifier == "illum") {
-			s >> materialData.illum;
-		}
-		else if (identifier == "map_Kd") {
+		if (identifier == "map_Kd") {
 			std::string textureFilename;
 			s >> textureFilename;
 			materialData.textureFilePath = directoryPath + "/" + textureFilename;

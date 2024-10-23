@@ -324,8 +324,8 @@ void DirectXCommon::PreDraw()
 	commandList->ClearDepthStencilView(dsvHandle, D3D12_CLEAR_FLAG_DEPTH, 1.0f, 0, 0, nullptr);
 
 	// --- SRV用のデスクリプタヒープを指定する ---
-	Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> descriptorHeaps[] = { srvDescriptorHeap };
-	commandList->SetDescriptorHeaps(1, descriptorHeaps->GetAddressOf());
+	//Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> descriptorHeaps[] = { srvDescriptorHeap };
+	//commandList->SetDescriptorHeaps(1, descriptorHeaps->GetAddressOf());
 
 	// --- ビューポート領域の設定 ---
 	commandList->RSSetViewports(1, &viewport);
@@ -354,8 +354,8 @@ void DirectXCommon::PostDraw()
 	assert(SUCCEEDED(hr));
 
 	// --- GPUコマンドの実行 ---
-	Microsoft::WRL::ComPtr<ID3D12CommandList> commandLists[] = { commandList };
-	commandQueue->ExecuteCommandLists(1, commandLists->GetAddressOf());
+	ID3D12CommandList* commandLists[] = { commandList.Get()};
+	commandQueue->ExecuteCommandLists(1, commandLists);
 
 	// --- GPU画面の交換を通知 ---
 	swapChain->Present(1, 0);
@@ -364,12 +364,14 @@ void DirectXCommon::PostDraw()
 	fenceValue++;
 
 	// --- コマンドキューにシグナルを送る ---
-	commandQueue->Signal(fence.Get(), fenceValue);
+	commandQueue->Signal(fence.Get(), ++fenceValue);
 
 	// --- コマンド完了待ち ---
 	if (fence->GetCompletedValue() < fenceValue) {
-		fence->SetEventOnCompletion(fenceValue, fenceEvent);
-		WaitForSingleObject(fenceEvent, INFINITE);
+		HANDLE event = CreateEvent(nullptr, false, false, nullptr);
+		fence->SetEventOnCompletion(fenceValue, event);
+		WaitForSingleObject(event, INFINITE);
+		CloseHandle(event);
 	}
 
 	// --- FPS固定 ---
@@ -383,6 +385,7 @@ void DirectXCommon::PostDraw()
 	hr = commandList->Reset(commandAllocator.Get(), nullptr);
 	assert(SUCCEEDED(hr));
 
+	CoUninitialize();
 }
 
 Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> DirectXCommon::CreateDescriptorHeap(Microsoft::WRL::ComPtr<ID3D12Device> device, D3D12_DESCRIPTOR_HEAP_TYPE heapType, UINT numDescriptors, bool shaderVisible)

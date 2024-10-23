@@ -39,12 +39,16 @@ void Framework::Initialize()
 	input = new Input();
 	input->Initialize(winApp);
 
+	// SRVマネージャ
+	srvManager = new SrvManager();
+	srvManager->Initialize(dxCommon);
+
 	// オーディオ
 	audio = new Audio();
 	audio->Initialize();
 
 	// スプライト
-	TextureManager::GetInstance()->Initialize(dxCommon);
+	TextureManager::GetInstance()->Initialize(dxCommon, srvManager);
 	spriteCommon = new SpriteCommon();
 	spriteCommon->Initialize(dxCommon);
 
@@ -62,6 +66,7 @@ void Framework::Finalize()
 
 	delete dxCommon;
 	delete input;
+	delete srvManager;
 	delete audio;
 
 	delete spriteCommon;

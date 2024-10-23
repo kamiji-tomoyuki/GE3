@@ -5,6 +5,7 @@
 #include <ModelManager.h>
 #include <Object3dCommon.h>
 #include <SpriteCommon.h>
+#include <SrvManager.h>
 #include <TextureManager.h>
 #include <WinApp.h>
 
@@ -41,6 +42,7 @@ protected:
 	WinApp* winApp = nullptr;			// WindowsAPI
 	DirectXCommon* dxCommon = nullptr;	// DirectX
 	Input* input = nullptr;				// キーボード入力
+	SrvManager* srvManager = nullptr;	// SRVマネージャ
 	Audio* audio = nullptr;				// オーディオ
 
 	SpriteCommon* spriteCommon = nullptr;		// スプライト

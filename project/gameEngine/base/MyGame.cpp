@@ -122,6 +122,9 @@ void MyGame::Update()
 
 void MyGame::Draw()
 {
+	//描画前処理(SRV)
+	srvManager->PreDraw();
+
 	//描画前処理(DirectX)
 	dxCommon->PreDraw();
 

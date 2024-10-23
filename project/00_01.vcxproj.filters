@@ -165,6 +165,9 @@
     <ClCompile Include="gameEngine\scene\GamePlayScene.cpp">
       <Filter>ソース ファイル\gameEngine\scene</Filter>
     </ClCompile>
+    <ClCompile Include="gameEngine\3d\SrvManager.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imconfig.h">
@@ -265,6 +268,9 @@
     </ClInclude>
     <ClInclude Include="gameEngine\scene\GamePlayScene.h">
       <Filter>ヘッダー ファイル\gameEngine\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="gameEngine\3d\SrvManager.h">
+      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

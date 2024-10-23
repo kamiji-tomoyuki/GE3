@@ -71,6 +71,7 @@ private:
 
 private:
 	SpriteCommon* spriteCommon = nullptr;
+	std::string textureFilePath_;
 
 	// --- 頂点データ ---
 	struct VertexData {
