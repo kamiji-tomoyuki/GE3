@@ -39,7 +39,6 @@ void DirectXCommon::Initialize(WinApp* winApp)
 	ViewportRectInitialize();
 	ScissorRect();
 	DXCCompilerCreate();
-	ImGuiInitialize();
 }
 
 void DirectXCommon::Update()
@@ -281,18 +280,6 @@ void DirectXCommon::DXCCompilerCreate()
 	// --- デフォルトインクルードハンドラの生成 ---
 	hr = dxcUtils->CreateDefaultIncludeHandler(&includeHandler);
 	assert(SUCCEEDED(hr));
-}
-
-void DirectXCommon::ImGuiInitialize()
-{
-	// --- ImGuiの初期化 ---
-	IMGUI_CHECKVERSION();
-	ImGui::CreateContext();
-	ImGui::StyleColorsDark();
-	ImGui_ImplWin32_Init(winApp_->GetHwnd());
-	ImGui_ImplDX12_Init(
-		device_.Get(), swapChainDesc.BufferCount, rtvDesc.Format, srvDescriptorHeap.Get(), srvDescriptorHeap->GetCPUDescriptorHandleForHeapStart(),
-		srvDescriptorHeap->GetGPUDescriptorHandleForHeapStart());
 }
 
 void DirectXCommon::PreDraw()
