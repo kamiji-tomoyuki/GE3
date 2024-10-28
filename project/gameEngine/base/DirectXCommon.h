@@ -33,7 +33,6 @@ public://メンバ関数
 	void ViewportRectInitialize();		// ビューポート矩形
 	void ScissorRect();					// シザリング矩形
 	void DXCCompilerCreate();			// DXCコンパイラ
-	void ImGuiInitialize();				// ImGui
 
 	// 描画処理
 	void PreDraw();	// 前

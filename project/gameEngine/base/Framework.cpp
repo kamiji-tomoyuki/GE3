@@ -12,8 +12,14 @@ void Framework::Run()
 		}
 		// ===== 更新処理 =====
 
+		// ImGui開始
+		imGuiManager->Begin();
+
 		// 毎フレーム更新
 		Update();
+
+		// ImGui終了
+		imGuiManager->End();
 
 		// ===== 描画処理 =====
 
@@ -69,17 +75,6 @@ void Framework::Update()
 {
 	// 入力の更新
 	input->Update();
-
-
-	// ImGui開始
-	imGuiManager->Begin();
-
-	// デモウィンドウの表示オン
-	ImGui::ShowDemoWindow();
-
-	// ImGui終了
-	imGuiManager->End();
-
 }
 
 void Framework::Finalize()

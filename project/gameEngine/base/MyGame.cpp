@@ -21,7 +21,8 @@ void MyGame::Initialize()
 		sprite->Initialize(spriteCommon, textureFile);
 		sprites.push_back(sprite);
 
-		sprite->SetPosition({ 100,100 });
+		spritePosition = { 100,100 };
+		sprite->SetPosition(spritePosition);
 	}
 
 	// --- 3Dオブジェクト ---
@@ -98,15 +99,16 @@ void MyGame::Update()
 
 		Vector4 color = sprites[i]->GetColor();
 		sprites[i]->SetColor(color);
+
+		ImGui::SetNextWindowSize({ 500,100 });
+		ImGui::Begin("Window");
+		ImGui::SliderFloat2("Position", &spritePosition.x, 0.0f, 1000.0f, "%.1f");
+		ImGui::End();
+
+		sprites[i]->SetPosition(spritePosition);
 	}
 
-	ImGui::SetNextWindowSize({ 500,100 });
-	ImGui::Begin("Window");
-	if (ImGui::TreeNode("sprite")) {
-		ImGui::DragFloat3("Position", &position.x, 0.01f);
-		ImGui::TreePop();
-	}
-	ImGui::End();
+
 
 #pragma endregion スプライト
 
@@ -155,6 +157,8 @@ void MyGame::Draw()
 	}
 
 	// ↑ ↑ ↑ ↑ Draw を書き込む ↑ ↑ ↑ ↑
+
+	imGuiManager->Draw();
 
 	// 描画後処理
 	dxCommon->PostDraw();

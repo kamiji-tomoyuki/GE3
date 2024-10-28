@@ -33,7 +33,7 @@ private: // メンバ変数
 
 	std::vector<Sprite*> sprites;
 	uint32_t spriteNum = 1;		/* スプライト枚数 */
-	Vector3 position;
+	Vector2 spritePosition;
 
 	std::vector<Object3d*> object3ds;
 	uint32_t objectNum = 2;		/* オブジェクト個数 */
