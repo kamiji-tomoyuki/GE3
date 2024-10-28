@@ -19,6 +19,8 @@ void Framework::Run()
 		// 描画
 		Draw();
 
+		// 描画(ImGui)
+		imGuiManager->Draw();
 	}
 
 	// ゲーム終了
@@ -47,6 +49,10 @@ void Framework::Initialize()
 	audio = new Audio();
 	audio->Initialize();
 
+	// ImGui
+	imGuiManager = new ImGuiManager();
+	imGuiManager->Initialize(winApp, dxCommon);
+
 	// スプライト
 	TextureManager::GetInstance()->Initialize(dxCommon, srvManager);
 	spriteCommon = new SpriteCommon();
@@ -68,13 +74,23 @@ void Framework::Finalize()
 	delete input;
 	delete srvManager;
 	delete audio;
+	delete imGuiManager;
 
 	delete spriteCommon;
 	delete object3dCommon;
+
+	imGuiManager->Finalize();
+	delete imGuiManager;
 }
 
 void Framework::Update()
 {
+	// ImGui開始
+	imGuiManager->Begin();
+
+	// ImGui終了
+	imGuiManager->End();
+
 	//入力の更新
 	input->Update();
 }

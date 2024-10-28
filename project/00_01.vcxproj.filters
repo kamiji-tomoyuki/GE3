@@ -135,7 +135,7 @@
     <ClCompile Include="gameEngine\utility\StringUtility.cpp">
       <Filter>ソース ファイル\gameEngine\utility</Filter>
     </ClCompile>
-    <ClCompile Include="gameEngine\2d\TextureManager.cpp">
+    <ClCompile Include="gameEngine\base\TextureManager.cpp">
       <Filter>ソース ファイル\gameEngine\2d</Filter>
     </ClCompile>
     <ClCompile Include="gameEngine\math\CalculateMath.cpp">
@@ -165,7 +165,10 @@
     <ClCompile Include="gameEngine\scene\GamePlayScene.cpp">
       <Filter>ソース ファイル\gameEngine\scene</Filter>
     </ClCompile>
-    <ClCompile Include="gameEngine\3d\SrvManager.cpp">
+    <ClCompile Include="gameEngine\base\SrvManager.cpp">
+      <Filter>ソース ファイル\gameEngine\base</Filter>
+    </ClCompile>
+    <ClCompile Include="gameEngine\base\ImGuiManager.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
@@ -200,7 +203,7 @@
     <ClInclude Include="gameEngine\2d\SpriteCommon.h">
       <Filter>ヘッダー ファイル\gameEngine\2d</Filter>
     </ClInclude>
-    <ClInclude Include="gameEngine\2d\TextureManager.h">
+    <ClInclude Include="gameEngine\base\TextureManager.h">
       <Filter>ヘッダー ファイル\gameEngine\2d</Filter>
     </ClInclude>
     <ClInclude Include="gameEngine\3d\Model.h">
@@ -269,7 +272,10 @@
     <ClInclude Include="gameEngine\scene\GamePlayScene.h">
       <Filter>ヘッダー ファイル\gameEngine\scene</Filter>
     </ClInclude>
-    <ClInclude Include="gameEngine\3d\SrvManager.h">
+    <ClInclude Include="gameEngine\base\SrvManager.h">
+      <Filter>ヘッダー ファイル\gameEngine\base</Filter>
+    </ClInclude>
+    <ClInclude Include="gameEngine\base\ImGuiManager.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>

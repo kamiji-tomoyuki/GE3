@@ -112,7 +112,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="externals\imgui\imgui_widgets.cpp" />
     <ClCompile Include="gameEngine\3d\Camera.cpp" />
     <ClCompile Include="gameEngine\3d\CameraManager.cpp" />
-    <ClCompile Include="gameEngine\3d\SrvManager.cpp" />
+    <ClCompile Include="gameEngine\base\SrvManager.cpp" />
     <ClCompile Include="gameEngine\audio\Audio.cpp" />
     <ClCompile Include="gameEngine\base\D3DResourceLeakChecker.cpp" />
     <ClCompile Include="gameEngine\base\DirectXCommon.cpp" />
@@ -128,8 +128,9 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="gameEngine\3d\Object3dCommon.cpp" />
     <ClCompile Include="gameEngine\2d\Sprite.cpp" />
     <ClCompile Include="gameEngine\2d\SpriteCommon.cpp" />
-    <ClCompile Include="gameEngine\2d\TextureManager.cpp" />
+    <ClCompile Include="gameEngine\base\TextureManager.cpp" />
     <ClCompile Include="gameEngine\base\WinApp.cpp" />
+    <ClCompile Include="gameEngine\base\ImGuiManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="gameEngine\math\CalculateMath.cpp" />
     <ClCompile Include="gameEngine\math\Matrix4x4.cpp" />
@@ -147,7 +148,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="externals\imgui\imstb_truetype.h" />
     <ClInclude Include="gameEngine\3d\Camera.h" />
     <ClInclude Include="gameEngine\3d\CameraManager.h" />
-    <ClInclude Include="gameEngine\3d\SrvManager.h" />
+    <ClInclude Include="gameEngine\base\SrvManager.h" />
     <ClInclude Include="gameEngine\audio\Audio.h" />
     <ClInclude Include="gameEngine\base\D3DResourceLeakChecker.h" />
     <ClInclude Include="gameEngine\base\DirectXCommon.h" />
@@ -163,7 +164,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="gameEngine\3d\Object3dCommon.h" />
     <ClInclude Include="gameEngine\2d\Sprite.h" />
     <ClInclude Include="gameEngine\2d\SpriteCommon.h" />
-    <ClInclude Include="gameEngine\2d\TextureManager.h" />
+    <ClInclude Include="gameEngine\base\TextureManager.h" />
     <ClInclude Include="gameEngine\base\WinApp.h" />
     <ClInclude Include="gameEngine\math\CalculateMath.h" />
     <ClInclude Include="gameEngine\math\Matrix4x4.h" />
@@ -171,6 +172,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="gameEngine\math\Vector3.h" />
     <ClInclude Include="gameEngine\math\Vector4.h" />
     <ClInclude Include="gameEngine\base\MyGame.h" />
+    <ClInclude Include="gameEngine\base\ImGuiManager.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="externals\imgui\LICENSE.txt" />
