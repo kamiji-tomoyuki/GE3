@@ -26,8 +26,6 @@ void Framework::Run()
 		// 描画
 		Draw();
 
-		// 描画(ImGui)
-		imGuiManager->Draw();
 	}
 
 	// ゲーム終了
