@@ -1,4 +1,5 @@
 #include "Framework.h"
+#include <imgui.h>
 
 void Framework::Run()
 {
@@ -64,6 +65,23 @@ void Framework::Initialize()
 	object3dCommon->Initialize(dxCommon);
 }
 
+void Framework::Update()
+{
+	// 入力の更新
+	input->Update();
+
+
+	// ImGui開始
+	imGuiManager->Begin();
+
+	// デモウィンドウの表示オン
+	ImGui::ShowDemoWindow();
+
+	// ImGui終了
+	imGuiManager->End();
+
+}
+
 void Framework::Finalize()
 {
 	winApp->Finalize();
@@ -74,7 +92,6 @@ void Framework::Finalize()
 	delete input;
 	delete srvManager;
 	delete audio;
-	delete imGuiManager;
 
 	delete spriteCommon;
 	delete object3dCommon;
@@ -83,14 +100,3 @@ void Framework::Finalize()
 	delete imGuiManager;
 }
 
-void Framework::Update()
-{
-	// ImGui開始
-	imGuiManager->Begin();
-
-	// ImGui終了
-	imGuiManager->End();
-
-	//入力の更新
-	input->Update();
-}

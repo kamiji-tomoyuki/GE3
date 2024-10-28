@@ -33,10 +33,7 @@ public:
 	virtual void Draw() = 0;
 
 	// 終了リクエストの取得
-	virtual bool IsEndRequest() { return endRequest; }
-
-private:
-	bool endRequest = false;	// 終了フラグ
+	virtual bool IsEndRequest() { return winApp->ProcessMessage(); }
 
 protected:
 	// 汎用性の高いシステム

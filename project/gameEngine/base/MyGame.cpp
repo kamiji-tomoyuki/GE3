@@ -20,6 +20,8 @@ void MyGame::Initialize()
 		}
 		sprite->Initialize(spriteCommon, textureFile);
 		sprites.push_back(sprite);
+
+		sprite->SetPosition({ 100,100 });
 	}
 
 	// --- 3Dオブジェクト ---
@@ -85,18 +87,26 @@ void MyGame::Update()
 	for (uint32_t i = 0; i < spriteNum; ++i) {
 		sprites[i]->Update();
 
-		Vector2 position = { 200.0f * i, 0.0f };
-		sprites[i]->SetPosition(position);
+		/*Vector2 position = { 200.0f * i, 0.0f };
+		sprites[i]->SetPosition(position);*/
 
 		float rotation = sprites[i]->GetRotate();
 		sprites[i]->SetRotate(rotation);
 
-		Vector2 size = { 200.0f,200.0f };
-		sprites[i]->SetSize(size);
+		/*Vector2 size = { 200.0f,200.0f };
+		sprites[i]->SetSize(size);*/
 
 		Vector4 color = sprites[i]->GetColor();
 		sprites[i]->SetColor(color);
 	}
+
+	ImGui::SetNextWindowSize({ 500,100 });
+	ImGui::Begin("Window");
+	if (ImGui::TreeNode("sprite")) {
+		ImGui::DragFloat3("Position", &position.x, 0.01f);
+		ImGui::TreePop();
+	}
+	ImGui::End();
 
 #pragma endregion スプライト
 
