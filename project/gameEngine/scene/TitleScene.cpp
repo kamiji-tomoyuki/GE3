@@ -1,7 +1,5 @@
 #include "TitleScene.h"
 
-#include "GamePlayScene.h"
-
 void TitleScene::Initialize()
 {
 	// --- カメラ ---
@@ -56,10 +54,7 @@ void TitleScene::Update()
 	// ENTERキーを押したら
 	if (Input::GetInstance()->TriggerKey(DIK_RETURN)) {
 		// 次のシーンを生成
-		BaseScene* scene = new GamePlayScene();
-		
-		// シーン切り替え
-		sceneManager_->SetNextScene_(scene);
+		SceneManager::GetInstance()->ChangeScene("GAMEPLAY");
 	}
 }
 

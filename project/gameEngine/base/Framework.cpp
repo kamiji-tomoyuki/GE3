@@ -98,6 +98,7 @@ void Framework::Finalize()
 	input->Finalize();
 	delete srvManager;
 
+	delete sceneFactory_;
 	sceneManager_->Finalize();
 
 	audio->Finalize();

@@ -1,6 +1,8 @@
 #pragma once
 #include <BaseScene.h>
 
+#include <AbstractSceneFactory.h>
+
 // シーン管理
 class SceneManager
 {
@@ -28,14 +30,19 @@ public:
 	void Draw();
 
 	// 次のシーンを予約	
-	void SetNextScene_(BaseScene* nextScene) { nextScene_ = nextScene; }
+	void ChangeScene(const std::string& sceneName);
+
+	// シーンファクトリーを設定
+	void SetSceneFactory(AbstractSceneFactory* sceneFactory) { sceneFactory_ = sceneFactory; }
 
 
 private:
 	// 実行中のシーン
 	BaseScene* scene_ = nullptr;
-
 	// 次のシーン
 	BaseScene* nextScene_ = nullptr;
+
+	// シーンファクトリー
+	AbstractSceneFactory* sceneFactory_ = nullptr;
 };
 

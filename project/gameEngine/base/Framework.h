@@ -11,6 +11,7 @@
 #include <ModelCommon.h>
 #include <ModelManager.h>
 #include <Object3dCommon.h>
+#include <SceneFactory.h>
 #include <SceneManager.h>
 #include <SpriteCommon.h>
 #include <SrvManager.h>
@@ -52,6 +53,8 @@ protected:
 	ImGuiManager* imGuiManager = nullptr;		// ImGuiマネージャ
 
 	SceneManager* sceneManager_ = nullptr;		// シーンマネージャ
+	AbstractSceneFactory* 
+		sceneFactory_ = nullptr;				// シーンファクトリー
 
 	SpriteCommon* spriteCommon = nullptr;		// スプライト
 	TextureManager* textureManager = nullptr;	// テクスチャマネージャ
