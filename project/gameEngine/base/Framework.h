@@ -45,7 +45,8 @@ protected:
 	ImGuiManager* imGuiManager = nullptr;	// ImGuiマネージャ
 
 	SpriteCommon* spriteCommon = nullptr;		// スプライト
+	TextureManager* textureManager = nullptr;	// テクスチャマネージャ
 	Object3dCommon* object3dCommon = nullptr;	// 3Dオブジェクト
-
+	ModelManager* modelManager = nullptr;		// モデルマネージャ
 };
 

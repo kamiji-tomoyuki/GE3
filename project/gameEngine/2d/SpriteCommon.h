@@ -7,6 +7,22 @@
 //スプライト共通部
 class SpriteCommon
 {
+#pragma region シングルトンインスタンス
+private:
+	static SpriteCommon* instance;
+
+	SpriteCommon() = default;
+	~SpriteCommon() = default;
+	SpriteCommon(SpriteCommon&) = delete;
+	SpriteCommon& operator = (SpriteCommon&) = delete;
+
+public:
+	// シングルトンインスタンスの取得
+	static SpriteCommon* GetInstance();
+	// 終了
+	void Finalize();
+#pragma endregion シングルトンインスタンス
+
 public://メンバ関数
 	//初期化
 	void Initialize(DirectXCommon* dxCommon);

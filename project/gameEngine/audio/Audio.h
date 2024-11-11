@@ -33,6 +33,22 @@ struct SoundData {
 
 class Audio
 {
+#pragma region シングルトンインスタンス
+private:
+	static Audio* instance;
+
+	Audio() = default;
+	~Audio() = default;
+	Audio(Audio&) = delete;
+	Audio& operator = (Audio&) = delete;
+
+public:
+	// シングルトンインスタンスの取得
+	static Audio* GetInstance();
+	// 終了
+	void Finalize();
+#pragma endregion シングルトンインスタンス
+
 public:
 	// 初期化
 	void Initialize();

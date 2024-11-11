@@ -64,6 +64,9 @@ void Sprite::Initialize(SpriteCommon* spriteCommon, std::string textureFilePath)
 void Sprite::Update()
 {
 	// --- world座標変換 ---
+	transform.translate = { position.x, position.y, 0.0f };
+	transform.rotate = { 0.0f, 0.0f, rotation };
+	transform.scale = { size.x, size.y, 1.0f };
 	worldMatrix = MakeAffineMatrix(transform.scale, transform.rotate, transform.translate);
 	viewMatrix = MakeIdentity4x4();
 	projectionMatrix = MakeOrthographicMatrix(0.0f, 0.0f, float(WinApp::kClientWidth), float(WinApp::kClientHeight), 0.0f, 100.0f);
@@ -71,10 +74,6 @@ void Sprite::Update()
 	// --- transformationMatrixDataの更新 ---
 	transformationMatrixData->WVP = worldMatrix * viewMatrix * projectionMatrix;
 	transformationMatrixData->World = worldMatrix;
-
-	transform.translate = { position.x, position.y, 0.0f };
-	transform.rotate = { 0.0f, 0.0f, rotation };
-	transform.scale = { size.x, size.y, 1.0f };
 
 	// --- フリップの更新処理 ---
 	if (isFlipX_) {

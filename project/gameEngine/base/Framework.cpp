@@ -51,7 +51,7 @@ void Framework::Initialize()
 	srvManager->Initialize(dxCommon);
 
 	// オーディオ
-	audio = new Audio();
+	audio = Audio::GetInstance();
 	audio->Initialize();
 
 	// ImGui
@@ -59,14 +59,21 @@ void Framework::Initialize()
 	imGuiManager->Initialize(winApp, dxCommon);
 
 	// スプライト
-	TextureManager::GetInstance()->Initialize(dxCommon, srvManager);
-	spriteCommon = new SpriteCommon();
+	spriteCommon = SpriteCommon::GetInstance();
 	spriteCommon->Initialize(dxCommon);
 
+	// テクスチャマネージャ
+	textureManager = TextureManager::GetInstance();
+	textureManager->Initialize(dxCommon, srvManager);
+
 	// 3Dオブジェクト
-	ModelManager::GetInstance()->Initialize(dxCommon);
-	object3dCommon = new Object3dCommon();
+	object3dCommon = Object3dCommon::GetInstance();
 	object3dCommon->Initialize(dxCommon);
+
+	// モデルマネージャ
+	modelManager = ModelManager::GetInstance();
+	modelManager->Initialize(dxCommon);
+
 }
 
 void Framework::Update()
@@ -84,10 +91,12 @@ void Framework::Finalize()
 	delete dxCommon;
 	delete input;
 	delete srvManager;
-	delete audio;
-
-	delete spriteCommon;
-	delete object3dCommon;
+	
+	audio->Finalize();
+	spriteCommon->Finalize();
+	textureManager->Finalize();
+	object3dCommon->Finalize();
+	modelManager->Finalize();
 
 	imGuiManager->Finalize();
 	delete imGuiManager;

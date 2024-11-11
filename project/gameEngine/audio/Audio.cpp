@@ -1,6 +1,22 @@
 #include "Audio.h"
 #include <cassert>
 
+Audio* Audio::instance = nullptr;
+
+Audio* Audio::GetInstance()
+{
+	if (instance == nullptr) {
+		instance = new Audio;
+	}
+	return instance;
+}
+
+void Audio::Finalize()
+{
+	delete instance;
+	instance = nullptr;
+}
+
 void Audio::Initialize()
 {
 	// xAudio生成

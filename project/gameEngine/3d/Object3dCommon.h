@@ -5,6 +5,22 @@
 
 class Object3dCommon
 {
+#pragma region シングルトンインスタンス
+private:
+	static Object3dCommon* instance;
+
+	Object3dCommon() = default;
+	~Object3dCommon() = default;
+	Object3dCommon(Object3dCommon&) = delete;
+	Object3dCommon& operator = (Object3dCommon&) = delete;
+
+public:
+	// シングルトンインスタンスの取得
+	static Object3dCommon* GetInstance();
+	// 終了
+	void Finalize();
+#pragma endregion シングルトンインスタンス
+
 public:
 	// 初期化
 	void Initialize(DirectXCommon* dxCommon);
