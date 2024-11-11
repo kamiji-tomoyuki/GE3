@@ -4,7 +4,7 @@
 #include <Sprite.h>
 #include <Object3d.h>
 
-class GamePlayScene : public BaseScene
+class TitleScene : public BaseScene
 {
 public:
 	// 初期化
@@ -31,4 +31,3 @@ private: // メンバ変数
 	std::vector<Object3d*> object3ds;
 
 };
-

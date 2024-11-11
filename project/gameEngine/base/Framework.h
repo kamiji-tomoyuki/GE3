@@ -1,8 +1,14 @@
 #pragma once
+#include <Windows.h>
 #include <Audio.h>
+#include <Camera.h>
+#include <CameraManager.h>
+#include <D3DResourceLeakChecker.h>
 #include <DirectXCommon.h>
 #include <ImGuiManager.h>
 #include <Input.h>
+#include <Model.h>
+#include <ModelCommon.h>
 #include <ModelManager.h>
 #include <Object3dCommon.h>
 #include <SpriteCommon.h>

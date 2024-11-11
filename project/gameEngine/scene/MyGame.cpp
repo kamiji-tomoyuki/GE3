@@ -6,6 +6,9 @@ void MyGame::Initialize()
 	Framework::Initialize();
 
 	// --- 各シーンの初期化 ---
+	titleScene_ = new TitleScene();
+	titleScene_->Initialize();
+
 	gamePlayScene_ = new GamePlayScene();
 	gamePlayScene_->Initialize();
 	
@@ -17,6 +20,9 @@ void MyGame::Finalize()
 	D3DResourceLeakChecker leakCheck;
 
 	// --- 解放処理 ---
+	titleScene_->Finalize();
+	delete titleScene_;
+
 	gamePlayScene_->Finalize();
 	delete gamePlayScene_;
 
@@ -30,6 +36,7 @@ void MyGame::Update()
 	Framework::Update();
 
 	// --- 各シーンの更新 ---
+	titleScene_->Update();
 	gamePlayScene_->Update();
 
 }
@@ -44,6 +51,7 @@ void MyGame::Draw()
 
 	// --- 各シーンの描画処理 ---
 
+	titleScene_->Draw();
 	gamePlayScene_->Draw();
 
 

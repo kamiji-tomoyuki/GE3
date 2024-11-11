@@ -1,5 +1,6 @@
 #pragma once
 #include "Framework.h"
+#include "TitleScene.h"
 #include "GamePlayScene.h"
 
 // ゲーム全体
@@ -19,6 +20,9 @@ public:
 	void Draw() override;
 
 private: // メンバ変数
+	// タイトルシーン
+	TitleScene* titleScene_ = nullptr;
+
 	// ゲームシーン
 	GamePlayScene* gamePlayScene_ = nullptr;
 
