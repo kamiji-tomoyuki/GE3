@@ -9,8 +9,8 @@ void MyGame::Initialize()
 	titleScene_ = new TitleScene();
 	titleScene_->Initialize();
 
-	gamePlayScene_ = new GamePlayScene();
-	gamePlayScene_->Initialize();
+	//gamePlayScene_ = new GamePlayScene();
+	//gamePlayScene_->Initialize();
 	
 }
 
@@ -23,8 +23,8 @@ void MyGame::Finalize()
 	titleScene_->Finalize();
 	delete titleScene_;
 
-	gamePlayScene_->Finalize();
-	delete gamePlayScene_;
+	//gamePlayScene_->Finalize();
+	//delete gamePlayScene_;
 
 	Framework::Finalize();	// 基底クラスの解放処理
 	
@@ -37,7 +37,7 @@ void MyGame::Update()
 
 	// --- 各シーンの更新 ---
 	titleScene_->Update();
-	gamePlayScene_->Update();
+	//gamePlayScene_->Update();
 
 }
 
@@ -52,7 +52,7 @@ void MyGame::Draw()
 	// --- 各シーンの描画処理 ---
 
 	titleScene_->Draw();
-	gamePlayScene_->Draw();
+	//gamePlayScene_->Draw();
 
 
 
