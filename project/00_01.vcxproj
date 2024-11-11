@@ -138,6 +138,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="gameEngine\math\Vector3.cpp" />
     <ClCompile Include="gameEngine\scene\MyGame.cpp" />
     <ClCompile Include="gameEngine\scene\TitleScene.cpp" />
+    <ClCompile Include="gameEngine\scene\SceneManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="gameEngine\scene\BaseScene.h" />
@@ -177,6 +178,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="gameEngine\scene\MyGame.h" />
     <ClInclude Include="gameEngine\base\ImGuiManager.h" />
     <ClInclude Include="gameEngine\scene\TitleScene.h" />
+    <ClInclude Include="gameEngine\scene\SceneManager.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="externals\imgui\LICENSE.txt" />

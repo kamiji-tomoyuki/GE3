@@ -43,7 +43,7 @@ void Framework::Initialize()
 	dxCommon->Initialize(winApp);
 
 	// キーボード入力
-	input = new Input();
+	input = Input::GetInstance();
 	input->Initialize(winApp);
 
 	// SRVマネージャ
@@ -57,6 +57,9 @@ void Framework::Initialize()
 	// ImGui
 	imGuiManager = new ImGuiManager();
 	imGuiManager->Initialize(winApp, dxCommon);
+
+	// シーンマネージャ
+	sceneManager_ = SceneManager::GetInstance();
 
 	// スプライト
 	spriteCommon = SpriteCommon::GetInstance();
@@ -78,6 +81,9 @@ void Framework::Initialize()
 
 void Framework::Update()
 {
+	// シーンマネージャの更新
+	sceneManager_->Update();
+
 	// 入力の更新
 	input->Update();
 }
@@ -89,9 +95,11 @@ void Framework::Finalize()
 	winApp = nullptr;
 
 	delete dxCommon;
-	delete input;
+	input->Finalize();
 	delete srvManager;
-	
+
+	sceneManager_->Finalize();
+
 	audio->Finalize();
 	spriteCommon->Finalize();
 	textureManager->Finalize();

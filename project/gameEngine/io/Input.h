@@ -14,6 +14,22 @@
 
 class Input
 {
+#pragma region シングルトンインスタンス
+private:
+	static Input* instance;
+
+	Input() = default;
+	~Input() = default;
+	Input(Input&) = delete;
+	Input& operator = (Input&) = delete;
+
+public:
+	// シングルトンインスタンスの取得
+	static Input* GetInstance();
+	// 終了
+	void Finalize();
+#pragma endregion シングルトンインスタンス
+
 public:
 	//namespace省略
 	template <class T> using ComPtr = Microsoft::WRL::ComPtr<T>;

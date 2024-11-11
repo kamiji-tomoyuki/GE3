@@ -11,6 +11,7 @@
 #include <ModelCommon.h>
 #include <ModelManager.h>
 #include <Object3dCommon.h>
+#include <SceneManager.h>
 #include <SpriteCommon.h>
 #include <SrvManager.h>
 #include <TextureManager.h>
@@ -43,12 +44,14 @@ public:
 
 protected:
 	// 汎用性の高いシステム
-	WinApp* winApp = nullptr;				// WindowsAPI
-	DirectXCommon* dxCommon = nullptr;		// DirectX
-	Input* input = nullptr;					// キーボード入力
-	SrvManager* srvManager = nullptr;		// SRVマネージャ
-	Audio* audio = nullptr;					// オーディオ
-	ImGuiManager* imGuiManager = nullptr;	// ImGuiマネージャ
+	WinApp* winApp = nullptr;					// WindowsAPI
+	DirectXCommon* dxCommon = nullptr;			// DirectX
+	Input* input = nullptr;						// キーボード入力
+	SrvManager* srvManager = nullptr;			// SRVマネージャ
+	Audio* audio = nullptr;						// オーディオ
+	ImGuiManager* imGuiManager = nullptr;		// ImGuiマネージャ
+
+	SceneManager* sceneManager_ = nullptr;		// シーンマネージャ
 
 	SpriteCommon* spriteCommon = nullptr;		// スプライト
 	TextureManager* textureManager = nullptr;	// テクスチャマネージャ

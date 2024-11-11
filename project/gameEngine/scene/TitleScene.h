@@ -1,6 +1,7 @@
 #pragma once
 #include <Framework.h>
 #include <BaseScene.h>
+#include <SceneManager.h>
 #include <Sprite.h>
 #include <Object3d.h>
 
@@ -30,4 +31,5 @@ private: // メンバ変数
 	// 3Dオブジェクト
 	std::vector<Object3d*> object3ds;
 
+	SceneManager* sceneManager_;
 };

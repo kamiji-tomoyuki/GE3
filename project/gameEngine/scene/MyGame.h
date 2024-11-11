@@ -20,11 +20,5 @@ public:
 	void Draw() override;
 
 private: // メンバ変数
-	// タイトルシーン
-	TitleScene* titleScene_ = nullptr;
-
-	// ゲームシーン
-	GamePlayScene* gamePlayScene_ = nullptr;
-
 };
 

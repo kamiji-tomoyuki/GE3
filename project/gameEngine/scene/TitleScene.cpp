@@ -1,5 +1,7 @@
 #include "TitleScene.h"
 
+#include "GamePlayScene.h"
+
 void TitleScene::Initialize()
 {
 	// --- カメラ ---
@@ -16,7 +18,7 @@ void TitleScene::Initialize()
 
 		sprites.push_back(sprite);
 	}
-
+	sceneManager_ = SceneManager::GetInstance();
 }
 
 void TitleScene::Finalize()
@@ -26,8 +28,6 @@ void TitleScene::Finalize()
 	for (Sprite* sprite : sprites) {
 		delete sprite;
 	}
-	Object3dCommon::GetInstance()->Finalize();
-	ModelManager::GetInstance()->Finalize();
 	Audio::GetInstance()->SoundUnload(Audio::GetInstance()->GetXAudio2(), &soundData);
 }
 
@@ -50,6 +50,16 @@ void TitleScene::Update()
 		sprites[i]->SetColor(color);
 
 		sprites[i]->Update();
+	}
+
+	// --- シーン移行処理 ---
+	// ENTERキーを押したら
+	if (Input::GetInstance()->TriggerKey(DIK_RETURN)) {
+		// 次のシーンを生成
+		BaseScene* scene = new GamePlayScene();
+		
+		// シーン切り替え
+		sceneManager_->SetNextScene_(scene);
 	}
 }
 
