@@ -18,7 +18,7 @@ void GamePlayScene::Initialize()
 		sprites.push_back(sprite);
 	}
 
-	// --- 3Dオブジェクト ---　
+	// --- 3Dオブジェクト ----　
 	ModelManager::GetInstance()->LoadModel("plane.obj");
 	ModelManager::GetInstance()->LoadModel("axis.obj");
 
